@@ -88,7 +88,7 @@ class MixedDemo:
         if not self.enabled(visitor):
             return dict(scripted, model_mode='SCRIPTED')
         if not self.key:
-            return dict(scripted, decision='hold', model_mode='LIVE', note='Live model unavailable; held safely.')
+            return dict(scripted, model_mode='SCRIPTED', note='Live model is not configured yet. Scripted simulation remains available.')
         mode, ids = self.reserve(visitor, address)
         if mode == 'scripted':
             return dict(scripted, model_mode='SCRIPTED', note='Live allowance reached. Scripted simulation remains available.')

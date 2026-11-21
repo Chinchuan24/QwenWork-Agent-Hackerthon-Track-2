@@ -1,6 +1,15 @@
 # OPTION 3: mixed Fly deployment (supersedes historical guide below)
 
-Implemented locally; not authenticated, pushed, signed up or deployed. No local Docker.
+Fly release target: twinguard-demo.fly.dev, personal organization, primary region sin.
+No GitHub push or local Docker. Deploy uses remote build only. One 1GB aegis_data
+volume at /data and one runtime Machine, UID/GID 10001. One-time administrative
+bootstrap verified /data ownership 10001:10001 and mode 0700.
+Fly first-party header contract: https://docs.fly.io/networking/request-headers.
+Observed immediate peer 172.16.11.2 is trusted as /32 only; Fly-Client-IP replaced
+spoofed input in the HTTPS probe. X-Forwarded-Proto can retain client input:
+non-HTTPS values fail closed, never broaden trust. Revalidate peer after host moves.
+Missing DeepSeek key returns polite SCRIPTED fallback without budget reservation;
+failed/uncertain configured live calls still HOLD. Actual acceptance recorded separately.
 Public visitors always start SCRIPTED even with keys present. The existing private
 qwen_client imports executors and private state: it is intentionally NOT imported.
 mixed_demo is a narrow transport adapter using the same OpenAI-compatible HTTP

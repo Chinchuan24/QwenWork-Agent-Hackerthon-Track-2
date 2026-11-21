@@ -88,6 +88,19 @@ def test_concurrent_reservations_and_persistent_privacy(tmp_path, monkeypatch):
     assert MixedDemo(demo.database, demo.salt).reserve('visitor', '192.0.2.1')[0] == 'hold'
 
 
+def test_missing_key_fallback(tmp_path, monkeypatch):
+    monkeypatch.setenv('AEGIS_MODEL_PROVIDER', 'deepseek')
+    monkeypatch.delenv('DEEPSEEK_API_KEY', raising=False)
+    demo, code = setup(tmp_path, monkeypatch)
+    requests = mock(monkeypatch)
+    assert demo.unlock('visitor', code)
+    result = demo.evaluate('visitor', '192.0.2.1', {}, {'decision': 'block'})
+    assert result['model_mode'] == 'SCRIPTED' and result['decision'] == 'block'
+    assert not requests
+    with demo.connect() as c:
+        assert c.execute('SELECT COUNT(*) FROM live_attempts').fetchone()[0] == 0
+
+
 def test_invalid_provider_and_hash_refused(tmp_path, monkeypatch):
     monkeypatch.setenv('AEGIS_MODEL_PROVIDER', 'http://localhost')
     with pytest.raises(ValueError):

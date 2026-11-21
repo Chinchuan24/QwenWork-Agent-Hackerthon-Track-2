@@ -1,6 +1,6 @@
-# Replace app name and trusted host before use; exactly one Machine.
-app = "replace-with-your-aegis-app"
-primary_region = "iad"
+# Exactly one Machine; immediate proxy observed on the sin host.
+app = "twinguard-demo"
+primary_region = "sin"
 kill_signal = "SIGTERM"
 kill_timeout = 30
 [build]
@@ -10,9 +10,10 @@ kill_timeout = 30
   max_unavailable = 1
 [env]
   PORT = "8080"
-  AEGIS_TRUSTED_HOSTS = "replace-with-your-aegis-app.fly.dev"
-  AEGIS_TRUSTED_PROXY_CIDRS = ""
-  AEGIS_MODEL_PROVIDER = "qwen"
+  AEGIS_TRUSTED_HOSTS = "twinguard-demo.fly.dev"
+  AEGIS_TRUSTED_PROXY_CIDRS = "172.16.11.2/32"
+  AEGIS_PROXY_PROVIDER = "fly"
+  AEGIS_MODEL_PROVIDER = "deepseek"
 [http_service]
   internal_port = 8080
   force_https = true

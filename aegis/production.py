@@ -180,7 +180,7 @@ def create_app():
         local_probe = ((peer in ('127.0.0.1', '::1', 'testclient') or trusted)
                        and request.method == 'GET' and request.url.path in ('/healthz', '/readyz'))
         if trusted and not local_probe:
-            forwarded = request.headers.get('x-forwarded-for', '')
+            forwarded = request.headers.get('fly-client-ip' if os.getenv('AEGIS_PROXY_PROVIDER') == 'fly' else 'x-forwarded-for', '')
             try:
                 # One address only: deployment proxy must replace, not append.
                 peer = str(ipaddress.ip_address(forwarded))
