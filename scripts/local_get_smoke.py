@@ -55,10 +55,12 @@ with sync_playwright() as pw:
             if status == 200 and 'text/html' in response.headers.get('content-type', ''):
                 page.goto(path)
                 assert label in page.locator('body').inner_text(), path
+                assert 'fixture-secret-must-not-leak' not in page.content(), path
                 # Record layout overflow without confusing HTTP coverage with visual acceptance.
                 overflow = page.evaluate('document.documentElement.scrollWidth > innerWidth')
                 page.screenshot(path=str(output / ('get-' + str(width) + '-' + name + '-' + pattern.strip('/').replace('/', '-').replace('{', '').replace('}', '') + '.png')), full_page=True)
+            assert 'fixture-secret-must-not-leak' not in response.text(), pattern
             rows.append({'route': pattern, 'role': accounts[name]['role'], 'identity': name, 'status': status, 'width': width, 'valid_seed_params': True, 'html_overflow': overflow if status == 200 and 'text/html' in response.headers.get('content-type', '') else None})
     browser.close()
-(output / 'get-matrix.json').write_text(json.dumps({'routes': len(paths), 'cases': len(rows), 'rows': rows}, indent=2))
+(output / 'get-matrix.json').write_text(json.dumps({'routes': len(paths), 'cases': len(rows), 'overflow_cases': sum(row['html_overflow'] is True for row in rows), 'rows': rows}, indent=2))
 print(f'GET matrix passed: {len(paths)} routes, {len(rows)} role cases, valid seed params, no 404/422/500.')

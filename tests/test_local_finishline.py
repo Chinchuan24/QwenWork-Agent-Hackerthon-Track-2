@@ -119,6 +119,15 @@ def open_pinned(request, timeout):
         subprocess.run([sys.executable, str(clone/'scripts/demo_rehearsal.py'), '--approve-sandbox', '--existing-url', url, '--password-file', str(clone/'.local-demo/passwords.json'), '--output-dir', str(output)], cwd=clone, env=env, check=True, capture_output=True, timeout=120)
         result = subprocess.run([sys.executable, str(clone/'scripts/local_get_smoke.py'), str(output), url, label], cwd=clone, env=env, capture_output=True, text=True, timeout=180)
         assert result.returncode == 0, result.stderr
+        import json
+        matrix = json.loads((output/'get-matrix.json').read_text())
+        assert matrix['cases'] == matrix['routes'] * 5 * 2
+        assert {row['width'] for row in matrix['rows']} == {1440, 390}
+        assert {row['role'] for row in matrix['rows']} == {'admin','approver','auditor','viewer'}
+        assert 'fixture-secret' not in json.dumps(matrix)
+        # Retain sanitized actual URL, stop and coverage evidence outside private state.
+        receipt = {'mode': mode, 'url': url, 'matrix': matrix, 'stop_expected': True}
+        (tmp_path/'local-browser-receipt.json').write_text(json.dumps(receipt))
         assert 'fixture-secret' not in html
         subprocess.run([str(clone/'run-local-demo.sh'),'stop'],cwd=clone,env=env,check=True,capture_output=True,timeout=10)
         out, err = process.communicate(timeout=20)
