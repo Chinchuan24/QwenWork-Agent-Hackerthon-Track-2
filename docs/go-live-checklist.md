@@ -1,8 +1,24 @@
 # Public demo go-live gate
 
-Local integration verified 2026-11-20 UTC. Managed-host acceptance not performed. Local commit authorized; no push, deployment, signup, payment or Docker run. Core owns production.py and evaluator logic; parent next performs independent verification.
+Current Fly target: twinguard-demo.fly.dev, sin. Sanitized receipt: twinguard-host-backup-evidence-20261121.txt (2026-11-21 UTC). Host agent consumed the ONE start budget; no further host operations or restart loop are authorized. Current docs/helper commit does not deploy or alter original history.
 
-## Verdict: READY TO DEPLOY (pending host configuration)
+## Verdict: Qualified host backup PASS; user actions pending
+
+- [x] One Machine 78111244b62498 and one encrypted 1GB aegis_data volume vol_rkg27pyzpkno1l24 in sin observed before/after. Configuration and status support single-instance operation, not autoscaling/replicas; minimum running count is not a maximum.
+- [x] Actual start 09:00:45Z; last observed 09:03:36Z started with 2/2 checks passing. Ordinary outside /healthz and /readyz returned 200. This short window is not continuous availability or billing-stop proof.
+- [x] Actual ingress configuration matches exact host, Fly provider and approved 172.16.0.0/12; prior observed peer 172.16.10.210. Prior focused ingress/mixed/HTTPS suite: 37 passed, not newly rerun host evidence. Fly-Client-IP is one edge-replaced address; ordinary proxied pages require forwarded HTTPS. Trusted exact GET probes alone permit transport-local HTTP.
+- [x] Runtime app UID/GID 10001; /data/aegis mode 0700. Rootfs requirement DISPOSITIONED by explicit user acceptance: actual / is writable overlay and /data writable ext4; non-root permissions constrain ordinary writes but do not enforce writable-only-/data. Reason: retain current managed Fly runtime while honestly accepting this residual limitation.
+- [ ] Read-only-root enforcement: NOT established; disposition above is not enforcement PASS.
+- [x] Real online SQLite backup under BEGIN IMMEDIATE writer lock, separate read-only backup connection, original stable key copied in the same snapshot, off-host isolated restore PASS. sessions=8, events=9, live_sessions=2, live_attempts=0; integrity ok, 9/9 HMAC links, Fernet decrypt and canonical payload checks pass. Auxiliary SQLite has no tables. Plaintext backup is owner-only, not additionally encrypted; retain/encrypt privately. No secret archive is delivered.
+- [x] Public-production external anchor N/A: absent and not implemented via AEGIS_ANCHOR_EXTERNAL; signer=false, simulated_hmac=true. Public consistency only, no independent provenance/coordinated-rollback guarantee; private signer/anchor acceptance is not claimed.
+- [ ] Exact pre-stop/post-start persistence equality remains UNVERIFIED: machine was already stopped and no numeric pre-stop baseline existed. Repeated post-start 9 events and restored 9 events do not supply that baseline. Future explicitly authorized task after billing must capture a baseline before any restart.
+- [ ] Local Docker remains UNRUN under Mac heat rule; real remote Fly image/runtime is separate evidence.
+- [ ] User personally adds/approves billing; no card or billing change performed here. If platform stops, report and stop, never restart-loop.
+- [ ] User DeepSeek key, account/model calibration and optional owned custom domain/DNS/TLS remain pending; no live API request or credential change claimed.
+
+## Historical local gates (not current host instructions)
+
+The remainder preserves older evidence and superseded pending lists. Historical single-root manifests, local gate counts and no-host statements are stale for the current multi-commit Fly release; they are not fresh acceptance or directions to create resources. Current gates above control.
 
 - [x] Native per-crate attribution complete: 133 registry lock entries, 131 unique official archives SHA256-verified; 240 legal texts plus full copyright/SPDX comment blocks retained in included `RUST_THIRD_PARTY_NOTICES`. Nine root/path entries covered by full legal texts/headers from both verified PyPI sdists.
 - [x] wit-bindgen-rt 0.39.0 missing archive licences resolved from official workspace licences at exact archive-recorded VCS commit, source URLs/hashes retained. Zero missing/unknown or incompatible selected licences; permissive alternatives elected and mandatory Unicode/BSD/exception scopes retained.

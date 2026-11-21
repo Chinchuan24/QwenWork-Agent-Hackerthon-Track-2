@@ -1,5 +1,11 @@
 # Twinguard build — progress log
 
+## Host backup acceptance (2026-11-21 UTC)
+- Sanitized host receipt twinguard-host-backup-evidence-20261121.txt: ONE start consumed 09:00:45Z, last 09:03:36Z started with 2/2 checks; outside health/ready 200. Machine 78111244b62498 sin, one encrypted 1GB volume vol_rkg27pyzpkno1l24. Actual config matches exact host/Fly/172.16.0.0/12; prior 37-test ingress result retained, not a new run.
+- Real coherent BEGIN IMMEDIATE SQLite/original-key snapshot and off-host isolated restore PASS: sessions8/events9/live_sessions2/live_attempts0, auxiliary DB no tables, integrity ok, 9/9 HMAC links/decrypt/canonical checks. Public simulated HMAC only, external anchor absent/N/A; private signer and coordinated-rollback resistance not claimed. No private backup/key artifact delivered.
+- Rootfs explicitly DISPOSITIONED by user acceptance: writable overlay root, writable ext4 /data, app UID/GID10001; not read-only enforcement. Local Docker UNRUN; remote Fly runtime separate. Exact pre-stop equality unchecked because already stopped/no numeric baseline. Repeated post-start9 and restore9 do not repair that gap.
+- User billing/card, DeepSeek key/calibration and optional domain pending. No further host operations/restart loop; future baseline/restart requires explicit authorization after billing. Current docs supersede historical local/provider gate lists without erasing history. Nonsecret scripts/public_backup.py is a future operator reference, not additional host execution evidence.
+
 ## Fly ingress repair (2026-11-21)
 - Actual target inspected: release checkout, existing twinguard-demo app, Machine 78111244b62498 in sin. Initial outside curl already returned 200, unlike the earlier reported 400; host-dependent allowlist remained fragile.
 - One diagnostic remote-only deployment logged only request.client.host for the first root request: 172.16.10.210, within the explicitly approved 172.16.0.0/12. Transient diagnostic removed. Secret names show no CIDR override; selected runtime settings matched fly.toml. No DeepSeek key read, logged, changed or removed.

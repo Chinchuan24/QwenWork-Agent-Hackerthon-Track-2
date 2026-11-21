@@ -54,17 +54,119 @@ https://www.alibabacloud.com/help/en/model-studio/compatibility-of-openai-with-d
 now recommends workspace-specific domains; the fixed legacy Singapore endpoint
 is retained for the existing client contract. Account compatibility is pending.
 
-Fly runbook is delivered with the prelaunch report. One Machine, one aegis_data
-volume at /data, 8080, /healthz and /readyz, autostop off. Actual exact hostname
-and immediate proxy CIDRs must replace placeholders, never universal ranges.
-Trusted proxy health probes may use HTTP only at exact read-only health routes.
-Untrusted probes remain blocked. Provider ingress/volume UID 10001 ownership,
-base-image runtime, real-provider calibration and restart/redeploy acceptance
-remain prelaunch gates. Fresh-volume chown in Docker build is NOT mount ownership.
-Do not clear pending reservations without independently verified usage settlement.
-The old Render/Railway recommendation and six-module/no-model descriptions below
-are historical evidence, not the current deployment contract. Railway config
-remains deprecated. Existing immutable audit event capacity behavior is unchanged.
+## Current host acceptance (2026-11-21 UTC)
+
+Receipt: twinguard-host-backup-evidence-20261121.txt, sanitized host-agent report.
+ONE authorized start consumed at 09:00:45Z. Machine 78111244b62498 in sin was
+started at last observation 09:03:36Z, 2/2 checks passing; outside /healthz and
+/readyz returned 200. One encrypted 1GB volume vol_rkg27pyzpkno1l24 (aegis_data)
+attached at /data. Actual config readback matches exact hostname, Fly provider,
+172.16.0.0/12 and port 8080. Prior ingress diagnostic peer: 172.16.10.210;
+prior focused suite 37 passed. No additional start/restart/deploy is authorized.
+Source/config plus status support one Machine/volume, not replicas/autoscaling;
+min_machines_running is a floor, not a maximum or billing-stop bypass.
+
+App UID/GID 10001, /data/aegis 0700. Actual / overlay rw and /data ext4 rw.
+Rootfs requirement explicitly DISPOSITIONED by user acceptance of the current
+managed runtime limitation: ordinary non-root permissions are not read-only
+mount enforcement. Read-only-root enforcement remains NOT established.
+Local Docker is UNRUN under the Mac rule; remote Fly runtime evidence is separate.
+
+Online writer-locked SQLite/key snapshot and real off-host isolated restore PASS:
+sessions=8, events=9, live_sessions=2, live_attempts=0; integrity ok; 9/9 previous
+links, HMAC-SHA256, Fernet decrypt and canonical JSON checks passed. Auxiliary DB
+has no tables. Exact pre-stop equality remains unchecked: already stopped before
+inspection, no numeric baseline. Repeated post-start 9 and restore 9 do not prove
+before/after equality. Future baseline/restart task requires explicit authorization
+after user billing; do not restart-loop if the platform stops.
+
+Public external anchor is absent/N/A, production has no AEGIS_ANCHOR_EXTERNAL
+implementation; readiness signer=false and simulated_hmac=true. A copied key
+proves HMAC consistency only, not independent provenance or coordinated-rollback
+resistance. No private signer/anchor acceptance is claimed. DeepSeek key,
+account/model calibration, user billing/card and optional custom domain remain
+user-pending. No billing, credential or domain change is performed here.
+
+## Operator backup reference (future authorization only)
+
+The nonsecret helper scripts/public_backup.py is an operator reference, NOT
+shipped runtime or a newly claimed host rehearsal. Its snapshot mode uses the
+current production legacy-or-separated key/DB layout, BEGIN IMMEDIATE on the main
+DB and a separate read-only backup connection; all live accounting tables remain
+in that DB. It copies original keys while writers are excluded, preserves other
+regular state files and snapshots auxiliary SQLite files. No instance.lock is
+acquired: that lifetime lock is not a backup writer lock. Do not rotate keys or
+run independent state maintenance during capture. Auxiliary databases require
+separately quiesced writers if they later acquire tables. Verify mode uses only
+SQLite, HMAC and Fernet, never legacy audit.verify or an application start.
+
+Commands below are future operator-only, not authorization to execute now.
+Use existing running Machine only. SFTP --select prompts must select exactly
+78111244b62498; abort on any other machine or stopped status. Use a NEW private
+local parent outside this repository/outputs, and a NEW remote random destination.
+Do not overwrite an existing snapshot or restore into production. Fly CLI must
+already be installed/authenticated by the operator; no installs or signup here.
+
+```bash
+FLY=/Users/chin/.fly/bin/flyctl
+APP=twinguard-demo
+umask 077
+PRIVATE_BACKUP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/twinguard-private-reference.XXXXXXXX")
+REMOTE=/tmp/twinguard-backup-$(openssl rand -hex 16)
+"$FLY" status -a "$APP"
+"$FLY" ssh sftp put scripts/public_backup.py "$REMOTE-helper.py" -a "$APP" --select
+"$FLY" ssh console -a "$APP" --select -C "python $REMOTE-helper.py snapshot /data/aegis $REMOTE"
+"$FLY" ssh console -a "$APP" --select -C "sh -c 'umask 077; tar -cf $REMOTE.tar -C $REMOTE .'"
+"$FLY" ssh console -a "$APP" --select -C "chmod 600 $REMOTE.tar"
+"$FLY" ssh sftp get "$REMOTE.tar" "$PRIVATE_BACKUP_DIR/snapshot.tar" -a "$APP" --select
+chmod 600 "$PRIVATE_BACKUP_DIR/snapshot.tar"
+```
+
+Before extraction inspect member types/names programmatically: only relative
+regular files/directories, no links, absolute paths or traversal. The reference helper has syntax validation only in this documentation lane;
+its runtime execution is unverified here because the release checkout has no
+.venv and system Python lacks cryptography. The following
+local commands require an already approved repository .venv containing cryptography. They
+do not install dependencies, import production, start a service or use network.
+The backup/key archive is private plaintext; encrypt/retain under operator policy,
+never commit, place in outputs or attach it. Preserve partial artifacts on failure.
+
+```bash
+.venv/bin/python - "$PRIVATE_BACKUP_DIR" <<'PY'
+import os
+from pathlib import Path
+import tarfile
+import sys
+os.umask(0o077)
+parent = Path(sys.argv[1])
+destination = parent / 'isolated-state'
+destination.mkdir(mode=0o700)
+with tarfile.open(parent / 'snapshot.tar') as archive:
+    members = archive.getmembers()
+    for member in members:
+        path = Path(member.name)
+        if path.is_absolute() or '..' in path.parts or not (member.isdir() or member.isfile()):
+            raise SystemExit('Unsafe archive member; extraction refused')
+    archive.extractall(destination, members=members, filter='data')
+for path in destination.rglob('*'):
+    path.chmod(0o700 if path.is_dir() else 0o600)
+PY
+.venv/bin/python scripts/public_backup.py verify "$PRIVATE_BACKUP_DIR/isolated-state"
+```
+
+Compare count/boolean output with the remote snapshot output; receipt must bind
+source/image revision, timestamps and isolation. Integrity plus HMAC/decrypt PASS
+is qualified public-chain consistency, not external-anchor proof. Keep original
+history, keys and pending reservations; no automatic clear/reset or volume deletion.
+The retained host-agent private helper path is intentionally absent from the
+sanitized report; this committed reference avoids referring to a nonexistent helper.
+
+## Historical guide boundary
+
+All following provider creation commands, iad prices/regions, six-module/no-model
+claims, local counts, old single-root identities and pending lists are historical,
+not current host instructions or fresh gates. Do not execute them for this existing
+Fly service. Railway deprecation and immutable-event capacity caveats still apply.
 
 # Public simulated demo deployment
 
