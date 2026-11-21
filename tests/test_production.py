@@ -173,6 +173,38 @@ def test_concurrent_last_event_slot(tmp_path, monkeypatch):
         assert len(c.get('/audit/export').json()['events']) == 2
 
 
+@pytest.mark.parametrize('peer', ['172.16.11.2', '172.19.10.209', '172.16.10.210', '172.31.255.254'])
+def test_fly_deployed_proxy_range(tmp_path, monkeypatch, peer):
+    import tomllib
+    from pathlib import Path
+    config = tomllib.loads((Path(__file__).parents[1] / 'fly.toml').read_text())['env']
+    client(tmp_path, monkeypatch)
+    for name in ('AEGIS_TRUSTED_PROXY_CIDRS', 'AEGIS_TRUSTED_HOSTS', 'AEGIS_PROXY_PROVIDER'):
+        monkeypatch.setenv(name, config[name])
+    from aegis.production import create_app
+    headers = {'X-Forwarded-Proto': 'https', 'Fly-Client-IP': '192.0.2.10'}
+    with TestClient(create_app(), base_url='http://twinguard-demo.fly.dev', client=(peer, 12345)) as c:
+        for path in ('/', '/readyz'):
+            assert c.get(path, headers=headers).status_code == 200
+        assert c.get('/', headers={'Fly-Client-IP': '192.0.2.10'}).status_code == 400
+        assert c.get('http://evil.example/', headers=headers).status_code == 400
+        assert c.get('/', headers={**headers, 'Fly-Client-IP': '192.0.2.10, 192.0.2.11'}).status_code == 400
+
+
+@pytest.mark.parametrize('peer', ['172.15.255.254', '172.32.0.1', '192.0.2.10'])
+def test_fly_outside_proxy_range_rejected(tmp_path, monkeypatch, peer):
+    import tomllib
+    from pathlib import Path
+    config = tomllib.loads((Path(__file__).parents[1] / 'fly.toml').read_text())['env']
+    client(tmp_path, monkeypatch)
+    for name in ('AEGIS_TRUSTED_PROXY_CIDRS', 'AEGIS_TRUSTED_HOSTS', 'AEGIS_PROXY_PROVIDER'):
+        monkeypatch.setenv(name, config[name])
+    from aegis.production import create_app
+    with TestClient(create_app(), base_url='http://twinguard-demo.fly.dev', client=(peer, 12345)) as c:
+        for path in ('/', '/readyz'):
+            assert c.get(path, headers={'X-Forwarded-Proto': 'https', 'Fly-Client-IP': '192.0.2.10'}).status_code == 400
+
+
 def test_http_and_host_and_rate(tmp_path, monkeypatch):
     with client(tmp_path, monkeypatch) as c:
         assert c.get('http://testserver/', follow_redirects=False).status_code == 400

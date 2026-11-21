@@ -5,11 +5,15 @@ No GitHub push or local Docker. Deploy uses remote build only. One 1GB aegis_dat
 volume at /data and one runtime Machine, UID/GID 10001. One-time administrative
 bootstrap verified /data ownership 10001:10001 and mode 0700.
 Fly first-party header contract: https://docs.fly.io/networking/request-headers.
-Bootstrap peer was 172.16.11.2; runtime host moved on replacement. Runtime TCP
-readback showed health peer 172.19.10.209 and sampled public-ingress peer
-172.16.10.210. Both are trusted as exact /32 addresses only. Fly-Client-IP replaced
-spoofed input in the HTTPS probe. X-Forwarded-Proto can retain client input:
-non-HTTPS values fail closed, never broaden trust. Revalidate peer after host moves.
+A bounded application-level diagnostic on 2026-11-21 observed public TCP peer
+172.16.10.210 from request.client.host; no request headers were logged. The
+transient diagnostic was removed before the final deployment. Per explicit
+operator approval, fly.toml trusts Fly private ingress 172.16.0.0/12, not individual
+host-dependent /32 peers. Exact trusted host remains twinguard-demo.fly.dev.
+Fly-Client-IP remains the edge-replaced client address. X-Forwarded-Proto must
+be https for ordinary proxied pages; outside peers cannot supply trusted forwarding.
+Secret names and runtime allowlisted settings were inspected: no CIDR secret
+exists, so fly.toml is the effective CIDR source. No model key was read or changed.
 Missing DeepSeek key returns polite SCRIPTED fallback without budget reservation;
 failed/uncertain configured live calls still HOLD. Actual acceptance recorded separately.
 Public visitors always start SCRIPTED even with keys present. The existing private
