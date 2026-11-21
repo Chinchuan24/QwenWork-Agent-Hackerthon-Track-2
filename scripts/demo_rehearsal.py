@@ -42,7 +42,7 @@ def main():
         url = urlsplit(args.existing_url)
         if url.scheme != 'http' or url.hostname not in ('localhost', '127.0.0.1') or url.path or url.username:
             parser.error('existing server must be a loopback HTTP origin')
-        if args.password_file != source / '.local-demo/passwords.json':
+        if args.password_file.resolve() != (source / '.local-demo/passwords.json').resolve():
             parser.error('only the owned local demo password file is accepted')
     with socket.socket() as sock:
         sock.bind(('127.0.0.1', 0))

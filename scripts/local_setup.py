@@ -99,9 +99,14 @@ def run(root, port=None, live=False):
         raise ValueError('port must be an integer from 1 to 65535')
     root = Path(root).resolve()
     env = environment(root, os.environ)
-    if live:
-        from local_env import load
-        env.update(load(root))
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from local_env import load
+    sys.path.insert(0, str(root))
+    from aegis.provider import resolve
+    settings = load(root)
+    provider, base, model, key = resolve(settings)
+    if key and provider != 'scripted':
+        env.update(settings)
         env['AEGIS_LOCAL_AI'] = '1'
     if port is not None:
         env['AEGIS_PORT'] = str(port)

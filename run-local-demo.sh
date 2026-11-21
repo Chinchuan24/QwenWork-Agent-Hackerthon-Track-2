@@ -1,5 +1,5 @@
 #!/bin/sh
-# Offline runtime discovery only. Never installs packages or reads .env files.
+# Trusted runtime discovery only. Python securely reads optional root .env.
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 if [ -n "${TWINGUARD_LOCAL_PYTHON:-}" ]; then

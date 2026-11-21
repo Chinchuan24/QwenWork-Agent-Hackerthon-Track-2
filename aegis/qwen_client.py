@@ -123,11 +123,8 @@ def _chat(model: str, messages: list, tools: list = None, temperature: float = 0
         _admit_attempt(mode)
         try:
             if config.LOCAL_AI:
-                class NoRedirect(urllib.request.HTTPRedirectHandler):
-                    def redirect_request(self, *args, **kwargs):
-                        return None
-                opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
-                resp = opener.open(req, timeout=config.JUDGE_TIMEOUT_S)
+                from .provider import open_pinned
+                resp = open_pinned(req, timeout=config.JUDGE_TIMEOUT_S)
             else:
                 resp = urllib.request.urlopen(req, timeout=config.JUDGE_TIMEOUT_S)
         except urllib.error.HTTPError as e:

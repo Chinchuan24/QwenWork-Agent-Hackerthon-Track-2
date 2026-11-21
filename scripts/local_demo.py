@@ -156,14 +156,19 @@ def main():
     import local_setup
     local_setup.initialize(STATE)
     env = local_setup.environment(STATE, env)
-    if args.live_ai:
-        from local_env import load
-        try:
-            env.update(load(ROOT))
-        except ValueError as exc:
-            raise SystemExit(str(exc)) from None
+    from local_env import load
+    sys.path.insert(0, str(ROOT))
+    from aegis.provider import resolve
+    try:
+        settings = load(ROOT)
+        provider, base, model, key = resolve(settings)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from None
+    live = bool(key) and provider != 'scripted'
+    if live:
+        env.update(settings)
         env['AEGIS_LOCAL_AI'] = '1'
-    env.update(TWINGUARD_OFFLINE='0' if args.live_ai else '1', PYTHONPATH=str(ROOT / 'scripts') + os.pathsep + str(ROOT))
+    env.update(TWINGUARD_OFFLINE='0' if live else '1', PYTHONPATH=str(ROOT / 'scripts') + os.pathsep + str(ROOT))
     sock = socket.socket()
     for port in range(8000, 65536):
         try:

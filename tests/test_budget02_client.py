@@ -12,6 +12,7 @@ from aegis import config, db, qwen_client as c
 def isolated(tmp_path, monkeypatch):
     connection = sqlite3.connect(tmp_path / 'budget.db')
     connection.row_factory = sqlite3.Row
+    connection.execute('PRAGMA journal_mode=WAL')
     connection.executescript(db.SCHEMA)
     monkeypatch.setattr(db, 'conn', lambda: connection)
     monkeypatch.setattr(config, 'DB_PATH', tmp_path / 'budget.db')

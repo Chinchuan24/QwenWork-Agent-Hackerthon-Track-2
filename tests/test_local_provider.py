@@ -50,7 +50,8 @@ def test_timeout_sanitized(monkeypatch):
     class Fake:
         def open(self, *args, **kwargs):
             raise TimeoutError('fixture-secret')
-    monkeypatch.setattr(client.urllib.request, 'build_opener', lambda *args: Fake())
+    from aegis import provider
+    monkeypatch.setattr(provider, 'open_pinned', Fake().open)
     with pytest.raises(client.JudgeUnavailable) as error:
         client._chat('model', [{'role': 'user', 'content': 'sample'}])
     assert 'fixture-secret' not in str(error.value)

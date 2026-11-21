@@ -6,7 +6,7 @@
 
 ## Quickstart And Current Gate
 
-After installing Python3.12 dependencies, run `.venv/bin/python scripts/local_setup.py start` from this repository. No API key is needed; inherited AEGIS settings are discarded. Installation and startup have no promised60-second timing. Full setup and demo-account instructions follow below.
+After installing Python3.12 dependencies, run `.venv/bin/python scripts/local_setup.py start` from this repository. No API key is needed; inherited AEGIS settings are discarded. The same local command securely loads an optional owner-only root .env: configured provider credentials select local AI; absent file or explicit scripted remains offline. Installation and startup have no promised60-second timing. Full setup and demo-account instructions follow below.
 
 Current local verification: completed through round11, with rounds10 and11 establishing zero new findings. Rounds4-11 each passed2089 tests across30 shards. ON-004/006 admission faults and ON-005 signer wording repaired. See [final report](docs/final-audit/overnight-final-report.md). This is bounded local acceptance, not live managed-host release approval.
 
@@ -54,9 +54,9 @@ python3.12 -m venv .venv
 .venv/bin/python scripts/local_setup.py start
 ```
 
-After installing dependencies, `start` is the single launch command. It exclusively copies `.env.example` to owner-only ignored `.env` if absent, preserves existing files, initializes private state, and starts without an API key. The copied template is an inventory, NOT loaded into the offline process: inherited AEGIS settings and live keys are discarded. Use `start --port 8081` for a free alternate port.
+After installing dependencies, `start` is the single launch command. It exclusively copies `.env.example` to owner-only ignored `.env` if absent, preserves existing files, initializes private state, and starts without an API key. The template defaults to scripted. Optional root .env settings are loaded as literal data, never evaluated; configured provider credentials enable local AI on this same command. Inherited credentials are discarded. Use `start --port 8081` for a free alternate port.
 
-Open http://127.0.0.1:8080. If another task owns port 8080, do not stop it: use `.venv/bin/python scripts/local_setup.py run --port 8081` with a free port and open http://127.0.0.1:8081 instead. The setup step creates private `.local-runtime/` state: an evidence encryption key, an outside-data signer key/state, and an outside-data anchor. It never prints keys or overwrites an existing runtime. The launch helper removes inherited `AEGIS_*` settings, binds localhost, and disables live model calls. Direct `run.py` still refuses missing evidence keys; no security check is disabled.
+Open http://127.0.0.1:8080. If another task owns port 8080, do not stop it: use `.venv/bin/python scripts/local_setup.py run --port 8081` with a free port and open http://127.0.0.1:8081 instead. The setup step creates private `.local-runtime/` state: an evidence encryption key, an outside-data signer key/state, and an outside-data anchor. It never prints keys or overwrites an existing runtime. The launch helper removes inherited credentials and `AEGIS_*` settings, binds localhost, and resolves optional secure root .env model settings. Direct `run.py` still refuses missing evidence keys; no security check is disabled.
 
 In another terminal at the repository root, run only these quick checks and one disposable sponsor safety story:
 
