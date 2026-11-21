@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Alarm | Twinguard{% endblock %}
+{% block content %}
+<h1>Security room: Alarm</h1>
+<p>Contain an incident: stop the helper involved while you review what happened.</p>
+<div class="banner note">Management controls are not connected here. Nothing changes from this page. Your signed-in management service must check your access and record each change.</div>
+<div class="card">
+<h2>Freeze one helper</h2>
+<p>ID card: the stored identity and limits for one helper. Freezing must stop all its current and future actions, not other helpers. Helpers cannot unfreeze themselves or anyone else.</p>
+<ul>{% for helper in helpers %}<li>{{ helper.card_id }}: {{ 'Frozen' if helper.frozen else 'Not frozen' }}</li>{% else %}<li>No helper status supplied.</li>{% endfor %}</ul>
+<button type="button" disabled>Freeze helper (not connected)</button>
+<button type="button" disabled>Unfreeze helper (not connected)</button>
+</div>
+<div class="card">
+<h2>Stop everything</h2>
+<p>The existing switch blocks all helper actions. Changing it needs a signed-in person, another password check and a saved record.</p>
+<p>Switch: {% if kill_switch is defined %}{{ 'On' if kill_switch else 'Off' }}{% else %}Status not supplied{% endif %}</p>
+<button type="button" disabled>Stop everything (not connected)</button>
+<h2>Incident report</h2>
+<p><a href="/breach-clock">Breach clocks and human incident log</a></p>
+{% if user.role == 'admin' %}<p><a href="/admin/demo">Isolated demo controls</a></p>{% endif %}
+<p>A plain account of what happened, with private text hidden. The existing report service must check access and record when a report is made.</p>
+<button type="button" disabled>Make incident report (not connected)</button>
+</div>
+<div class="card">
+<h2>Do I need to report this?</h2>
+<p>This is a reminder, not legal advice. A person decides whether the incident is notifiable. This page never decides, reports or sends a message.</p>
+<p>Notifiable means the organisation has determined that it must notify the PDPC.</p>
+<fieldset disabled>
+<legend>Questions for the person assessing the incident</legend>
+<label for="personal-data">Was personal data involved?</label>
+<select id="personal-data"><option>Unknown</option><option>Yes</option><option>No</option></select>
+<label for="people-count">About how many people were affected?</label>
+<input id="people-count" type="number" min="0" step="1" placeholder="Unknown">
+<label for="harm">Could it cause them real harm?</label>
+<select id="harm"><option>Unknown</option><option>Yes</option><option>No</option></select>
+<p>Do not enter names, contact details or incident content.</p>
+<button type="button">Mark assessed and notifiable (not connected)</button>
+</fieldset>
+{% if alarm %}
+{% if not alarm.show_reminder %}
+<p><strong>No personal data involved: no notification reminder.</strong></p>
+{% else %}
+<p>{{ alarm.rule }}</p>
+<p>Significant harm means serious harm to the people affected, not simply a large count.</p>
+{% if alarm.deadline %}
+<p>Human assessment recorded: <time>{{ alarm.assessed_at }}</time>.</p>
+<p><strong>{{ 'Deadline passed' if alarm.state == 'overdue' else 'Notification reminder' }}</strong>: <time>{{ alarm.deadline }}</time> (Singapore time).</p>
+<p>{{ alarm.remaining_seconds }} seconds remaining as of {{ alarm.as_of }}. Refresh to update.</p>
+<p>The display uses the end of the third following Singapore calendar date, not 72 hours. Notify as soon as practicable; do not wait for this ceiling.</p>
+{% elif alarm.state == 'owner_not_notifiable' %}
+<p>The person assessing this incident marked it not notifiable. No countdown is running.</p>
+{% else %}<p>Waiting for a human assessment. No countdown is running.</p>{% endif %}
+{% endif %}
+<p>Official PDPC guidance read on {{ alarm.source_checked }}. The source is recorded in the reminder metadata; this page makes no external request.</p>
+{% else %}<p>No assessment supplied. No countdown is running.</p>{% endif %}
+</div>
+{% endblock %}

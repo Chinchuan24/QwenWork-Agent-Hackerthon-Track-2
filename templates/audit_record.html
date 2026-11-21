@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Audit record {{ row.id }}</h1>
+<p>{{ row.event }} · run {{ row.run_id or '—' }} · session {{ row.session_id or '—' }}</p>
+<p><code>prev: {{ row.prev_hash }}</code><br><code>hash: {{ row.hash }}</code></p>
+<pre>{{ detail }}</pre>
+<p><a href="/audit">← audit</a></p>
+{% endblock %}

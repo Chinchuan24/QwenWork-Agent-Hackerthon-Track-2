@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ scen.id or 'Run' }} — {{ scen.name }}</h1>
+{% if task %}<p class="muted">Task: {{ task }}</p>{% endif %}
+<div class="cols">
+{% for m, r in results.items() %}
+<div class="col card">
+  <h2>{% if m == 'off' %}UNPROTECTED BASELINE{% elif m == 'monitor' %}MONITOR{% else %}PROTECTED (enforce){% endif %}</h2>
+  {% if r.leaks %}
+    <div class="banner danger">DATA LEAKED — {{ r.leaks|length }} finding(s)</div>
+    <ul class="leaks">{% for l in r.leaks %}<li>{{ l.kind }} → {{ l.to or l.payee or '' }} ({{ l.sink }}{% if l.doc %}, {{ l.doc }}{% endif %})</li>{% endfor %}</ul>
+  {% else %}
+    <div class="banner ok">0 leaks</div>
+  {% endif %}
+  <p class="muted">Agent: Scripted · run <a href="/run/{{ r.run_id }}">{{ r.run_id }}</a> · sent {{ r.sent_count }}</p>
+  <ol class="steps">
+  {% for s in r.steps %}
+    <li class="step v-{{ s.verdict }}">
+      <div class="stephead"><code>{{ s.tool }}</code>
+        <span class="verdict {{ s.verdict }}">
+          {% if s.verdict == 'allow' %}✅ Allow{% elif s.verdict == 'allow_redacted' %}✂️ Allow, redacted{% elif s.verdict == 'hold' %}✋ Hold{% elif s.verdict == 'block' %}⛔ Block{% elif s.verdict == 'approved' %}✅ Approved & ran once{% else %}{{ s.verdict }}{% endif %}
+        </span>
+      </div>
+      <details><summary>arguments & reasons</summary>
+        {% if s.approval_id %}<p><a href="/approvals/{{ s.approval_id }}">→ Review this held action in Approvals</a></p>{% endif %}
+        <pre class="untrusted">{{ s.args | tojson(indent=2) }}</pre>
+        <ul>{% for reason in s.reasons %}<li><strong>{{ reason.rule }}</strong> — {{ reason.reason }}{% if reason.ai_written %} <em class="ai">[AI-written note, possibly influenced by content]</em>{% endif %}{% if reason.judge_mode %} <em class="muted">[judge: {{ reason.judge_mode }}]</em>{% endif %}</li>{% endfor %}</ul>
+        {% if s.result %}<pre class="untrusted labelled">{{ s.result | tojson(indent=2) }}</pre>{% endif %}
+      </details>
+    </li>
+  {% endfor %}
+  </ol>
+</div>
+{% endfor %}
+</div>
+<p><a href="/live">← back to Live</a> · <a href="/approvals">Approvals queue</a></p>
+{% endblock %}

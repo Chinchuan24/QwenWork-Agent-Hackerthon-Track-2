@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Helper ID cards | Twinguard{% endblock %}
+{% block content %}
+<h1>Helper ID cards</h1>
+<p>Each card shows stored limits for a helper. These cards do not authorize actions. The gateway must check each action separately.</p>
+<p>This is a read-only view. No helper can edit cards through this view. Card changes and identity checks are handled outside this screen.</p>
+{% if card_view and card_view.enforcement_connected is sameas true %}
+<p role="status">Enforcement: connected. The trusted adapter reports that card checks are connected to the gateway. This is not permission to act.</p>
+{% else %}
+<p class="banner danger" role="status">Enforcement: not connected. This screen does not confirm that the gateway checks these cards.</p>
+{% endif %}
+{% if card_view and card_view.status == 'ready' and card_view.cards %}
+{% for card in card_view.cards %}
+<section class="card" aria-labelledby="helper-card-{{ loop.index }}">
+  <h2 id="helper-card-{{ loop.index }}">{{ card.name }}</h2>
+  <p>Card ID: <code>{{ card.helper_id }}</code> | Version {{ card.version }}</p>
+  {% if card.frozen %}<p class="banner danger">Frozen: yes. This is the stored card state, not an action verdict.</p>{% else %}<p>Not frozen. This does not mean every action is allowed.</p>{% endif %}
+  <dl>
+    <dt>Job</dt><dd>{{ card.job }}</dd>
+    <dt>Folders it may read</dt><dd><ul>{% for value in card.read_folders %}<li>{{ value }}</li>{% else %}<li>None</li>{% endfor %}</ul></dd>
+    <dt>Data levels it may read</dt><dd><ul>{% for value in card.read_sensitivity %}<li>{{ value }}</li>{% else %}<li>None</li>{% endfor %}</ul></dd>
+    <dt>What these levels mean</dt><dd>Public: shared openly. Internal: business working information. Client-confidential: private client information. Regulated: personal or financial details needing extra care.</dd>
+    <dt>Must not read</dt><dd><ul>{% for value in card.never_read %}<li>{{ value }}</li>{% else %}<li>No extra entries. Task limits still apply.</li>{% endfor %}</ul></dd>
+    <dt>May do alone</dt><dd><ul>{% for value in card.alone %}<li>{{ value }}</li>{% else %}<li>None</li>{% endfor %}</ul></dd>
+    <dt>Needs the owner's yes</dt><dd><ul>{% for value in card.ask %}<li>{{ value }}</li>{% else %}<li>None listed. This does not grant permission.</li>{% endfor %}</ul></dd>
+    <dt>May never do</dt><dd><ul>{% for value in card.never %}<li>{{ value }}</li>{% else %}<li>No extra entries. Fixed rules still apply.</li>{% endfor %}</ul></dd>
+    <dt>Money limits</dt><dd>{{ card.money_limits.currency }} {{ card.money_limits.per_action }} per action; {{ card.money_limits.currency }} {{ card.money_limits.per_day }} per day.</dd>
+  </dl>
+</section>
+{% endfor %}
+{% else %}
+<p class="banner danger" role="status">No usable card to display.</p>
+<p>The card is missing or cannot be read. This view cannot determine whether an action is allowed. A signed-in person should check the stored card and gateway connection.</p>
+{% endif %}
+{% endblock %}

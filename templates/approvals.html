@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Approvals</h1>
+{% if review_metrics %}
+<section aria-label="Approval review counts">
+<h2>Approval review counts</h2>
+<p>Stored history: approve {{ review_metrics.counts.approve }}, reject {{ review_metrics.counts.reject }}, change {{ review_metrics.counts.change }}.</p>
+<p>{{ review_metrics.review_seconds|length }} recorded screen-view timings; {{ review_metrics.missing_view_count }} decisions have no matched view. Visibility does not prove reading. These counts never block your decisions.</p>
+</section>
+{% endif %}
+<p>Actions too risky to decide alone. The person who set the task cannot approve it. Approvals are tied to a fingerprint of the exact action, work once, and expire.</p>
+{% if not queue %}<p class="muted">Queue is empty.</p>{% endif %}
+<table>
+<tr><th>Approval</th><th>Tool</th><th>Task</th><th>Requested by</th><th>State</th><th></th></tr>
+{% for q in queue %}
+<tr>
+  <td>{{ q.id }}</td><td><code>{{ q.tool }}</code></td>
+  <td>{{ q.task_text[:80] }}</td><td>{{ q.created_by }}</td>
+  <td>{% if q.expired %}expired{% else %}pending{% endif %}</td>
+  <td><a href="/approvals/{{ q.id }}">review</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

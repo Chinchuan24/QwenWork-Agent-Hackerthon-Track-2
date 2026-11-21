@@ -1,0 +1,15 @@
+.venv/
+aegis_data/
+__pycache__/
+*.pyc
+.pytest_cache/
+nohup.out
+.local-runtime/
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+signing.key
+evidence.key

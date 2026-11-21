@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: aegis-public-demo
+    runtime: docker
+    plan: 0.5c-512mb
+    numInstances: 1
+    autoDeployTrigger: 'off'
+    healthCheckPath: /readyz
+    disk:
+      name: aegis-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: AEGIS_TRUSTED_HOSTS
+        sync: false
+      - key: AEGIS_TRUSTED_PROXY_CIDRS
+        sync: false

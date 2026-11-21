@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Rule match | Twinguard{% endblock %}
+{% block content %}
+<h1>Rule match</h1>
+<p>{{ notice }}</p>
+<p>Candidate checks show where to look next. They are not proof. Missing proof stays <strong>not covered</strong>. Unreadable requirements stay <strong>not verified</strong>.</p>
+<div class="table-scroll" role="region" aria-label="Official requirements and evidence" tabindex="0">
+<table>
+<caption>Official sources read on 18 November 2026. No coverage receipts validated.</caption>
+<thead><tr><th scope="col">Source</th><th scope="col">Official heading</th><th scope="col">In plain words</th><th scope="col">Candidate check</th><th scope="col">Proof</th><th scope="col">Status</th></tr></thead>
+<tbody>
+{% for row in table %}
+<tr><td><a href="{{ row.url }}" rel="noopener noreferrer">{{ row.source }}</a><br>{{ row.version }}</td><td>{{ row.number }} {{ row.heading }}</td><td>{{ row.summary }}</td><td>{{ row.check }}</td><td>No validated proof</td><td>{{ row.status }}</td></tr>
+{% endfor %}
+</tbody></table>
+</div>
+<h2>Source limits</h2>
+{% for short, source in sources.items() %}
+<h3>{{ short }}</h3><p>{{ source.name }}. {{ source.publication_status }}. {{ source.note }}</p>
+{% endfor %}
+{% endblock %}

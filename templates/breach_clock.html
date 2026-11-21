@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Breach clock | Twinguard{% endblock %}
+{% block content %}
+<h1>Breach clock</h1>
+<p><a href="/alarm">Alarm</a> | <a href="/incident-report">Incident report</a> | <a href="/breach-clock">Incident records</a></p>
+<div class="banner note">This is a reminder, not legal advice. A person decides whether notification is required. This screen never decides, reports or sends anything.</div>
+<p>Assess within 30 calendar days of credible grounds to believe a breach occurred. Notify the PDPC as soon as practicable, no later than 3 calendar days after the human determination that it is notifiable.</p>
+<p>Affected people, where notification is required, must be notified as soon as practicable, at the same time as or after the PDPC. Counts and harm facts do not start a clock or decide notification.</p>
+<p>Asia/Singapore calendar dates, not rolling hours. Day one is the next date; the ceiling is the end of the deadline date. Refresh to update. As of {{ as_of }}.</p>
+{% if incident %}
+<h2>{{ incident.title }}</h2>
+{% for label, reminder in [('Assessment: 30 calendar days', clock.assessment), ('PDPC notification: 3 calendar days', clock.notification)] %}
+<section class="card"><h2>{{ label }}</h2>
+{% if completion and loop.first %}<p>Assessment completed: {{ 'on time' if completion.completed_at.date() <= reminder.deadline_date else 'late' }}. Original deadline: {{ reminder.deadline_date }}. Human assessed as not notifiable at {{ completion.completed_at }}. Reason: {{ completion.reason }}.</p>
+{% elif completion %}<p>Notification not required by explicit human decision. No countdown is running. {% if reminder.deadline_date %}Prior notification deadline: {{ reminder.deadline_date }} (preserved).{% endif %}</p>
+{% elif reminder.deadline_date %}<p>First day: {{ reminder.first_day }}. Deadline date: <strong>{{ reminder.deadline_date }}</strong>.</p>
+{% if loop.first and clock.notification.first_day %}
+<p>Assessment completed: {{ 'on time' if (clock.notification.first_day - reminder.deadline_date).days <= 1 else 'late' }} (human notifiable determination recorded). The original assessment deadline is preserved; no active assessment countdown.</p>
+{% else %}<p>Status: {{ reminder.status }}. Calendar days remaining: {{ reminder.days_remaining }}.</p>{% endif %}
+{% else %}<p>Waiting for a human trigger. No countdown is running.</p>{% endif %}</section>
+{% endfor %}
+<h2>PDPC facts summary (read-only)</h2>
+<dl>{% for key in ['count', 'data', 'harm'] %}<dt>{{ key }}</dt><dd>{{ prefill[key] if prefill[key] != '' else 'Unknown' }}</dd>{% endfor %}</dl>
+<h2>Persistent human step log</h2>
+<p>Saved sequence, not reordered by timestamps. Facts are human-supplied, not automatically inferred from evidence. Unknown facts remain unknown.</p>
+{% for row in [incident] + incident.steps %}
+<section class="card"><h3>{{ row.step if row.step is defined else row.title }}</h3>
+<p>Actor ID {{ row.actor_id }} | Diary receipt <a href="/audit/record/{{ row.audit_id }}">{{ row.audit_id }}</a></p>
+<p>Step epoch: {{ row.timestamp if row.timestamp is not none else 'Unknown' }}</p>
+<dl>{% for key, label in [('count', 'Affected people count'), ('data', 'Data categories'), ('harm', 'Potential harm')] %}
+<dt>{{ label }}</dt><dd>{{ row.facts[key] if key in row.facts else 'Unknown' }}</dd>{% endfor %}</dl></section>
+{% endfor %}
+<p>Source: {{ clock.source }}. Attribution to supplied guidance, not live verification.</p>
+{% else %}
+<h2>Saved incidents</h2>
+<ul>{% for item in incidents %}<li><a href="/breach-clock/{{ item.id }}">{{ item.title }}</a></li>{% else %}<li>No incident recorded.</li>{% endfor %}</ul>
+{% endif %}
+{% if user.role == 'admin' %}
+<section class="card"><h2>{{ 'Append a human step' if incident else 'Create an incident record' }}</h2>
+<p>Do not enter names, contact details, secrets or raw incident content. Saving records a human step only; it does not notify anyone.</p>
+<form method="post" action="{{ '/breach-clock/' + incident.id + '/steps' if incident else '/breach-clock' }}">
+<input type="hidden" name="csrf" value="{{ csrf }}">
+<label for="text">{{ 'Step taken' if incident else 'Incident title' }}</label><textarea id="text" name="text" required maxlength="10000"></textarea>
+<label for="count">Affected people count (blank: no update to previous saved value)</label><input id="count" name="count" type="number" value="{{ prefill.count }}" min="0" max="9223372036854775807" step="1">
+<label for="data">Data categories (blank means unknown)</label><textarea id="data" name="data" maxlength="10000">{{ prefill.data if prefill.data is string else prefill.data|join(', ') }}</textarea>
+<label for="harm">Potential harm</label><select id="harm" name="harm"><option value="">Unknown: no update to previous saved value</option><option value="yes" {{ 'selected' if prefill.harm is sameas true else '' }}>Yes</option><option value="no" {{ 'selected' if prefill.harm is sameas false else '' }}>No</option></select>
+{% if not clock or not clock.assessment.first_day %}
+<label for="awareness">Credible grounds date and time (Singapore)</label><input id="awareness" name="awareness_at" type="datetime-local">
+<label for="confirm-awareness">Human confirmation of credible grounds</label><select id="confirm-awareness" name="human_awareness"><option value="">Not confirmed</option><option value="yes">I confirm the supplied credible grounds time</option></select>
+{% endif %}
+{% if not completion and (not clock or not clock.notification.first_day) %}
+<label for="determination">Human notifiable determination date and time (Singapore)</label><input id="determination" name="determination_at" type="datetime-local">
+<label for="confirm-determination">Human confirmation of determination</label><select id="confirm-determination" name="human_determination"><option value="">Not confirmed</option><option value="yes">I confirm a person determined this breach is notifiable</option></select>
+{% endif %}
+<button type="submit">Save human record only</button>
+</form></section>
+{% if incident and not completion %}
+<section class="card"><h2>Explicit non-notifiable assessment decision</h2>
+<p>This terminal human decision stops the notification reminder, including an existing clock. Prior deadlines and history remain recorded.</p>
+<form method="post" action="{{ '/breach-clock/' + incident.id + '/steps' }}">
+<input type="hidden" name="csrf" value="{{ csrf }}">
+<input type="hidden" name="outcome" value="not_notifiable">
+<label for="reason">Required reason for completion</label><textarea id="reason" name="reason" required maxlength="9000"></textarea>
+<label for="completed">Completion date and time (Singapore)</label><input id="completed" name="completed_at" type="datetime-local" required>
+<label for="confirm-completion">Human confirmation</label><select id="confirm-completion" name="human_completion" required><option value="">Not confirmed</option><option value="yes">I confirm this explicit terminal assessment decision</option></select>
+<button type="submit">Record assessed as not notifiable</button>
+</form></section>
+{% endif %}
+{% else %}<p>Read-only: only a signed-in admin with a changed password may save human records.</p>{% endif %}
+{% endblock %}

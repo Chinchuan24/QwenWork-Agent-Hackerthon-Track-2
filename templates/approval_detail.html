@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Approval {{ ap.id }}</h1>
+<p>Status: <strong>{{ ap.status }}</strong>{% if expired %} (expired){% endif %} · expires in fingerprint-bound form · task set by <strong>{{ sess.created_by }}</strong></p>
+
+<h2>Facts worked out by rules</h2>
+<ul class="facts">
+{% for f in facts %}<li><strong>{{ f.rule }}</strong> — {{ f.reason }}</li>{% endfor %}
+{% if not facts %}<li>No rule facts recorded.</li>{% endif %}
+</ul>
+
+<h2>AI-written notes <span class="muted">(labelled: possibly influenced by the content)</span></h2>
+<ul class="ai-notes">
+{% for n in ai_notes %}<li><strong>{{ n.rule }}</strong> — {{ n.reason }} <em>[{{ n.judge_mode }}]</em></li>{% endfor %}
+{% if not ai_notes %}<li class="muted">None.</li>{% endif %}
+</ul>
+
+<h2>Review facts <span class="muted">(resolved from the sandbox world, not from the agent)</span></h2>
+{% if review_facts.exposures %}
+<div class="banner note"><strong>Exposed session</strong> — this session took in outside content. Likely cause(s):
+<ul>
+{% for e in review_facts.exposures %}
+<li>{{ e.kind }} via <code>{{ e.source }}</code>{% if e.sender %} (sender {{ e.sender }}){% endif %} — fields: {{ e.fields|join(', ') }}<br><span class="muted">snippet: {{ e.snippet }}</span></li>
+{% endfor %}
+</ul>
+Side effects are held unless clearly inside the task (R-EXPOSED).</div>
+{% endif %}
+<ul class="facts">
+{% if review_facts.tool == 'send_email' %}
+<li>Recipient: <code>{{ review_facts.recipient }}</code> — client: <strong>{{ review_facts.recipient_client or 'none (not a known client domain)' }}</strong>{% if review_facts.recipient_internal %} (internal){% endif %}{% if not review_facts.recipient_known %} · <strong>unknown contact</strong>{% endif %}</li>
+{% for a in review_facts.attachments %}
+<li>Attachment <code>{{ a.id }}</code>{% if a.exists %}: “{{ a.title }}” — owner <strong>{{ a.owner }}</strong>, {{ a.sensitivity }}{% else %}: <strong>does not exist</strong>{% endif %}</li>
+{% endfor %}
+{% endif %}
+{% if review_facts.tool == 'issue_refund' %}
+{% if review_facts.ledger %}
+<li>Ledger: invoice <code>{{ review_facts.args.invoice_id }}</code> — client <strong>{{ review_facts.ledger.client }}</strong>, paid {{ review_facts.ledger.amount }}, payee “{{ review_facts.ledger.payee }}”, status {{ review_facts.ledger.status }}</li>
+<li>This refund would pay <strong>{{ review_facts.amount_to_pay }}</strong> to “{{ review_facts.payee }}”; already refunded against this invoice: {{ review_facts.refunded_so_far }}</li>
+{% else %}
+<li><strong>No ledger entry for this invoice.</strong></li>
+{% endif %}
+{% endif %}
+{% for r in review_facts.redaction_preview %}
+<li>Redaction — {{ r.field }}: {% if r.stored %}<code>{{ r.stored }}</code> ({{ r.note }}){% else %}{{ r.before }} → {{ r.after }} ({{ r.rule }}){% endif %}</li>
+{% endfor %}
+{% if not review_facts.attachments and not review_facts.redaction_preview and review_facts.tool == 'send_email' %}
+<li>No attachments; no redactions pending.</li>
+{% endif %}
+</ul>
+
+<h2>The exact action</h2>
+<p>Tool: <code>{{ action.tool }}</code></p>
+<pre class="untrusted labelled">{{ args | tojson(indent=2) }}</pre>
+<p class="muted">Untrusted content above is boxed and labelled; it cannot pose as a system message.</p>
+
+{% if ap.status == 'pending' and not expired and user.role in ('admin', 'approver') and user.username != sess.created_by %}
+<form method="post" action="/approvals/{{ ap.id }}/decide" class="inline" data-review-view-url="/approvals/{{ ap.id }}/view" data-csrf="{{ csrf }}">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <label for="approval-reason">Short review reason (required for highest-risk approvals)</label>
+  <input id="approval-reason" name="reason" maxlength="500">
+  <button name="decision" value="approve">Approve once</button>
+  <button name="decision" value="deny" class="secondary">Deny</button>
+  <button name="decision" value="change" class="secondary">Request change</button>
+</form>
+<form method="post" action="/approvals/{{ ap.id }}/decide" class="inline" data-review-view-url="/approvals/{{ ap.id }}/view" data-csrf="{{ csrf }}">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <input type="hidden" name="decision" value="deny">
+  <input type="hidden" name="freeze" value="1">
+  <button class="danger-btn">Deny and freeze session</button>
+</form>
+{% elif user.username == sess.created_by %}
+<div class="banner note">You set this task, so you cannot approve it. Sign in as a second person (e.g. ops).</div>
+{% endif %}
+<p><a href="/approvals">← queue</a></p>
+<script src="/static/approval-review.js"></script>
+{% endblock %}

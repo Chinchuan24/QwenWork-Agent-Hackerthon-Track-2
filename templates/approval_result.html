@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Approval decision</h1>
+{% if res.ok %}
+<div class="banner ok">{{ res.status }}{% if res.status == 'executed' %} — the action ran exactly once, after re-running the rule checks{% endif %}</div>
+{% if res.result %}<pre class="untrusted labelled">{{ res.result | tojson(indent=2) }}</pre>{% endif %}
+{% else %}
+<div class="banner danger">{{ res.error }}</div>
+{% endif %}
+<p><a href="/approvals">← queue</a> · <a href="/live">Live</a></p>
+{% endblock %}

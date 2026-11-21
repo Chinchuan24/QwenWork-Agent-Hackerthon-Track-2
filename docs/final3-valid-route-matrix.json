@@ -1,0 +1,3087 @@
+{
+  "source_receipt": "aegis-test-shards-4laspuie.json",
+  "role_viewport_cases": 10,
+  "row_count": 342,
+  "post_route_count": 23,
+  "rows": [
+    {
+      "path": "/run/dc3ba5906711",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/9a9a70d9a4de",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/30c4781b448ff0fc475a9fb410d1d570",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/9af949f62027/freeze",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/9af949f62027/release",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/e6abcc437cb4/source-message-scope",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/5be7fd4822d2/decide",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/5a0a62b0c44f/view",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/30c4781b448ff0fc475a9fb410d1d570/steps",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/source",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/guard",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/results",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/record-1",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 404,
+      "actual_status": 404,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_status": 404,
+      "actual_status": 404,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/8cfa4f06d088",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/9f812ee795aa",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/a0cdb5ed8e837270bc64fb5da7304b85",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/316064cf561b/freeze",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/316064cf561b/release",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/448d8a73ab23/source-message-scope",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/196e1a183f0c/decide",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/4d3ed565df39/view",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/a0cdb5ed8e837270bc64fb5da7304b85/steps",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/source",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/guard",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/results",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/record-1",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 404,
+      "actual_status": 404,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_status": 404,
+      "actual_status": 404,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/4e5f4d3c5c56",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/222ba8af3a8e",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/70d2ef8abf3c49b286aa81f7943a1147",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/91ced460514e/freeze",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/91ced460514e/release",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/19e1ba3d212e/source-message-scope",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/2a8b9c097d26/decide",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/8004ae0a5f0e/view",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/70d2ef8abf3c49b286aa81f7943a1147/steps",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 404,
+      "actual_status": 404,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/10497de3c096",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/1578aadc37f0",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/35f839a5ec73610d4d45e348b2a857a2",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/46b14ea0f749/freeze",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/46b14ea0f749/release",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/f44558da219e/source-message-scope",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/88c93bb0dd8e/decide",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/c3b634e981e6/view",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/35f839a5ec73610d4d45e348b2a857a2/steps",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 404,
+      "actual_status": 404,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/ae875415cd32",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/0c68ae699b64",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/46592f1b1039209a704bd91cec617e02",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/de6370275343/freeze",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/de6370275343/release",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/60c34021a7de/source-message-scope",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/341d216fb0ed/decide",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/0efd1aecfe3d/view",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/46592f1b1039209a704bd91cec617e02/steps",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/a7b6e8fec662",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/61a4ec68dddc",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/df5606d6c4472d8714a7a8633bf5bbaa",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/4869159fcedf/freeze",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/4869159fcedf/release",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/cfb99eacfb92/source-message-scope",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/6033c4a868af/decide",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/9af89cc52811/view",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/df5606d6c4472d8714a7a8633bf5bbaa/steps",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/88f36b3fa05c",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/f97b85e00fd7",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/986fc939965e925b5664b1bae0f93381",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/f63191e1a028/freeze",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/f63191e1a028/release",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/1bdac83a61ed/source-message-scope",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/01142f4491e6/decide",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/c5edb3d2d22a/view",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/986fc939965e925b5664b1bae0f93381/steps",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/c4ac58efc48f",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/a19d12eec039",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/4e8b7506e61491b37a38b26dd59561dc",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/e6decd3a1677/freeze",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/e6decd3a1677/release",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/342428d3bf15/source-message-scope",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/b6d938d69123/decide",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/cc877254f8bc/view",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/4e8b7506e61491b37a38b26dd59561dc/steps",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/e73a868fea3d",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/81dedf3fbcbb",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/814022d692525939c8d939de9aac5907",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/36ef0bf585e1/freeze",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/36ef0bf585e1/release",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/59d6d50ba74b/source-message-scope",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/30e5ac1e4a9f/decide",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/d4ded0bff4ea/view",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/814022d692525939c8d939de9aac5907/steps",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 404,
+      "actual_status": 404,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/run/de602891e42b",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/bbc5c8225c76",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/d1d2e21a9cec6104fe075ff90614b478",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/bench",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/default-mode",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/reset",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/demo/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/ebbfc3802cde/freeze",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/ebbfc3802cde/release",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/helpers/0e8b9461b5e8/source-message-scope",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/kill",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/admin/tools/review",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 401,
+      "actual_status": 401,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/7c7912702fd5/decide",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/approvals/dd5b3c50e275/view",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/breach-clock/d1d2e21a9cec6104fe075ff90614b478/steps",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/agent-run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/live/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/policies/activate",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/redteam/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/change-password",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/login",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/logout",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 303,
+      "actual_status": 303,
+      "evidence": "valid synthetic form and state assertions"
+    },
+    {
+      "path": "/api/agent/session",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/call",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/api/agent/model",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 200,
+      "actual_status": 200,
+      "evidence": "generated worker token, read-only/no-live-model"
+    },
+    {
+      "path": "/run/matrix-missing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/approvals/matrix-missing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/breach-clock/matrix-missing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 404,
+      "actual_status": 404,
+      "evidence": "seeded browser detail"
+    },
+    {
+      "path": "/admin/demo/proof/matrix-missing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_status": 403,
+      "actual_status": 403,
+      "evidence": "seeded browser detail"
+    }
+  ],
+  "failure_count": 0
+}

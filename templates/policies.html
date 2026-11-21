@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Policies</h1>
+<p>Active version: <strong>v{{ active }}</strong>. Rules are readable YAML with a fixed condition vocabulary — no code can run. A bad file (including an empty rule set) is refused and the previous version stays active. Activating requires re-authentication. Hard rules built into the code (canary, invoice over-value, unknown tool, frozen session, kill switch, fail-closed) can never be switched off here.</p>
+{% if error %}<div class="banner danger">{{ error }}</div>{% endif %}
+<table>
+<tr><th>ID</th><th>Plain-English rule</th><th>When</th><th>Decision</th></tr>
+{% for r in rules %}
+<tr><td><code>{{ r.id }}</code></td><td>{{ r.explain }}</td>
+<td>{% for k, v in r.when.items() %}{{ k }}={{ v }} {% endfor %}</td>
+<td><span class="verdict {{ r.decision }}">{{ r.decision }}</span></td></tr>
+{% endfor %}
+</table>
+<h2>Versions</h2>
+<table>
+<tr><th>Version</th><th>By</th><th>Note</th></tr>
+{% for v in versions %}<tr><td>{{ v.version }}</td><td>{{ v.activated_by }}</td><td>{{ v.note or '' }}</td></tr>{% endfor %}
+</table>
+{% if user.role == 'admin' %}
+<h2>Activate a new version</h2>
+<form method="post" action="/policies/activate">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <label for="policy-content">YAML policy</label>
+  <textarea id="policy-content" name="content" rows="12" placeholder="Paste the full YAML policy here">{{ content }}</textarea>
+  <label>Confirm your password to activate <input name="password" type="password" autocomplete="current-password" required></label>
+  <button>Validate & activate</button>
+</form>
+{% endif %}
+{% endblock %}

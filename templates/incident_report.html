@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Incident report | Twinguard{% endblock %}
+{% block content %}
+<h1>Incident report</h1>
+<div class="banner note">Private text is hidden. This page does not approve, release or send anything. Downloads and report creation must go through the signed-in management service, which records each report.</div>
+<p><a href="/breach-clock">Breach clocks and human incident log</a></p>
+{% if user is defined and user and user.role == 'admin' %}<p><a href="/admin/demo">Isolated demo controls</a></p>{% endif %}
+{% if report %}
+<p><strong>{{ report.summary | forceescape }}</strong></p>
+<div class="card">
+<h2>What was asked and attempted</h2>
+<p>Human request: {{ report.task.content | forceescape }}</p>
+<p>Attempted tool: {{ report.action.tool | forceescape }}. Content: {{ report.action.content | forceescape }}.</p>
+<h2>What led to the decision</h2>
+<p>{{ report.cause.content | forceescape }}. {{ report.cause.notice | forceescape }}</p>
+<p>What was protected: {{ report.protected_data.notice | forceescape }}</p>
+<h2>What to do next</h2>
+<ul>{% for step in report.next_steps %}<li>{{ step | forceescape }}</li>{% endfor %}</ul>
+</div>
+<details class="card">
+<summary>Show proof and recorded checks</summary>
+<p>{{ report.proof.notice | forceescape }}</p>
+<p>Selected diary entries: {% for id in report.proof.trigger_record_ids %}{{ id | forceescape }} {% endfor %}</p>
+<p>Outside-content entries: {% for id in report.cause.exposure_record_ids %}{{ id | forceescape }} {% else %}Not recorded{% endfor %}</p>
+<p>Rules: {% for rule in report.policy.rules %}{{ rule | forceescape }} {% else %}Not recorded{% endfor %}</p>
+<p>Policy version: {{ report.policy.version if report.policy.version is not none else 'Not recorded' }}</p>
+<p>Action binding: {{ report.action.action_id_binding | forceescape }}</p>
+<p>Action guard verdict: {{ report.action.guard_verdict | forceescape }}. Session checks alone do not establish an action verdict.</p>
+<p>Action-bound check entries: {% for id in report.action.guard_record_ids %}{{ id | forceescape }} {% else %}Not recorded{% endfor %}</p>
+{% for guard in report.guards %}
+<p>Diary entry {{ guard.record_id | forceescape }}: {{ guard.binding | forceescape }}</p>
+<p>First check: {{ guard.a.verdict | forceescape }} ({{ guard.a.mode | forceescape }}). {{ guard.a.reason | forceescape }}</p>
+<p>Second check: {{ guard.b.verdict | forceescape }} ({{ guard.b.mode | forceescape }}). {{ guard.b.reason | forceescape }}</p>
+{% else %}<p>Both check answers: not recorded.</p>{% endfor %}
+</details>
+<details class="card">
+<summary>Full sequence: {{ report.timeline | length }} diary entries</summary>
+<p>Entries follow the saved sequence, even if the clock moved backwards. Private details stay hidden.</p>
+<div class="table-wrap"><table>
+<caption>Recorded incident sequence</caption>
+<thead><tr><th scope="col">Entry</th><th scope="col">Time</th><th scope="col">Event</th><th scope="col">Tool</th><th scope="col">Decision</th></tr></thead>
+<tbody>{% for row in report.timeline %}<tr><td>{{ row.record_id | forceescape }}</td><td>{{ row.time | forceescape }}</td><td>{{ row.event | forceescape }}</td><td>{{ row.tool | forceescape }}</td><td>{{ row.verdict | forceescape }}</td></tr>{% endfor %}</tbody>
+</table></div>
+</details>
+<h2>Limits of this report</h2>
+<ul>{% for item in report.limitations %}<li>{{ item | forceescape }}</li>{% endfor %}</ul>
+{% else %}<p>No incident report supplied. Ask the signed-in management service to resolve a held action, blocked action or frozen session.</p>{% endif %}
+{% endblock %}

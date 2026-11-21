@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Today - Twinguard{% endblock %}
+{% macro proof_links(ids) %}
+{% set valid = ids|default([], true)|select('integer')|reject('sameas', true)|reject('sameas', false)|select('gt', 0)|list %}
+{% if valid %}
+<details>
+  <summary>Show proof</summary>
+  <ul>
+  {% for rid in valid %}
+    <li><a href="/audit/record/{{ rid }}">Read supporting record {{ loop.index }}</a></li>
+  {% endfor %}
+  </ul>
+</details>
+{% else %}
+<p class="muted">Proof is not available yet.</p>
+{% endif %}
+{% endmacro %}
+{% block content %}
+<h1>What your AI did today</h1>
+<section aria-label="Today's note">
+{% if briefing %}
+  <p class="muted">{% if briefing.mode == 'template' %}Written from a template.{% elif briefing.mode == 'live' %}Written with AI help.{% else %}Writing source is not known.{% endif %}{% if briefing.live_status == 'waiting for key' %} Live AI writing is not ready.{% endif %}</p>
+  {% if briefing.headline %}
+  <p><strong>{{ briefing.headline.text }}</strong></p>
+  {{ proof_links(briefing.headline.proof_ids) }}
+  {% endif %}
+  {% for key, heading in [('needs_decision', 'Needs your decision'), ('stopped_for_you', 'Stopped for you'), ('you_should_know', 'You should know'), ('went_fine', 'Went fine'), ('still_waiting', 'Still waiting')] %}
+    {% for line in (briefing.sections|default({}, true)).get(key, []) %}
+      {% if loop.first %}<h2>{{ heading }}</h2>{% endif %}
+      <p>{{ line.text }}</p>
+      {{ proof_links(line.proof_ids) }}
+    {% endfor %}
+  {% endfor %}
+{% else %}
+  <p>Today's note is not ready.</p>
+{% endif %}
+</section>
+<section aria-labelledby="owner-queue">
+<h2 id="owner-queue">Waiting for your decision</h2>
+<p>The person who asked for the work cannot approve it. Review the proof before deciding.</p>
+{% for item in approvals %}
+<article class="card" aria-label="Decision item {{ loop.index }}">
+  <p id="decision-note-{{ loop.index }}">{{ item.explanation|default('Details are not ready. Open the decision page to review this work.', true) }}</p>
+  <p><strong>Recommendation:</strong> {{ item.recommendation|default('No recommendation is available yet.', true) }}</p>
+  {{ proof_links(item.proof_ids) }}
+  {% if item.id %}<p><a href="/approvals/{{ item.id|urlencode|replace('/', '%2F') }}">Review this work</a></p>{% endif %}
+  {% set decision = item.decision|default('', true)|upper %}
+  {% set valid_proof = item.proof_ids|default([], true)|select('integer')|reject('sameas', true)|reject('sameas', false)|select('gt', 0)|list %}
+  {% if decision in ('NEVER', 'BLOCK') %}
+    <p><strong>Stopped.</strong> This action cannot be approved.</p>
+  {% elif decision in ('APPROVE', 'HOLD') and item.status == 'pending' and item.expired is sameas false %}
+    {% if user and user.role in ('admin', 'approver') and not user.must_change and item.created_by and user.username != item.created_by and item.id and csrf and valid_proof %}
+    <p class="inline">
+      <a href="/approvals/{{ item.id|urlencode|replace('/', '%2F') }}" aria-describedby="decision-note-{{ loop.index }}">Allow once</a>
+      <a href="/approvals/{{ item.id|urlencode|replace('/', '%2F') }}" class="secondary" aria-describedby="decision-note-{{ loop.index }}">Do not allow</a>
+    </p>
+    {% elif user and user.must_change %}
+    <p><a href="/change-password">Change your password</a> before deciding.</p>
+    {% elif user and user.username == item.created_by %}
+    <p>You asked for this work. A second person must decide.</p>
+    {% else %}
+    <p>A person with permission must review this item and its proof.</p>
+    {% endif %}
+  {% else %}
+    <p>This item is not open for a decision.</p>
+  {% endif %}
+</article>
+{% else %}
+<p>Nothing is waiting for your decision.</p>
+{% endfor %}
+</section>
+<details>
+  <summary>Details and proof</summary>
+  <h2>Security room</h2>
+  <ul>
+    <li><a href="/audit">Read the activity record</a></li>
+    <li><a href="/compliance">See how checks help with rules</a></li>
+    <li><a href="/redteam">See attack tests</a></li>
+    {% if user and user.role == 'admin' %}<li><a href="/admin">Manage settings</a></li>{% endif %}
+  </ul>
+</details>
+{% endblock %}

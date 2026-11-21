@@ -1,0 +1,7912 @@
+{
+  "router_method_count": 58,
+  "roles": 5,
+  "widths": [
+    1440,
+    390
+  ],
+  "rows": [
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        303
+      ],
+      "actual_status": 303,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        401
+      ],
+      "actual_status": 401,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "anonymous",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        403,
+        404,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "admin",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        403,
+        404,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "admin",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403,
+        404,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "approver",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403,
+        404,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "approver",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403,
+        404,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "auditor",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403,
+        404,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        404
+      ],
+      "actual_status": 404,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "auditor",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403,
+        404,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "viewer",
+      "width": 1440,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/openapi.json",
+      "method": "HEAD",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "HTTP HEAD",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/tools/review",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/results",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/briefing",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/guard",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/source",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/proof/{proof_ref}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/demo/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/demo/reset",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/healthz",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/login",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 200,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/logout",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 303,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/change-password",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/alarm",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/incident-report",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/rule-match",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/helper-cards",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/attack-board",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/release",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/freeze",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/admin/helpers/{helper_id}/source-message-scope",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/api/agent/session",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/call",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/agent/model",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 401,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/live/agent-run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/run/{run_id}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/api/run/{run_id}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/approvals/{approval_id}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403,
+        404,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/view",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/approvals/{approval_id}/decide",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/audit",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/record/{rid}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.json",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/audit/export.csv",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/policies/activate",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 422,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/redteam/run",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/compliance/trust-report.json",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/bench",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/kill",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/admin/default-mode",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/error",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200
+      ],
+      "actual_status": 200,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "GET",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        403
+      ],
+      "actual_status": 403,
+      "coverage": "browser GET",
+      "parameter_case": "existing or static"
+    },
+    {
+      "route": "/breach-clock/{incident_id}/steps",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "missing"
+    },
+    {
+      "route": "/breach-clock",
+      "method": "POST",
+      "role": "viewer",
+      "width": 390,
+      "expected_statuses": [
+        200,
+        303,
+        401,
+        403,
+        422
+      ],
+      "actual_status": 403,
+      "coverage": "negative method probe, invalid CSRF; not authorized workflow",
+      "parameter_case": "existing or static"
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Writes probe rejection only, not valid authorized workflows.",
+    "Missing approval/incident/proof/helper cases do not prove existing-record rendering.",
+    "Expected HTTP resource errors excluded from JavaScript console errors."
+  ]
+}

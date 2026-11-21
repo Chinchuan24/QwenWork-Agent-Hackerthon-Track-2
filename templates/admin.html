@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Admin</h1>
+{% if error %}<div class="banner danger">{{ error }}</div>{% endif %}
+<div class="card">
+<h2>Kill switch</h2>
+<p>Currently: <strong>{{ 'ON' if kill_switch else 'off' }}</strong>. Changing it requires your password again and is logged.</p>
+<form method="post" action="/admin/kill">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <label>Re-authenticate (password) <input type="password" name="password" required></label>
+  <button name="value" value="on" class="danger-btn">Turn ON</button>
+  <button name="value" value="off" class="secondary">Turn off</button>
+</form>
+</div>
+<div class="card">
+<h2>Default mode for new runs</h2>
+<p>Currently: <strong>{{ default_mode }}</strong>. Protection is only ever off inside a labelled baseline run with its own copy of the world — 'off' cannot become the default.</p>
+<form method="post" action="/admin/default-mode">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <label>Re-authenticate (password) <input type="password" name="password" required></label>
+  <button name="value" value="enforce">enforce</button>
+  <button name="value" value="monitor" class="secondary">monitor (decides and logs, lets through)</button>
+</form>
+</div>
+<div class="card">
+<h2>Qwen spending meter</h2>
+<p>Mode: <strong>{{ spend.mode }}</strong> · estimated spend ${{ spend.total_usd }} of ${{ spend.cap_usd }} cap. Estimates use rough per-token prices; the cap fails closed (judges hold, never allow).</p>
+</div>
+<div class="card">
+<h2>Speed &amp; load (measured)</h2>
+<form method="post" action="/admin/bench" class="inline">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <button>Run benchmark (1000 calls)</button>
+</form>
+{% if bench %}
+<p class="muted">Judge: {{ bench.judge_mode }} · signer + encryption ON · {{ bench.n }} calls · {{ bench.machine.platform }} · Python {{ bench.machine.python }} · {{ bench.machine.cpus }} CPUs. Live timing: {{ bench.live_timing }}.</p>
+<table class="score">
+<tr><th>Phase</th><th>p50 (ms)</th><th>p95 (ms)</th><th>decisions/sec</th></tr>
+<tr><td>Cold judge cache</td><td>{{ bench.cold.p50_ms }}</td><td>{{ bench.cold.p95_ms }}</td><td>{{ bench.cold.decisions_per_sec }}</td></tr>
+<tr><td>Warm judge cache</td><td>{{ bench.warm.p50_ms }}</td><td>{{ bench.warm.p95_ms }}</td><td>{{ bench.warm.decisions_per_sec }}</td></tr>
+</table>
+<h3>Per-step added time (warm, ms)</h3>
+<table>
+<tr><th>Step</th><th>p50</th><th>p95</th></tr>
+{% for name, s in bench.warm.steps.items() %}<tr><td>{{ name }}</td><td>{{ s.p50_ms }}</td><td>{{ s.p95_ms }}</td></tr>{% endfor %}
+</table>
+{% else %}<p class="muted">No benchmark run yet.</p>{% endif %}
+</div>
+<div class="card">
+<h2>Users</h2>
+<table>
+<tr><th>Username</th><th>Role</th></tr>
+{% for u in users %}<tr><td>{{ u.username }}</td><td>{{ u.role }}</td></tr>{% endfor %}
+</table>
+<p class="muted">Agent tokens are one-session, issued only when a logged-in human starts a task. They cannot start sessions or change tasks.</p>
+</div>
+{% endblock %}

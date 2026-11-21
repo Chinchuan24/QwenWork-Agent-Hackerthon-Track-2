@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Audit</h1>
+<p>Append-only at the database level. Each record carries the fingerprint of the one before it; signed checkpoints with the record count are kept outside the database.</p>
+<form method="get" action="/audit" class="inline">
+  <button name="verify" value="1">Verify</button>
+</form>
+{% if user.role in ('admin', 'auditor') %}
+<a href="/audit/export.json">Export JSON</a> · <a href="/audit/export.csv">Export CSV</a>
+{% endif %}
+{% if verify_result %}
+  {% if verify_result.ok %}
+  <div class="banner ok">Verify OK — {{ verify_result.records }} records, {{ verify_result.checkpoints }} outside checkpoints, chain intact.</div>
+  {% else %}
+  <div class="banner danger">TAMPER DETECTED
+    <ul>{% for p in verify_result.problems %}<li>{{ p }}</li>{% endfor %}</ul>
+  </div>
+  {% endif %}
+{% endif %}
+<table>
+<tr><th>#</th><th>Event</th><th>Run</th><th>Session</th><th>Hash (first 12)</th><th></th></tr>
+{% for r in rows %}
+<tr><td>{{ r.id }}</td><td>{{ r.event }}</td><td>{{ r.run_id or '—' }}</td><td>{{ r.session_id or '—' }}</td>
+<td><code>{{ r.hash[:12] }}</code></td><td><a href="/audit/record/{{ r.id }}">detail</a></td></tr>
+{% endfor %}
+</table>
+{% endblock %}

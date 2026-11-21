@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Twinguard{% endblock %}</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="top">
+  <div class="brand"><a class="home-link" href="/" aria-label="Twinguard home">Twinguard</a> <span class="sub">two AI guards: Aegis checks first, Delta checks again</span></div>
+  {% if user %}
+  <nav>
+    <a href="/live">Live</a>
+    <a href="/approvals">Approvals</a>
+    <a href="/audit">Audit</a>
+    <a href="/policies">Policies</a>
+    <a href="/redteam">Red Team</a>
+    <a href="/compliance">Compliance</a>
+    {% if user.role == 'admin' %}<a href="/admin">Admin</a>{% endif %}
+    <a href="/change-password">Password</a>
+  </nav>
+  <div class="who">
+    {{ user.username }} ({{ user.role }})
+    <form method="post" action="/logout" class="inline">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <button class="link">log out</button>
+    </form>
+  </div>
+  {% endif %}
+</header>
+{% if kill_switch %}<div class="banner danger">KILL SWITCH ACTIVE — all actions blocked</div>{% endif %}
+{% if user and user.must_change %}<div class="banner note">You are using a published demo password. <a href="/change-password">Change it</a> before privileged actions (admin settings, approvals, policy edits).</div>{% endif %}
+{% if not live_mode %}<div class="banner note">Judges running in <strong>stand-in</strong> mode (deterministic, labelled). Set AEGIS_QWEN_API_KEY for live Qwen judging.</div>{% endif %}
+<main id="main-content" tabindex="-1">
+{% block content %}{% endblock %}
+</main>
+<footer>Twinguard · Built by Qwen · sandbox only · made-up data · reserved .example domains · every decision logged</footer>
+<div class="watermark" aria-hidden="true">BUILT BY QWEN</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

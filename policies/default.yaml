@@ -1,0 +1,110 @@
+# Aegis default policy v1 — readable rules, fixed condition vocabulary.
+# Each rule: id, plain-English explanation, conditions (ALL must hold), decision.
+# Decisions: block | hold | allow_redacted | allow. Strictest wins.
+# Hard rules built into the code can NEVER be switched off by editing this file.
+# High-risk definition (R2): actions matching these get TWO independent judges.
+high_risk:
+  refund_above: 300
+  external_send_after_confidential: true
+
+rules:
+  - id: R-OWNER
+    explain: "An attachment or pasted document belongs to a different client than the recipient. Never send one client's data to another."
+    when: {owner_mismatch: true}
+    decision: block
+  - id: R-SECRETS
+    explain: "Outgoing text contains credentials or secret keys."
+    when: {secrets: true}
+    decision: block
+  - id: R-URL
+    explain: "Data is hidden inside a link's parameters. Links cannot carry data out."
+    when: {url_smuggle: true}
+    decision: block
+  - id: R-INJ-MAL
+    explain: "Content carries a clear injection attack. Withhold it and block the action it tries to cause."
+    when: {injection_malicious: true}
+    decision: block
+  - id: R-SCOPE
+    explain: "The action touches a client outside this task's scope. The task's limits cannot be widened by anything the agent reads."
+    when: {scope_violation: true}
+    decision: block
+  - id: R-LEAK-YES
+    explain: "The leak judge found confidential content reworded into the outgoing text."
+    when: {leak_yes: true}
+    decision: block
+  - id: R-PII
+    explain: "Personal data (card numbers, national IDs) is removed before sending. The action proceeds with redaction."
+    when: {pii: true}
+    decision: allow_redacted
+  - id: R-LOOKALIKE
+    explain: "A recipient domain looks like a known client domain but is not it. A human must check."
+    when: {lookalike: true}
+    decision: hold
+  - id: R-INJ-SUS
+    explain: "Content looks suspicious (hidden characters plus instruction-like text). A human must check."
+    when: {injection_suspicious: true}
+    decision: hold
+  - id: R-MIXED
+    explain: "This session has read confidential data from more than one client, or the firm's own confidential data. Every external send needs a human, whatever the text looks like."
+    when: {mixed_data: true, external_send: true}
+    decision: hold
+  - id: R-SUSPECT
+    explain: "The Injection Shield flagged something this session read. Actions with side effects are held until a human checks."
+    when: {suspicious_session: true, side_effect: true}
+    decision: hold
+  - id: R-INTENT-NO
+    explain: "The intent judge says this action is not a reasonable step toward the user's task."
+    when: {intent_no: true}
+    decision: hold
+  - id: R-INTENT-UNSURE
+    explain: "The intent judge is unsure about an action with side effects. Fail closed: a human decides."
+    when: {intent_unsure: true, side_effect: true}
+    decision: hold
+  - id: R-LEAK-UNSURE
+    explain: "The leak judge cannot rule out a reworded leak. A human decides."
+    when: {leak_unsure: true}
+    decision: hold
+  - id: R-REFUND-CAP
+    explain: "The refund is larger than the per-action cap. A second person must approve."
+    when: {refund_over_cap: true}
+    decision: hold
+  - id: R-SECOND-UNSAFE
+    explain: "A second-opinion safety judge found this high-risk action unsafe. Two independent judges review high-risk actions; either one saying unsafe stops it."
+    when: {second_opinion_unsafe: true}
+    decision: block
+  - id: R-SECOND-UNSURE
+    explain: "The two safety judges disagree, or either is unsure or unavailable. Fail closed: a human decides."
+    when: {second_opinion_unsure: true}
+    decision: hold
+  - id: R-EXPOSED
+    explain: "This session has taken in content from outside the firm's control (an outside email, a web page, an attachment, or a flagged field). A side effect that is not clearly inside the human's task — target named or trusted-lookup, tool needed, no outside-copied text — goes to a human. Containment does not depend on recognising the attack's words."
+    when: {exposed_side_effect: true}
+    decision: hold
+  - id: R-REFUND-INVOICE
+    explain: "This refund would pay out more than the invoice's value across all refunds. An invoice can never be refunded past what was paid."
+    when: {refund_invoice_over: true}
+    decision: block
+  - id: R-REFUND-TOTAL
+    explain: "Running refund totals for this session, client or day are over the limit. Splitting one big refund into small ones does not get around it."
+    when: {refund_total_over: true}
+    decision: hold
+  - id: R-SEND-TOTAL
+    explain: "This session has sent too many external emails. Possible slow leak or loop."
+    when: {send_total_over: true}
+    decision: hold
+  - id: R-CLAIM
+    explain: "An email's claimed refund amount or payee disagrees with the payments ledger. The ledger is the source of truth."
+    when: {claim_ledger_mismatch: true}
+    decision: hold
+  - id: R-SENDER
+    explain: "The sender is unknown or look-alike. Values that come from emails are only trusted through the mail system's own sender field."
+    when: {unknown_sender: true}
+    decision: hold
+  - id: R-OVERSIZE
+    explain: "Content is over the size cap. It is held, never skipped."
+    when: {oversize: true}
+    decision: hold
+  - id: R-TOOLS
+    explain: "The tool is outside this task's limits. Anything outside the task goes to a human."
+    when: {tool_not_allowed: true}
+    decision: hold

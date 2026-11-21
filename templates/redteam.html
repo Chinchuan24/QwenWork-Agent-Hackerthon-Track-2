@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Red Team</h1>
+<p>{{ attacks|length }} main attack scenarios (compromised-agent direct path + agent-path injection), {{ evasions|length }} pattern-free evasion injections and {{ normals|length }} normal tasks, run through the same gateway. Every attack states the protected facts that must not leave; the checker looks for them in everything that left, plain and encoded. Misses are listed, never dropped. Scripted and live results are shown as separate rows; judge mode is labelled.</p>
+{% if user.role in ('admin', 'approver') %}
+<form method="post" action="/redteam/run" class="inline">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <button name="subset" value="smoke">Run smoke subset</button>
+  <button name="subset" value="full" class="secondary">Run full suites</button>
+</form>
+{% endif %}
+{% if boards.latest %}
+{% set cmp = boards.latest %}
+<h2>Scoreboard — {{ cmp.on.subset }} subset</h2>
+
+<h3>Scripted agent · judge: {{ cmp.on.judge_mode }} (main suite)</h3>
+<table class="score">
+<tr><th>Measure</th><th class="off">Twinguard OFF (unprotected baseline)</th><th class="on">Twinguard ON (enforce)</th></tr>
+<tr><td>Attack runs with data leaked</td><td class="off">{{ cmp.off.attack_leak_runs }} / {{ cmp.off.attacks_total }}</td><td class="on">{{ cmp.on.attack_leak_runs }} / {{ cmp.on.attacks_total }}</td></tr>
+<tr><td>Attacks stopped (blocked / held / redacted)</td><td class="off">—</td><td class="on">{{ cmp.on.attacks_stopped }} / {{ cmp.on.attacks_total }} ({{ cmp.on.attacks_stopped_pct }}%)</td></tr>
+<tr><td>Detected (attack recognised)</td><td class="off">—</td><td class="on">{{ cmp.on.attacks_detected }} / {{ cmp.on.attacks_total }} ({{ cmp.on.attacks_detected_pct }}%)</td></tr>
+<tr><td>Harm stopped (nothing protected left)</td><td class="off">—</td><td class="on">{{ cmp.on.attacks_harm_stopped }} / {{ cmp.on.attacks_total }} ({{ cmp.on.attacks_harm_stopped_pct }}%)</td></tr>
+<tr><td>Normal tasks completed</td><td class="off">{{ cmp.off.normal_completed }} / {{ cmp.off.normal_total }}</td><td class="on">{{ cmp.on.normal_completed }} / {{ cmp.on.normal_total }} ({{ cmp.on.normal_completed_pct }}%)</td></tr>
+<tr><td>Normal actions wrongly held</td><td class="off">—</td><td class="on">{{ cmp.on.false_holds }} ({{ cmp.on.false_hold_pct }}%)</td></tr>
+</table>
+
+<h3>Scripted agent · pattern-free evasion injections ({{ cmp.evasion_on.attacks_total }} texts matching none of the detector patterns)</h3>
+<table class="score">
+<tr><th>Measure</th><th class="off">Twinguard OFF</th><th class="on">Twinguard ON (enforce)</th></tr>
+<tr><td>Evasion runs with protected facts leaked</td><td class="off">{{ cmp.evasion_off.attack_leak_runs }} / {{ cmp.evasion_off.attacks_total }}</td><td class="on">{{ cmp.evasion_on.attack_leak_runs }} / {{ cmp.evasion_on.attacks_total }}</td></tr>
+<tr><td>Detected (attack recognised)</td><td class="off">—</td><td class="on">{{ cmp.evasion_on.attacks_detected }} / {{ cmp.evasion_on.attacks_total }} ({{ cmp.evasion_on.attacks_detected_pct }}%)</td></tr>
+<tr><td>Harm stopped (containment, R1)</td><td class="off">—</td><td class="on">{{ cmp.evasion_on.attacks_harm_stopped }} / {{ cmp.evasion_on.attacks_total }} ({{ cmp.evasion_on.attacks_harm_stopped_pct }}%)</td></tr>
+</table>
+{% if cmp.evasion_on.misses %}
+<h4>Evasion detection misses (shown honestly — containment still stops the harm)</h4>
+<ul class="leaks">{% for m in cmp.evasion_on.misses %}<li>{{ m.id }} {{ m.name }} — verdicts {{ m.verdicts }} leaks {{ m.leaks|length }}</li>{% endfor %}</ul>
+{% else %}<div class="banner ok">No evasion misses in this run.</div>{% endif %}
+{% if cmp.evasion_on.harm_misses %}
+<h4>HARM MISSES (defects — must be fixed)</h4>
+<ul class="leaks">{% for m in cmp.evasion_on.harm_misses %}<li>{{ m.id }} {{ m.name }} — leaks {{ m.leaks|length }}</li>{% endfor %}</ul>
+{% endif %}
+
+<h3>Scripted agent · adaptive attacker ({{ cmp.adaptive_on.attacks_total }} seeded variants{% if cmp.adaptive_on.seed %}, seed {{ cmp.adaptive_on.seed }}{% endif %})</h3>
+<table class="score">
+<tr><th>Measure</th><th class="off">Twinguard OFF</th><th class="on">Twinguard ON (enforce)</th></tr>
+<tr><td>Variant runs with protected facts leaked</td><td class="off">{{ cmp.adaptive_off.attack_leak_runs }} / {{ cmp.adaptive_off.attacks_total }}</td><td class="on">{{ cmp.adaptive_on.attack_leak_runs }} / {{ cmp.adaptive_on.attacks_total }}</td></tr>
+<tr><td>Detected (attack recognised)</td><td class="off">—</td><td class="on">{{ cmp.adaptive_on.attacks_detected }} / {{ cmp.adaptive_on.attacks_total }} ({{ cmp.adaptive_on.attacks_detected_pct }}%)</td></tr>
+<tr><td>Harm stopped (containment)</td><td class="off">—</td><td class="on">{{ cmp.adaptive_on.attacks_harm_stopped }} / {{ cmp.adaptive_on.attacks_total }} ({{ cmp.adaptive_on.attacks_harm_stopped_pct }}%)</td></tr>
+</table>
+{% if cmp.adaptive_on.harm_misses %}
+<h4>ADAPTIVE HARM MISSES (defects — must be fixed)</h4>
+<ul class="leaks">{% for m in cmp.adaptive_on.harm_misses %}<li>{{ m.id }} — {{ m.variant_text }} — leaks {{ m.leaks|length }}</li>{% endfor %}</ul>
+{% else %}<div class="banner ok">No adaptive variant caused harm in this run.</div>{% endif %}
+{% if cmp.adaptive_on.misses %}
+<h4>Adaptive detection misses (shown honestly — containment still stops the harm)</h4>
+<ul class="leaks">{% for m in cmp.adaptive_on.misses %}<li>{{ m.id }} — {{ m.variant_text[:160] }} — verdicts {{ m.verdicts }}</li>{% endfor %}</ul>
+{% endif %}
+
+<h3>Live Qwen worker · judge: live</h3>
+{% if cmp.live.waiting_for_key %}
+<div class="banner note">Waiting for key — set <code>AEGIS_QWEN_API_KEY</code> and re-run to measure the live worker on the injection, normal and evasion suites. No live numbers are shown until then.</div>
+{% else %}
+<table class="score">
+<tr><th>Measure</th><th class="on">Main suite (live)</th><th class="on">Evasion suite (live)</th></tr>
+<tr><td>Attack runs with data leaked</td><td class="on">{{ cmp.live.main.attack_leak_runs }} / {{ cmp.live.main.attacks_total }}</td><td class="on">{{ cmp.live.evasion.attack_leak_runs }} / {{ cmp.live.evasion.attacks_total }}</td></tr>
+<tr><td>Attacks stopped</td><td class="on">{{ cmp.live.main.attacks_stopped }} / {{ cmp.live.main.attacks_total }} ({{ cmp.live.main.attacks_stopped_pct }}%)</td><td class="on">{{ cmp.live.evasion.attacks_stopped }} / {{ cmp.live.evasion.attacks_total }} ({{ cmp.live.evasion.attacks_stopped_pct }}%)</td></tr>
+<tr><td>Detected</td><td class="on">{{ cmp.live.main.attacks_detected }} / {{ cmp.live.main.attacks_total }}</td><td class="on">{{ cmp.live.evasion.attacks_detected }} / {{ cmp.live.evasion.attacks_total }}</td></tr>
+<tr><td>Harm stopped</td><td class="on">{{ cmp.live.main.attacks_harm_stopped }} / {{ cmp.live.main.attacks_total }}</td><td class="on">{{ cmp.live.evasion.attacks_harm_stopped }} / {{ cmp.live.evasion.attacks_total }}</td></tr>
+<tr><td>Normal tasks completed</td><td class="on">{{ cmp.live.main.normal_completed }} / {{ cmp.live.main.normal_total }}</td><td class="on">—</td></tr>
+</table>
+{% if cmp.live.main.misses or cmp.live.evasion.misses %}
+<h4>Live misses (shown honestly)</h4>
+<ul class="leaks">
+{% for m in cmp.live.main.misses %}<li>main {{ m.id }} {{ m.name }} — verdicts {{ m.verdicts }} leaks {{ m.leaks|length }}</li>{% endfor %}
+{% for m in cmp.live.evasion.misses %}<li>evasion {{ m.id }} {{ m.name }} — verdicts {{ m.verdicts }} leaks {{ m.leaks|length }}</li>{% endfor %}
+</ul>
+{% endif %}
+{% endif %}
+
+{% if cmp.on.misses %}
+<h3>Main-suite misses (shown honestly)</h3>
+<ul class="leaks">{% for m in cmp.on.misses %}<li>{{ m.id }} {{ m.name }} — verdicts {{ m.verdicts }} leaks {{ m.leaks|length }}</li>{% endfor %}</ul>
+{% else %}<div class="banner ok">No main-suite misses in this run.</div>{% endif %}
+
+<h3>Drill into any attack (protected runs)</h3>
+<table>
+<tr><th>ID</th><th>Attack</th><th>Mode</th><th>Stopped</th><th>Leaks</th><th>Run</th></tr>
+{% for r in cmp.on_results.attacks %}
+<tr><td>{{ r.scenario }}</td><td>{{ r.name }}</td><td>{{ r.mode }}</td>
+<td>{% if r.stopped %}yes{% else %}NO{% endif %}</td><td>{{ r.leaks|length }}</td>
+<td><a href="/run/{{ r.run_id }}">view</a></td></tr>
+{% endfor %}
+{% for r in cmp.evasion_on_results.attacks %}
+<tr><td>{{ r.scenario }}</td><td>{{ r.name }}</td><td>{{ r.mode }}</td>
+<td>{% if r.stopped %}yes{% else %}NO{% endif %}</td><td>{{ r.leaks|length }}</td>
+<td><a href="/run/{{ r.run_id }}">view</a></td></tr>
+{% endfor %}
+</table>
+{% endif %}
+{% endblock %}

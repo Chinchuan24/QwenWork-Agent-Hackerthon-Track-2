@@ -1,0 +1,12 @@
+# Allowlist excludes history, legacy runtime, fixtures and secrets.
+**
+!Dockerfile
+!requirements-production.lock
+!aegis/
+!aegis/__init__.py
+!aegis/production.py
+!aegis/public_evaluator.py
+!aegis/claims.py
+!aegis/policy.py
+!aegis/sensitivity.py
+!aegis/mixed_demo.py

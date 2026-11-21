@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Compliance</h1>
+<p>Each Twinguard control mapped to recognised frameworks — references verified against official sources (EU AI Act article titles, OWASP LLM Top 10 2025, OWASP Agentic Threats v1.0, NIST AI RMF 1.0); unverifiable clause numbers were dropped. These are best-effort alignments, <strong>not a compliance certification</strong>. <a href="/compliance/trust-report.json">Download trust report (JSON)</a> — includes the live audit-verify result, policy version, scoreboard and stated limits.</p>
+<table>
+<tr><th>Control</th><th>OWASP (LLM / Agentic)</th><th>NIST AI RMF</th><th>ISO/IEC 42001</th><th>EU AI Act</th></tr>
+{% for c in table %}
+<tr><td>{{ c[0] }}</td><td>{{ c[1] }}</td><td>{{ c[2] }}</td><td>{{ c[3] }}</td><td>{{ c[4] }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Attack board | Twinguard{% endblock %}
+{% block content %}
+<h1>Attack board</h1>
+<p>Aegis and Delta are two AI security guards. Fixed rules always win. This screen reads stored results only; it cannot release an action.</p>
+<section aria-labelledby="misses-title">
+<h2 id="misses-title">Stored miss details</h2>
+<p>Harm misses and legacy stop misses are separate measures. A legacy stop miss does not mean harm got through.</p>
+{% for warning in board.warnings %}<p class="banner danger" role="alert">{{ warning }}</p>{% endfor %}
+<ul>{% for miss in board.individual_misses %}<li>{{ miss.identifier }}: {{ miss.kind }}; {{ miss.label }} ({{ miss.execution }}), {{ miss.run_at or 'time not recorded' }}. Private text withheld. {% for ref in miss.proof_refs %}<a href="/audit/record/{{ ref }}">Show proof</a> {% endfor %}</li>{% endfor %}</ul>
+{% for miss in board.misses %}
+<div class="banner danger">{{ miss.label }} ({{ miss.execution }}): {{ miss.count }} missed. Run at {{ miss.run_at }}. Private attack text withheld.
+{% for ref in miss.proof_refs %}<a href="/audit/record/{{ ref }}">Show proof</a> {% endfor %}
+</div>
+{% else %}{% if not board.individual_misses and not board.warnings %}<p>No misses listed in available measurements. Unrun suites provide no evidence.</p>{% endif %}{% endfor %}
+</section>
+{% if board.headline %}
+<p>Attacks tried: {{ board.headline.tried }}. Stopped: {{ board.headline.stopped }}. Got through: {{ board.headline.got_through }}. These numbers belong to the single measured suite below.</p>
+{% else %}<p>Combined headline: not run as a single measurement. Separate suites and scripted/live runs are not added together.</p>{% endif %}
+{% if board.waiting_for_key %}<p class="banner note">Live confirmation: waiting for key. No live numbers are invented.</p>{% endif %}
+<h2>Attack results</h2>
+<p>Stopped means the stored harm check found no harm. Spotted means the stored detector recognised an attack. Missed means harm was not stopped. Legacy stopped is the scoreboard's separate blocked, held or redacted measure.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Attack results table">
+<table>
+<caption>Stored suite measurements; unavailable categories show not run</caption>
+<thead><tr><th scope="col">Attack type</th><th scope="col">Measurement</th><th scope="col">Tried</th><th scope="col">Stopped</th><th scope="col">Spotted</th><th scope="col">Missed</th><th scope="col">Legacy stopped</th><th scope="col">Aegis</th><th scope="col">Delta</th><th scope="col">Proof and risk</th></tr></thead>
+<tbody>{% for row in board.rows %}
+<tr><th scope="row">{{ row.label }} ({{ row.technical }})</th>
+<td>{{ row.execution }}; judge: {{ row.judge_mode }}<br>{{ row.run_at or 'not run' }}</td>
+{% for value in [row.tried, row.stopped, row.spotted, row.missed, row.legacy_stopped] %}<td>{{ value if value is not none else 'not run' }}</td>{% endfor %}
+<td>{{ row.aegis }}</td><td>{{ row.delta }}</td><td>Risk: {{ row.risk }}<br>{% for ref in row.proof_refs %}<a href="/audit/record/{{ ref }}">Show proof</a> {% else %}Proof not linked{% endfor %}</td></tr>
+{% endfor %}</tbody></table>
+</div>
+<h2>Recent stopped and held checks</h2>
+<p>Stored audit checks, newest first. No attack content or guard reasons are displayed.</p>
+<ul>{% for item in board.recent %}<li>{{ item.run_at }}: {{ item.outcome }}. Aegis: {{ item.aegis }}; Delta: {{ item.delta }}. <a href="/audit/record/{{ item.proof_id }}">Show proof</a></li>{% else %}<li>Not recorded.</li>{% endfor %}</ul>
+{% endblock %}

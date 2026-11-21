@@ -1,0 +1,9 @@
+# Exact installed versions; public image uses requirements-production.lock.
+fastapi==0.163.1
+uvicorn==0.54.0
+jinja2==3.1.6
+pyyaml==6.0.3
+python-multipart==0.0.34
+cryptography==50.0.2
+pytest==9.2.0
+httpx==0.28.1
