@@ -1,0 +1,57 @@
+# Local Demo
+
+## Start
+
+```sh
+/Users/chin/Qwen/twinguard-release/run-local-demo.sh
+```
+
+Uses an installed trusted Python 3.12 runtime, never installs dependencies. Discovery order: explicit `TWINGUARD_LOCAL_PYTHON`, repository `.venv/bin/python`, then `/Users/chin/Qwen/aegis/.venv/bin/python`. Exact requirements.txt versions are checked. No virtual environment is packaged. A missing prerequisite is an error, not permission to download packages.
+
+The readiness line prints the actual URL and owned HTTP child PID. Default is http://localhost:8000; an occupied port is skipped without stopping its owner. No automatic preview is opened. Full private application, not the public limited interface.
+
+Passwords are generated independently with 32 random bytes per account and stored only at `.local-demo/passwords.json` (0600). Accounts: dana/admin, ops/approver, riley/approver, audi/auditor. No password is included here. This is intentionally synthetic local demo authority, not production accounts. No .env file is read or written.
+
+## Click Path
+
+1. Sign in as dana using the private password file.
+2. Open `/admin/tools/review`, review all 14 displayed tools, schemas and fingerprints. Enter dana's password, confirm the displayed snapshot, then select **Approve reviewed snapshot**. Require the saved approval audit receipt.
+3. Open `/admin/demo`. Select **Reset demo**, then **Run five stories**. These allocate isolated scenario state, not a production reset.
+4. Open `/admin/demo/source` for emitted source evidence, `/admin/demo/guard` for Aegis/Delta saved judgments, `/admin/demo/briefing` for the morning briefing, and `/admin/demo/results` for actual verdicts and contract gaps.
+5. Follow this run's proof links under `/admin/demo/proof/`. Ordinary `/audit` is a separate parent audit stream. Do not substitute normalized scenario references for its database IDs.
+6. Open `/local-demo` for the combined source/scenario, Aegis/Delta, briefing and copied-proof tamper panel. Sign in separately as ops and riley to approve the same saved synthetic pack. First approval stays held; a repeated identity is rejected; the second distinct identity marks the pack approved. Pack approval never releases an action.
+7. Local `/approvals` additionally requires ops and riley for action approval: first approval remains held, duplicate and creator approvals are rejected, second approval invokes the original fingerprint/expiry/release checks. This action wrapper is implemented but its complete browser release path remains unverified.
+
+All model judgments are scripted stand-ins, not live AI. Existing scenarios include risky actions, unsupported numeric claims and contradictions. HOLD is not BLOCK. The source view is emitted JSON evidence, not a newly completed rogue-pack comparison interface. The observed guard pair is Aegis safe / Delta unsure, not Delta unsafe. No full AvePoint acceptance claim is made.
+
+## Reset And Stop
+
+Stop only the owned foreground launcher with Ctrl-C in its terminal. SIGTERM to the displayed owned HTTP child also causes the parent to finish. Do not use pkill, killall or port-wide termination. `run-local-demo.sh stop` requests termination through the owned private Unix control socket, not a saved PID or a port-wide process search. This command was verified against the repeated server.
+
+After stopping:
+
+```sh
+/Users/chin/Qwen/twinguard-release/run-local-demo.sh reset
+/Users/chin/Qwen/twinguard-release/run-local-demo.sh
+```
+
+Reset atomically renames the entire demo directory to `.local-demo-archive-<timestamp>`. It never deletes user files or clears production logs. Running-state reset is refused by an exclusive owner lock. Both active state and archives are gitignored and absent from tracked-file release inventories. Do not include ignored state in ad hoc release archives.
+
+## Verification
+
+The existing browser rehearsal was minimally adapted to accept the already-running loopback server and its private credential file:
+
+```sh
+/Users/chin/Qwen/aegis/.venv/bin/python scripts/demo_rehearsal.py \
+  --approve-sandbox --existing-url http://localhost:8000 \
+  --password-file /Users/chin/Qwen/twinguard-release/.local-demo/passwords.json \
+  --output-dir /absolute/empty/output-directory
+```
+
+Two actual server rehearsals passed, separated by stop, archive reset and a fresh one-command startup. Each captured 25 screenshots across 1440 and 390 pixel viewports, checked twelve existing private routes, five scenario results, verified audit history and zero synthetic sends. Browser requests outside the origin were blocked and none were observed. No full suite was run.
+
+The launcher allowlists inherited environment names, disables the model key and enforces loopback sockets/DNS in its Python HTTP process. Python descendants inherit a gated sitecustomize policy through PYTHONPATH. This is a trusted-Python runtime boundary, not an OS sandbox against arbitrary hostile native executables.
+
+The final implementation was rehearsed twice against actual servers with an archive reset between them. Four-role `/local-demo` browser smoke checks passed on both runs: first reviewer held, duplicate reviewer rejected, second reviewer approved, original proof seal true and modified COPY seal false. Main saved proof and audit history were not tampered with.
+
+Remaining acceptance gaps: all registered GET pages with valid seeded parameters/all roles; action-quorum release-path browser verification; a richer rogue-pack comparison beyond emitted scenario JSON; scripted-model labels on every private screen; next-free-port collision rehearsal. These are not claimed complete.

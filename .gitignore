@@ -5,6 +5,8 @@ __pycache__/
 .pytest_cache/
 nohup.out
 .local-runtime/
+.local-demo/
+.local-demo-archive-*/
 .env
 .env.*
 !.env.example

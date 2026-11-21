@@ -16,23 +16,33 @@ def main():
     parser.add_argument('--approve-sandbox', action='store_true', required=True,
                         help='authorize the displayed snapshot in a NEW disposable clone only')
     parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--existing-url', help='Use the already-running owned loopback demo')
+    parser.add_argument('--password-file', type=Path, help='Private local-demo account file; never copied to output')
     args = parser.parse_args()
     source = Path(__file__).resolve().parents[1]
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=True)
     if any(output.iterdir()):
         parser.error('output directory must be empty; prior evidence is preserved')
-    clone = Path(tempfile.mkdtemp(prefix='twinguard-browser-')).resolve() / 'source'
-    subprocess.run(['git', 'clone', '--quiet', '--no-hardlinks', str(source), str(clone)], check=True)
+    clone = source if args.existing_url else Path(tempfile.mkdtemp(prefix='twinguard-browser-')).resolve() / 'source'
+    if not args.existing_url:
+        subprocess.run(['git', 'clone', '--quiet', '--no-hardlinks', str(source), str(clone)], check=True)
+    if args.existing_url:
+        from urllib.parse import urlsplit
+        url = urlsplit(args.existing_url)
+        if url.scheme != 'http' or url.hostname not in ('localhost', '127.0.0.1') or url.path or url.username:
+            parser.error('existing server must be a loopback HTTP origin')
+        if args.password_file != source / '.local-demo/passwords.json':
+            parser.error('only the owned local demo password file is accepted')
     with socket.socket() as sock:
         sock.bind(('127.0.0.1', 0))
         port = sock.getsockname()[1]
     env = {k: v for k, v in os.environ.items() if not k.startswith('AEGIS_')}
     env['PYTHONPATH'] = str(clone)
     log = (output / 'server.log').open('w')
-    process = subprocess.Popen([sys.executable, str(clone / 'scripts/local_setup.py'), 'start', '--port', str(port)],
+    process = None if args.existing_url else subprocess.Popen([sys.executable, str(clone / 'scripts/local_setup.py'), 'start', '--port', str(port)],
                                cwd=clone, env=env, stdout=log, stderr=log)
-    base = f'http://127.0.0.1:{port}'
+    base = args.existing_url or f'http://127.0.0.1:{port}'
     try:
         import urllib.request
         deadline = time.monotonic() + 30
@@ -41,7 +51,7 @@ def main():
                 urllib.request.urlopen(base + '/login', timeout=1).close()
                 break
             except OSError:
-                if process.poll() is not None:
+                if process is not None and process.poll() is not None:
                     raise RuntimeError('Owned server exited; inspect server.log')
                 time.sleep(.1)
         else:
@@ -66,13 +76,15 @@ def main():
                 screens.append(name + '.png')
             page.goto('/login')
             page.get_by_label('Username', exact=True).fill('dana')
-            page.get_by_label('Password', exact=True).fill('demo-dana-2026')
+            password = json.loads(args.password_file.read_text())['dana']['password'] if args.existing_url else 'demo-dana-2026'
+            page.get_by_label('Password', exact=True).fill(password)
             page.get_by_role('button', name='Sign in', exact=True).click()
-            page.goto('/change-password')
-            password = secrets.token_urlsafe(24)
-            page.locator('[name=current]').fill('demo-dana-2026')
-            page.locator('[name=new]').fill(password)
-            page.get_by_role('button', name='Change password', exact=True).click()
+            if not args.existing_url:
+                page.goto('/change-password')
+                password = secrets.token_urlsafe(24)
+                page.locator('[name=current]').fill('demo-dana-2026')
+                page.locator('[name=new]').fill(password)
+                page.get_by_role('button', name='Change password', exact=True).click()
             page.goto('/admin/tools/review')
             names = page.locator('main h2').all_text_contents()
             assert len(names) == 14 and len(set(names)) == 14
@@ -122,12 +134,13 @@ def main():
         print(json.dumps({'screenshots': len(screens), 'audit_ok': result['audit_ok'], 'sent': result['sent'],
                           'output': str(output), 'action_seconds': timings[:2]}))
     finally:
-        process.terminate()
-        try:
-            process.wait(timeout=15)
-        except subprocess.TimeoutExpired:
-            process.kill()
-            process.wait()
+        if process is not None:
+            process.terminate()
+            try:
+                process.wait(timeout=15)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
         log.close()
 
 
