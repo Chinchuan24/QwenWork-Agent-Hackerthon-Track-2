@@ -1,0 +1,13 @@
+{
+  "source_commit": "7efc4657a5e92712319573fe8b456ed3ce3bd186",
+  "scope": "current regular package files, including hidden config; .git excluded; actual .env content never read",
+  "unresolved_candidates": 0,
+  "synthetic_controls": [
+    {"kind": "provider-shaped token constructed in memory", "disposition": "detected synthetic positive control, not a credential"},
+    {"kind": "quoted password constructed in memory", "disposition": "detected synthetic positive control, not a credential"},
+    {"kind": "private-key header constructed in memory", "disposition": "detected synthetic positive control, not a private key"},
+    {"kind": "platform placeholder", "disposition": "correctly not flagged"}
+  ],
+  "limitations": "pattern-based current-file scan, not all possible secret encodings; no external scanner or git-history claim",
+  "actual_operations": "none; local packaging, tests and local commit only"
+}

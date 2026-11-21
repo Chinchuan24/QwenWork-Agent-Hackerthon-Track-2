@@ -1,0 +1,117 @@
+{
+  "source_commit": "7efc4657a5e92712319573fe8b456ed3ce3bd186",
+  "self_exclusion": "docs/production/MANIFEST.json",
+  "file_count_excluding_manifest": 22,
+  "files": [
+    {
+      "path": ".dockerignore",
+      "bytes": 121,
+      "sha256": "c88181c932648cadbae4df7e30929bf8b06cd77403024a95a80c1e8ef0a2542d"
+    },
+    {
+      "path": ".env.production.example",
+      "bytes": 651,
+      "sha256": "419eab9791fbe2f7914f1fabbf33f9ac757b0e23ad92209c85dc3a93219df7b8"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 84,
+      "sha256": "6367b0906290981588b54e7ce61f4bce85a4ab4f6d83fa3a48f55c158e629c0f"
+    },
+    {
+      "path": "Dockerfile",
+      "bytes": 1242,
+      "sha256": "0e84628252f4242c5a28baa476d3234017ec9a4dd3fcbee6c3186f5c2e9e25e3"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1079,
+      "sha256": "39eee56e027f6358f16915aa7d097aecd3ee45969b5255331e08bdc4c09f9adb"
+    },
+    {
+      "path": "RUST_THIRD_PARTY_NOTICES",
+      "bytes": 1491408,
+      "sha256": "df333c5f9b82af0b7189a35ef68bf40c25bfefa1383d672860697325bf4e521b"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES",
+      "bytes": 169727,
+      "sha256": "41e3c12102bed0f446ddd4b7b0a66897ed411d31643f772443b1105856f034ba"
+    },
+    {
+      "path": "aegis/__init__.py",
+      "bytes": 152,
+      "sha256": "4afa63f0e660dc23932206595e60152ce80ccdfc934cbb097e50f141cbc68743"
+    },
+    {
+      "path": "aegis/claims.py",
+      "bytes": 20379,
+      "sha256": "ece52c599dc448c2058acf30b9bf6edf6b195fe94986a5f615941aaf9de75bc2"
+    },
+    {
+      "path": "aegis/mixed_demo.py",
+      "bytes": 7472,
+      "sha256": "05c361ab12790b236ddcc8f8600bfe885154b0f1dd4e61cad78f2573a740c0a3"
+    },
+    {
+      "path": "aegis/policy.py",
+      "bytes": 8714,
+      "sha256": "99044f1e3d0ed8f3bde618174da85b20533ee0052b724ec16f3bf194b557f835"
+    },
+    {
+      "path": "aegis/production.py",
+      "bytes": 21976,
+      "sha256": "8eed2625f1cf796a56c9003b8af5b8ea3c98c197fc09fc30085efee25c751d44"
+    },
+    {
+      "path": "aegis/provider.py",
+      "bytes": 3634,
+      "sha256": "9205a760c35218a7175818d4365a6bf945d608756b0fbaa5d8a012a9bf0c1971"
+    },
+    {
+      "path": "aegis/public_evaluator.py",
+      "bytes": 2591,
+      "sha256": "c6713a0550c175a48bf5fd87458403b578a3ccc67d561312119ad18a70182b9e"
+    },
+    {
+      "path": "aegis/sensitivity.py",
+      "bytes": 8226,
+      "sha256": "99ccf9e61670304d4431113ecb7ac53d87cd9812cfa7f3ea669d3fb21bfb6161"
+    },
+    {
+      "path": "docs/production/DEPLOY.md",
+      "bytes": 7676,
+      "sha256": "23b61996354eab2855b387b94ea5cd3d4eedb329ae169cdf722e7d33c587baa0"
+    },
+    {
+      "path": "docs/production/SCAN.json",
+      "bytes": 917,
+      "sha256": "66f722ebe1f3ac1468671fb8a750d7ac664582b2ff77edc6a4cc0292a4db3988"
+    },
+    {
+      "path": "docs/production/VERIFICATION.md",
+      "bytes": 4625,
+      "sha256": "e3a565cbdbb92a879cbfe3dde5c7d3e97c0de41a0bb2a3681da8f9051bf55903"
+    },
+    {
+      "path": "docs/production/VERIFY.py",
+      "bytes": 2491,
+      "sha256": "2e5b15ac7df8d6035418dc7ece0f0ea021fee85e3d9f6e2db25e073650f2c182"
+    },
+    {
+      "path": "fly.toml",
+      "bytes": 1151,
+      "sha256": "241164e021336139acd386819909e03f5163b34bd78b7061be9b43cbe8d6bed6"
+    },
+    {
+      "path": "render.yaml",
+      "bytes": 666,
+      "sha256": "0e98f49ec92f30d5d3ee8926e3f0738dd825c8fdb14a785cbf91421bdd76bac4"
+    },
+    {
+      "path": "requirements-production.lock",
+      "bytes": 28575,
+      "sha256": "441916b08c8e0a240dd44acfe9268f3992a94f189fc1782a072c572e72bc19bc"
+    }
+  ]
+}

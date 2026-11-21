@@ -1,0 +1,8 @@
+**
+!Dockerfile
+!requirements-production.lock
+!LICENSE
+!THIRD_PARTY_NOTICES
+!RUST_THIRD_PARTY_NOTICES
+!aegis/
+!aegis/*.py
