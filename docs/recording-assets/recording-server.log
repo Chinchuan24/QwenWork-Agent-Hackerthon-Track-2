@@ -1,0 +1,7 @@
+Ready http://localhost:8001 child PID 47545
+Scripted stand-in, synthetic actions only. Password file: /private/tmp/tg-29egqllf/source/.local-demo/passwords.json
+Stop: Ctrl-C in this terminal. Reset after stopping: ./run-local-demo.sh reset
+Exception in thread Thread-1 (listen):
+Traceback (most recent call last):
+  File "/Users/chin/.local/share/uv/python/cpython-3.12.15-macos-aarch64-none/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+Owned server stopped.

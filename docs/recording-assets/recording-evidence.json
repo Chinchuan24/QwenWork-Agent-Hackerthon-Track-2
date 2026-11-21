@@ -1,0 +1,539 @@
+{
+  "revision": "998f2eb5995fb4e787f198fafb1a3dd8dc4d1c4e",
+  "origin": "http://localhost:8001",
+  "clone": "/tmp/tg-29egqllf/source",
+  "screenshots": [
+    {
+      "step": 1,
+      "title": "dana: blank login",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "01-setup.png"
+    },
+    {
+      "step": 2,
+      "title": "dana: select account",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "02-setup.png"
+    },
+    {
+      "step": 3,
+      "title": "dana: private password masked",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "03-setup.png"
+    },
+    {
+      "step": 4,
+      "title": "dana: signed in",
+      "scene": "setup",
+      "url": "http://localhost:8001/",
+      "file": "04-setup.png"
+    },
+    {
+      "step": 5,
+      "title": "Review all 14 tool schemas and fingerprints",
+      "scene": "setup",
+      "url": "http://localhost:8001/admin/tools/review?present=1",
+      "file": "05-setup.png"
+    },
+    {
+      "step": 6,
+      "title": "Reauthenticate review; password masked",
+      "scene": "setup",
+      "url": "http://localhost:8001/admin/tools/review?present=1",
+      "file": "06-setup.png"
+    },
+    {
+      "step": 7,
+      "title": "Confirm exact displayed snapshot",
+      "scene": "setup",
+      "url": "http://localhost:8001/admin/tools/review?present=1",
+      "file": "07-setup.png"
+    },
+    {
+      "step": 8,
+      "title": "Saved tool approval receipt",
+      "scene": "setup",
+      "url": "http://localhost:8001/admin/tools/review",
+      "file": "08-setup.png"
+    },
+    {
+      "step": 9,
+      "title": "Open fresh recording scene",
+      "scene": "s06",
+      "url": "http://localhost:8001/present/s06?present=1",
+      "file": "09-s06.png"
+    },
+    {
+      "step": 10,
+      "title": "Five behaviours queued / 0 processed",
+      "scene": "s06",
+      "url": "http://localhost:8001/present/s06?present=1",
+      "file": "10-s06.png"
+    },
+    {
+      "step": 11,
+      "title": "Actual processing completed 1/5",
+      "scene": "s06",
+      "url": "http://localhost:8001/present/s06?present=1",
+      "file": "11-s06.png"
+    },
+    {
+      "step": 12,
+      "title": "Actual processing completed 2/5",
+      "scene": "s06",
+      "url": "http://localhost:8001/present/s06?present=1",
+      "file": "12-s06.png"
+    },
+    {
+      "step": 13,
+      "title": "Actual processing completed 3/5",
+      "scene": "s06",
+      "url": "http://localhost:8001/present/s06?present=1",
+      "file": "13-s06.png"
+    },
+    {
+      "step": 14,
+      "title": "Actual processing completed 4/5",
+      "scene": "s06",
+      "url": "http://localhost:8001/present/s06?present=1",
+      "file": "14-s06.png"
+    },
+    {
+      "step": 15,
+      "title": "Actual processing completed 5/5",
+      "scene": "s06",
+      "url": "http://localhost:8001/present/s06?present=1",
+      "file": "15-s06.png"
+    },
+    {
+      "step": 16,
+      "title": "Client email blocked / zero sends / saved rules",
+      "scene": "s07",
+      "url": "http://localhost:8001/present/s07?present=1",
+      "file": "16-s07.png"
+    },
+    {
+      "step": 17,
+      "title": "Inspect actual client-list decision receipt",
+      "scene": "s07",
+      "url": "http://localhost:8001/audit/record/21?present=1",
+      "file": "17-s07.png"
+    },
+    {
+      "step": 18,
+      "title": "Draft HOLD / S$4,800 versus paper fixture S$6,200",
+      "scene": "s09",
+      "url": "http://localhost:8001/present/s09?present=1",
+      "file": "18-s09.png"
+    },
+    {
+      "step": 19,
+      "title": "Inspect actual draft evidence rejection",
+      "scene": "s09",
+      "url": "http://localhost:8001/audit/record/27?present=1",
+      "file": "19-s09.png"
+    },
+    {
+      "step": 20,
+      "title": "Dana chooses corrected contract review",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "20-s11.png"
+    },
+    {
+      "step": 21,
+      "title": "Saved genuine guard disagreement and contract HOLD",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "21-s11.png"
+    },
+    {
+      "step": 22,
+      "title": "Dana tests no-self-approval boundary",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "22-s11.png"
+    },
+    {
+      "step": 23,
+      "title": "Creator rejected",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "23-s11.png"
+    },
+    {
+      "step": 24,
+      "title": "ops: blank login",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "24-setup.png"
+    },
+    {
+      "step": 25,
+      "title": "ops: select account",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "25-setup.png"
+    },
+    {
+      "step": 26,
+      "title": "ops: private password masked",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "26-setup.png"
+    },
+    {
+      "step": 27,
+      "title": "ops: signed in",
+      "scene": "setup",
+      "url": "http://localhost:8001/",
+      "file": "27-setup.png"
+    },
+    {
+      "step": 28,
+      "title": "ops: inspect same contract approval",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "28-s11.png"
+    },
+    {
+      "step": 29,
+      "title": "ops: record review reason",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "29-s11.png"
+    },
+    {
+      "step": 30,
+      "title": "ops: approval outcome",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "30-s11.png"
+    },
+    {
+      "step": 31,
+      "title": "ops: attempt duplicate",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "31-s11.png"
+    },
+    {
+      "step": 32,
+      "title": "Duplicate rejected",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "32-s11.png"
+    },
+    {
+      "step": 33,
+      "title": "riley: blank login",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "33-setup.png"
+    },
+    {
+      "step": 34,
+      "title": "riley: select account",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "34-setup.png"
+    },
+    {
+      "step": 35,
+      "title": "riley: private password masked",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "35-setup.png"
+    },
+    {
+      "step": 36,
+      "title": "riley: signed in",
+      "scene": "setup",
+      "url": "http://localhost:8001/",
+      "file": "36-setup.png"
+    },
+    {
+      "step": 37,
+      "title": "riley: inspect same contract approval",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "37-s11.png"
+    },
+    {
+      "step": 38,
+      "title": "riley: record review reason",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "38-s11.png"
+    },
+    {
+      "step": 39,
+      "title": "riley: approval outcome",
+      "scene": "s11",
+      "url": "http://localhost:8001/present/s11?present=1",
+      "file": "39-s11.png"
+    },
+    {
+      "step": 40,
+      "title": "audi: blank login",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "40-setup.png"
+    },
+    {
+      "step": 41,
+      "title": "audi: select account",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "41-setup.png"
+    },
+    {
+      "step": 42,
+      "title": "audi: private password masked",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "42-setup.png"
+    },
+    {
+      "step": 43,
+      "title": "audi: signed in",
+      "scene": "setup",
+      "url": "http://localhost:8001/",
+      "file": "43-setup.png"
+    },
+    {
+      "step": 44,
+      "title": "audi: read-only briefing",
+      "scene": "setup",
+      "url": "http://localhost:8001/present/s13?present=1",
+      "file": "44-setup.png"
+    },
+    {
+      "step": 45,
+      "title": "view: blank login",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "45-setup.png"
+    },
+    {
+      "step": 46,
+      "title": "view: select account",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "46-setup.png"
+    },
+    {
+      "step": 47,
+      "title": "view: private password masked",
+      "scene": "setup",
+      "url": "http://localhost:8001/login?present=1",
+      "file": "47-setup.png"
+    },
+    {
+      "step": 48,
+      "title": "view: signed in",
+      "scene": "setup",
+      "url": "http://localhost:8001/",
+      "file": "48-setup.png"
+    },
+    {
+      "step": 49,
+      "title": "view: read-only briefing",
+      "scene": "setup",
+      "url": "http://localhost:8001/present/s13?present=1",
+      "file": "49-setup.png"
+    },
+    {
+      "step": 50,
+      "title": "Four briefing groups with audit-derived counts",
+      "scene": "s13",
+      "url": "http://localhost:8001/present/s13?present=1",
+      "file": "50-s13.png"
+    },
+    {
+      "step": 51,
+      "title": "Briefing item proof receipt",
+      "scene": "s13",
+      "url": "http://localhost:8001/audit/record/18?present=1",
+      "file": "51-s13.png"
+    },
+    {
+      "step": 52,
+      "title": "Proof pack ready to verify",
+      "scene": "s14",
+      "url": "http://localhost:8001/present/s14?present=1",
+      "file": "52-s14.png"
+    },
+    {
+      "step": 53,
+      "title": "Green Verified / original pack sealed",
+      "scene": "s14",
+      "url": "http://localhost:8001/present/s14?present=1",
+      "file": "53-s14.png"
+    },
+    {
+      "step": 54,
+      "title": "Red COPY / exact changed field / original still verifies",
+      "scene": "s14",
+      "url": "http://localhost:8001/present/s14?present=1",
+      "file": "54-s14.png"
+    }
+  ],
+  "overflow_matrix": [
+    {
+      "width": 1440,
+      "route": "/present/s06?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/present/s07?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/present/s09?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/present/s11?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/present/s13?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/present/s14?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/admin/tools/review?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/approvals?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/audit?present=1",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "/local-demo?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/present/s06?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/present/s07?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/present/s09?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/present/s11?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/present/s13?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/present/s14?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/admin/tools/review?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/approvals?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/audit?present=1",
+      "passed": true
+    },
+    {
+      "width": 768,
+      "route": "/local-demo?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/present/s06?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/present/s07?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/present/s09?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/present/s11?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/present/s13?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/present/s14?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/admin/tools/review?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/approvals?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/audit?present=1",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "/local-demo?present=1",
+      "passed": true
+    }
+  ],
+  "outside_requests": [],
+  "page_errors": []
+}

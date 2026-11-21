@@ -58,4 +58,4 @@ Scoped gates passed on the repeated clean runtime: 35 GET routes from the curren
 
 The owned-dummy collision check reserved 8000, observed readiness on http://localhost:8001 (HTTP child 64339), stopped only the demo via its control socket and proved the dummy still owned 8000. The dummy was then closed by its own test scope.
 
-Focused commands after the rehearsal: `scripts/local_action_smoke.py OUTPUT`, `scripts/local_get_smoke.py OUTPUT`, `scripts/local_panel_smoke.py OUTPUT`, and `scripts/local_port_smoke.py`, all using the verified installed Python. No full application test suite was run.
+Focused commands after the rehearsal: `scripts/local_action_smoke.py OUTPUT`, `scripts/local_get_smoke.py OUTPUT`, `scripts/local_panel_smoke.py OUTPUT`, and `scripts/local_port_smoke.py`, all using the verified installed Python. Historical local smoke checks did not run the full suite. The presentation release subsequently completed the canonical 2,147-test, 30-shard suite with jobs=1 and zero skips; see `recording-script.md`.
