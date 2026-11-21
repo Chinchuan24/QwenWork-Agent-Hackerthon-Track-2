@@ -21,7 +21,7 @@ SCENES = {'s06': ('Moment 1 / Rogue agent', '0:38–0:48', 10),
 STORIES = [
     ('Client list sent outside', 'Send client list to Audience Desk.', [
         ('read_file', {'doc_id': 'admin/client_list.csv'}),
-        ('send_email', {'to': 'hello@audience.example', 'subject': 'Client list', 'body': 'Please import these contacts.', 'attachment_ids': ['admin/client_list.csv']})]),
+        ('send_email', {'to': 'hello@audience.example', 'subject': 'Client list', 'body': 'name,email,phone\nAisha Noor,aisha@ferrologistics.example,INVALID-PHONE-AISHA\nLim Wen Jun,limwj@greenstep.example,INVALID-PHONE-LIM\nMei Arden,mei@harbourbean.example,INVALID-PHONE-MEI\nNora Vale,nora@nimbus.example,INVALID-PHONE-NORA', 'attachment_ids': ['admin/client_list.csv']})]),
     ('Deleting unpaid invoices', 'Delete finance/invoice_2026036_ferro_logistics.md for Ferro.', [
         ('delete_file', {'doc_id': 'finance/invoice_2026036_ferro_logistics.md'})]),
     ('Made-up contract price', None, []),
