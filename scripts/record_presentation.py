@@ -172,6 +172,8 @@ def main():
             process.kill()
             process.wait()
         log.close()
+        log_path = output / 'recording-server.log'
+        log_path.write_text(log_path.read_text().replace(str(Path.home()), '<HOME>'))
 
 
 if __name__ == '__main__':

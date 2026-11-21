@@ -140,16 +140,20 @@ def invoke(files, directory, collect=False, root=ROOT, timeout=None):
             proc = subprocess.Popen(command, cwd=root, env=env, stdout=log,
                                     stderr=subprocess.STDOUT, start_new_session=True)
             try:
-                proc.wait(timeout=timeout)
-            except subprocess.TimeoutExpired:
-                timed_out = True
-                # Popen owns this child; never signal a reusable process-group ID.
-                proc.terminate()
                 try:
-                    proc.wait(timeout=1)
+                    proc.wait(timeout=timeout)
                 except subprocess.TimeoutExpired:
-                    proc.kill()
-                proc.wait()
+                    timed_out = True
+            finally:
+                if timed_out or proc.returncode is None:
+                    # Popen owns this child. Managed signers watch this owner's
+                    # death even though they have their own session groups.
+                    proc.terminate()
+                    try:
+                        proc.wait(timeout=1)
+                    except subprocess.TimeoutExpired:
+                        proc.kill()
+                        proc.wait()
         result = json.loads(path.read_text()) if path.exists() else {}
         result['exit_code'] = 124 if timed_out else proc.returncode
         if not collect and result['exit_code'] == 0:

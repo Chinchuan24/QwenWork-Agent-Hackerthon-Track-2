@@ -41,7 +41,9 @@ class SignerPortStartupTests(unittest.TestCase):
                  patch.object(signer_client.time, 'time', side_effect=lambda: clock[0]), \
                  patch.object(signer_client.time, 'monotonic', side_effect=lambda: clock[0]), \
                  patch.object(signer_client.time, 'sleep', side_effect=sleep), \
-                 patch.object(signer_client.SignerClient, 'request', request):
+                 patch.object(signer_client.SignerClient, 'request', request), \
+                 patch.object(manager, 'stop'), \
+                 patch.object(signer_client.atexit, 'register'):
                 manager.start()
             return manager.port, reads, clock[0]
 

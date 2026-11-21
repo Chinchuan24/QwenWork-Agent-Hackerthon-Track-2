@@ -2,6 +2,8 @@
 ever speaks the JSON-line protocol; it never reads the signing key."""
 import atexit
 import json
+import os
+import signal
 import socket
 import subprocess
 import sys
@@ -49,14 +51,23 @@ class SignerManager:
         self.port = int(port)
         self.proc = None
         self.start()
-        atexit.register(self.stop)
 
     def start(self):
         pf = Path(tempfile.mkdtemp(prefix="aegis-signer-")) / "signer.port"
         self.proc = subprocess.Popen(
             [sys.executable, "-m", "aegis.signer", "--state-dir", self.state_dir,
-             "--port-file", str(pf), "--port", str(self.port)],
-            cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+             "--port-file", str(pf), "--port", str(self.port),
+             "--owner-pid", str(os.getpid())],
+            cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            start_new_session=True)
+        atexit.register(self.stop)
+        try:
+            self._wait_ready(pf)
+        except BaseException:
+            self.stop()
+            raise
+
+    def _wait_ready(self, pf):
         deadline = time.monotonic() + 15
         failure = "signer did not write its port file"
         while True:
@@ -95,10 +106,20 @@ class SignerManager:
         self.start()   # same state dir, same port -> continues its own record
 
     def stop(self):
-        if self.proc and self.proc.poll() is None:
-            self.proc.terminate()
-            try:
-                self.proc.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                self.proc.kill()
+        proc = self.proc
+        if proc is not None:
+            if proc.poll() is None:
+                # The unreaped session leader pins the group identity we own.
+                try:
+                    os.killpg(proc.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    os.killpg(proc.pid, signal.SIGKILL)
+                    proc.wait(timeout=5)
+            if proc.stdout is not None:
+                proc.stdout.close()
         self.proc = None
+        atexit.unregister(self.stop)

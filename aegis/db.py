@@ -1,6 +1,7 @@
 """SQLite storage. The audit table refuses UPDATE and DELETE at the database level."""
 import sqlite3
 import threading
+import time
 from . import config
 
 _local = threading.local()
@@ -77,7 +78,18 @@ def conn() -> sqlite3.Connection:
     if c is None:
         c = sqlite3.connect(config.DB_PATH, timeout=10)
         c.row_factory = sqlite3.Row
-        c.execute("PRAGMA journal_mode=WAL")
+        # Concurrent first connections can race the WAL transition; SQLite's
+        # busy timeout does not reliably wait for this pragma's lock upgrade.
+        deadline = time.monotonic() + 10
+        while True:
+            try:
+                c.execute("PRAGMA journal_mode=WAL")
+                break
+            except sqlite3.OperationalError as exc:
+                if exc.sqlite_errorcode != sqlite3.SQLITE_BUSY or time.monotonic() >= deadline:
+                    c.close()
+                    raise
+                time.sleep(0.01)
         c.execute("PRAGMA foreign_keys=ON")
         _local.conn = c
     return c

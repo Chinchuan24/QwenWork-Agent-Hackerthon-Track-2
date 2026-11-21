@@ -31,7 +31,7 @@ These are Section C storyboard edit durations, not invented processing timings. 
 
 The recorder also checked ten routes at 1440, 768 and 390 pixels, 30 overflow cases total. No external browser requests or JavaScript page errors were observed. Audi and view were independently signed in and confirmed read-only briefing access.
 
-To regenerate from committed application code in a new isolated clone: `/Users/chin/Qwen/aegis/.venv/bin/python scripts/record_presentation.py --output-dir /absolute/new/recording-assets`. It launches only scripted mode, never copies or reads the release `.env`, and stops its own launcher. The clone uses a short `/tmp` path for the macOS Unix socket limit.
+To regenerate from committed application code in a new isolated clone: activate a Python environment with project dependencies and Playwright Chromium installed, then run `python scripts/record_presentation.py --output-dir /absolute/new/recording-assets`. It launches only scripted mode, never copies or reads the release `.env`, and stops its own launcher. The clone uses a short `/tmp` path for the macOS Unix socket limit.
 
 ## Provenance And Recording Limits
 

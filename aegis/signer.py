@@ -223,7 +223,19 @@ def main():
     ap.add_argument("--state-dir", required=True)
     ap.add_argument("--port-file", required=True)
     ap.add_argument("--port", type=int, default=0)
+    ap.add_argument("--owner-pid", type=int)
     a = ap.parse_args()
+    if a.owner_pid is not None:
+        import threading
+        import time
+
+        def watch_owner():
+            # Opt-in only for managed children. Reparenting detects SIGKILL too.
+            while os.getppid() == a.owner_pid:
+                time.sleep(0.1)
+            os._exit(0)
+
+        threading.Thread(target=watch_owner, daemon=True).start()
     state = SignerState(a.state_dir)
     srv = Server(("127.0.0.1", a.port), Handler)
     srv.state = state

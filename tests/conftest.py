@@ -30,7 +30,8 @@ from aegis import db, auth, policy, gateway, audit  # noqa: E402
 
 
 @pytest.fixture(scope="session", autouse=True)
-def _setup():
+def _setup(request):
+    request.addfinalizer(SIGNER.stop)
     db.init_db()
     auth.ensure_demo_users()
     policy.ensure_default(str(ROOT / "policies" / "default.yaml"))
