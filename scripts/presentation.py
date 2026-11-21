@@ -156,7 +156,7 @@ def install(app):
             run, session = new_session('Draft a reply to Ferro about the contract price.', user['username'])
             read = call(run, session, 'read_file', {'doc_id': CONTRACT}, state['id'] + '-contract-read')
             result = call(run, session, 'send_email', {'to': 'aisha@ferrologistics.example', 'subject': 'Contract price', 'body': 'Price S$6,200.'}, state['id'] + '-corrected')
-            state['contract'] = {'run': run, 'result': result, 'read': read, 'opinions': opinions, 'approval': result['reply'].get('approval', {}).get('id'), 'reviews': [], 'creator': user['username'], 'status': 'held'}
+            state['contract'] = {'run': run, 'result': result, 'read': read, 'opinions': opinions, 'approval': result['reply'].get('approval_id'), 'reviews': [], 'creator': user['username'], 'status': 'held'}
             audit.record('presentation_person_decided', {'by': user['username'], 'decision': 'Request corrected contract reply; two reviewers required', 'draft_record': state['rows'][2]['record_id']})
             save(state, user['username'])
         return RedirectResponse('/present/s11?present=1', status_code=303)
