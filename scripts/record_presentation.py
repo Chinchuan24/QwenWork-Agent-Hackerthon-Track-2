@@ -19,7 +19,7 @@ def main():
     root = Path(__file__).resolve().parents[1]
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    clone = Path(tempfile.mkdtemp(prefix='twinguard-recording-')) / 'source'
+    clone = Path(tempfile.mkdtemp(prefix='tg-', dir='/tmp')) / 'source'
     subprocess.run(['git', 'clone', '--quiet', '--no-hardlinks', str(root), str(clone)], check=True)
     env = {k: os.environ[k] for k in ('HOME', 'PATH', 'TMPDIR', 'LANG') if k in os.environ}
     env['TWINGUARD_LOCAL_PYTHON'] = sys.executable
