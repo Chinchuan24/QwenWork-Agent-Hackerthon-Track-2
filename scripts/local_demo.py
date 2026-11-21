@@ -88,7 +88,7 @@ def child():
                 body = b''.join([part async for part in response.body_iterator])
                 import html
                 from aegis import config
-                label = ('Live AI ' + config.MODEL_PROVIDER + ' / ' + config.MODEL_JUDGE if config.live_mode() else 'Scripted / no key')
+                label = views.templates.env.globals['provider_label']()
                 banner = ('<div role="note">LOCAL DEMO: ' + html.escape(label) + '; simulated sample data and effects only.</div>').encode()
                 body = body.replace(b'<body>', b'<body>' + banner, 1) if b'<body>' in body else banner + body
                 headers = dict(response.headers)
@@ -99,6 +99,11 @@ def child():
     sys.path.insert(0, str(ROOT / 'scripts'))
     from local_demo_panel import install
     install(app)
+    from local_key_settings import install as install_settings
+    install_settings(app, hard_offline=os.environ.get('TWINGUARD_HARD_OFFLINE') == '1')
+    if os.environ.get('TWINGUARD_HARD_OFFLINE') != '1':
+        from local_key_settings import network_guard
+        network_guard()
     from presentation import install as install_presentation
     install_presentation(app)
     from starlette.middleware.trustedhost import TrustedHostMiddleware
@@ -172,7 +177,9 @@ def main():
     if live:
         env.update(settings)
         env['AEGIS_LOCAL_AI'] = '1'
-    env.update(TWINGUARD_OFFLINE='0' if live else '1', PYTHONPATH=str(ROOT / 'scripts') + os.pathsep + str(ROOT))
+    env.update(TWINGUARD_OFFLINE='1' if args.scripted else '0',
+               TWINGUARD_HARD_OFFLINE='1' if args.scripted else '0',
+               PYTHONPATH=str(ROOT / 'scripts') + os.pathsep + str(ROOT))
     sock = socket.socket()
     for port in range(8000, 65536):
         try:

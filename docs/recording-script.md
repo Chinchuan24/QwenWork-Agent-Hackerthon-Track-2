@@ -6,6 +6,10 @@ Run `./run-local-demo.sh --scripted` in the release folder. The actual readiness
 
 Sign in as dana. Open `/admin/tools/review?present=1`. Review all 14 schemas and fingerprints, enter the private password, check the explicit snapshot confirmation, click **Approve reviewed snapshot**. Require the saved audit receipt before continuing. Presentation mode collapses raw evidence, raises base text by 15%, and retains the scripted/synthetic banner.
 
+## Optional Local Live Settings
+
+For a local live demonstration start normally with `./run-local-demo.sh`, not `--scripted`. Sign in as Dana and open `/local-demo/settings` on the printed origin. Paste the selected provider key BEFORE recording, submit, and confirm the blank password box plus masked last-four hint. Never record key entry or take a screenshot while it is populated. Test connection performs one tiny capped call; HOLD means do not claim a verified live connection. Every refreshed page shows the current provider/model badge. Forget removes only the pasted override, not an existing environment fallback. Eight-hour monotonic expiry and process restart forget the pasted override. The presentation stories remain explicitly synthetic/scripted; a live provider badge does not turn saved story evidence into live results.
+
 ## Exact Scene Timings
 
 These are Section C storyboard edit durations, not invented processing timings. Do not pretend saved outcomes are live animated processing. Actual processing occurs on each button click.

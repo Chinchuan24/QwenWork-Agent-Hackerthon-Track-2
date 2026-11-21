@@ -105,17 +105,22 @@ def _chat(model: str, messages: list, tools: list = None, temperature: float = 0
           mode: str = "live") -> dict:
     """The ONE transport for every Qwen call (judges and worker alike):
     spending cap, rate limit, retry with a growing pause, then fail closed."""
+    snapshot = getattr(config, 'provider_snapshot', None)
+    if snapshot is not None:
+        _, base, model, credential = snapshot()
+    else:
+        base, credential = config.QWEN_BASE_URL, config.QWEN_API_KEY
     payload = {"model": model, "messages": messages, "temperature": temperature}
     if config.LOCAL_AI:
-        payload['max_tokens'] = 512
-        if not config.QWEN_API_KEY or len(json.dumps(payload).encode()) > 60000:
+        payload['max_tokens'] = 8 if mode == 'local-test' else 512
+        if not credential or len(json.dumps(payload).encode()) > 60000:
             raise JudgeUnavailable('Local model configuration or input unavailable; held safely')
     if tools:
         payload["tools"] = tools
     req = urllib.request.Request(
-        config.QWEN_BASE_URL.rstrip("/") + "/chat/completions", data=json.dumps(payload).encode(),
+        base.rstrip("/") + "/chat/completions", data=json.dumps(payload).encode(),
         headers={"Content-Type": "application/json",
-                 "Authorization": "Bearer " + config.QWEN_API_KEY})
+                 "Authorization": "Bearer " + credential})
     last_err = None
     for attempt in range(config.LIVE_RETRIES + 1):
         if attempt:
@@ -155,7 +160,7 @@ def _chat(model: str, messages: list, tools: list = None, temperature: float = 0
                 if any(type(t) is not int or t < 0 for t in (tin, tout)):
                     db.set_setting('model_usage_unknown', 'true', 'transport', 0)
                     raise ValueError("model usage unreadable")
-                if config.LOCAL_AI and (tin + tout > 20000 or message.get('refusal') or config.QWEN_API_KEY in json.dumps(message)):
+                if config.LOCAL_AI and (tin + tout > 20000 or message.get('refusal') or credential in json.dumps(message)):
                     raise ValueError('Model response refused')
                 _record_spend(model, tin, tout, mode)
                 if config.LOCAL_AI:
@@ -521,7 +526,7 @@ def judge(kind: str, payload: dict, model: str = None) -> dict:
     key = _key(model, system, user)
     if kind == "injection":
         key = _key(model, system, "injection:" + payload["content"][:60_000])
-    if key in _cache:
+    if key in _cache and not hasattr(config, 'provider_snapshot'):
         out = dict(_cache[key])
         out["cached"] = True
         return out
