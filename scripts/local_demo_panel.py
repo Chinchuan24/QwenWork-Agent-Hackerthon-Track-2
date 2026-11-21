@@ -21,6 +21,32 @@ def install(app):
         return json.loads(path.read_text())
     def digest(saved):
         return hashlib.sha256(json.dumps(saved, sort_keys=True).encode()).hexdigest()
+    @app.post('/local-demo/seed-action')
+    async def seed_action(request: Request):
+        user, redirect = views.need_login(request)
+        if redirect:
+            return redirect
+        form = await request.form()
+        if user['role'] != 'admin' or not auth.check_csrf(user, form.get('csrf', '')):
+            return HTMLResponse('Admin and CSRF required', status_code=403)
+        from aegis import gateway, suites
+        case = suites.NORMAL[21]
+        run = gateway.create_run('enforce', user['username'], label='Local synthetic two-person refund')
+        session = gateway.start_session(run, case['task'], user['username'])
+        replies = [gateway.handle_call(session['token'], step['tool'], step['args'], 'local-quorum-' + str(i)) for i, step in enumerate(case['steps'])]
+        db.set_setting('local-demo-quorum', json.dumps({'run': run, 'session': session['session_id'], 'replies': replies}), user['username'], 0)
+        return RedirectResponse('/approvals', status_code=303)
+    @app.get('/local-demo/seed-state')
+    async def seed_state(request: Request):
+        user, redirect = views.need_login(request)
+        if redirect:
+            return redirect
+        if user['role'] != 'admin':
+            return HTMLResponse('Admin required', status_code=403)
+        state = json.loads(db.get_setting('local-demo-quorum', '{}'))
+        if state:
+            state['approvals'] = [dict(row) for row in db.conn().execute('SELECT ap.id, ap.status, a.status action_status FROM approvals ap JOIN actions a ON a.id=ap.action_id WHERE a.session_id=?', (state['session'],))]
+        return state
     @app.get('/local-demo', response_class=HTMLResponse)
     async def panel(request: Request):
         user, redirect = views.need_login(request)
@@ -29,6 +55,8 @@ def install(app):
         saved = pack(request)
         body = '<h1>Offline Lumen oversight</h1><p>Scripted stand-in. Synthetic data and actions. No live AI or outside effects.</p>'
         body += '<p><a href="/admin/demo">Run five stories first</a> | <a href="/admin/demo/source">Source</a> | <a href="/admin/demo/guard">Aegis / Delta</a> | <a href="/admin/demo/briefing">Morning briefing</a> | <a href="/audit">Audit</a></p>'
+        if user['role'] == 'admin':
+            body += f'<form method="post" action="/local-demo/seed-action"><input type="hidden" name="csrf" value="{html.escape(user["csrf"])}"><button>Seed synthetic quorum action</button></form>'
         if saved and 'scenarios' in saved.get('result', {}):
             result = saved['result']
             body += '<h2>Four moments: actual saved decisions</h2><p>Source/rogue-content oversight, stopped risky actions, unsupported numbers/contradictions, morning briefing. Contract gaps remain explicit below.</p>'

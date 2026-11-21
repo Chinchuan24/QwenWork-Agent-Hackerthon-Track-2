@@ -43,7 +43,7 @@ def child():
         if db.conn().execute('SELECT COUNT(*) n FROM users').fetchone()['n']:
             return
         accounts = {}
-        for name, role in [('dana', 'admin'), ('ops', 'approver'), ('riley', 'approver'), ('audi', 'auditor')]:
+        for name, role in [('dana', 'admin'), ('ops', 'approver'), ('riley', 'approver'), ('audi', 'auditor'), ('view', 'viewer')]:
             password = secrets.token_urlsafe(32)
             auth.create_user(name, password, role)
             accounts[name] = {'role': role, 'password': password}
@@ -78,6 +78,20 @@ def child():
     from aegis.app import app
     from aegis import app as views
     views.demo_result_path = lambda request: STATE / 'saved-rehearsal.json'
+    from starlette.middleware.base import BaseHTTPMiddleware
+    from starlette.responses import Response
+    class OfflineBanner(BaseHTTPMiddleware):
+        async def dispatch(self, request, call_next):
+            response = await call_next(request)
+            if 'text/html' in response.headers.get('content-type', ''):
+                body = b''.join([part async for part in response.body_iterator])
+                banner = b'<div role="note">LOCAL OFFLINE DEMO: scripted stand-in, synthetic data and effects only. No live AI.</div>'
+                body = body.replace(b'<body>', b'<body>' + banner, 1) if b'<body>' in body else banner + body
+                headers = dict(response.headers)
+                headers.pop('content-length', None)
+                return Response(body, status_code=response.status_code, headers=headers)
+            return response
+    app.add_middleware(OfflineBanner)
     sys.path.insert(0, str(ROOT / 'scripts'))
     from local_demo_panel import install
     install(app)

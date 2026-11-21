@@ -10,7 +10,7 @@ Uses an installed trusted Python 3.12 runtime, never installs dependencies. Disc
 
 The readiness line prints the actual URL and owned HTTP child PID. Default is http://localhost:8000; an occupied port is skipped without stopping its owner. No automatic preview is opened. Full private application, not the public limited interface.
 
-Passwords are generated independently with 32 random bytes per account and stored only at `.local-demo/passwords.json` (0600). Accounts: dana/admin, ops/approver, riley/approver, audi/auditor. No password is included here. This is intentionally synthetic local demo authority, not production accounts. No .env file is read or written.
+Passwords are generated independently with 32 random bytes per account and stored only at `.local-demo/passwords.json` (0600). Accounts: dana/admin, ops/approver, riley/approver, audi/auditor, view/viewer. No password is included here. This is intentionally synthetic local demo authority, not production accounts. No .env file is read or written.
 
 ## Click Path
 
@@ -20,7 +20,7 @@ Passwords are generated independently with 32 random bytes per account and store
 4. Open `/admin/demo/source` for emitted source evidence, `/admin/demo/guard` for Aegis/Delta saved judgments, `/admin/demo/briefing` for the morning briefing, and `/admin/demo/results` for actual verdicts and contract gaps.
 5. Follow this run's proof links under `/admin/demo/proof/`. Ordinary `/audit` is a separate parent audit stream. Do not substitute normalized scenario references for its database IDs.
 6. Open `/local-demo` for the combined source/scenario, Aegis/Delta, briefing and copied-proof tamper panel. Sign in separately as ops and riley to approve the same saved synthetic pack. First approval stays held; a repeated identity is rejected; the second distinct identity marks the pack approved. Pack approval never releases an action.
-7. Local `/approvals` additionally requires ops and riley for action approval: first approval remains held, duplicate and creator approvals are rejected, second approval invokes the original fingerprint/expiry/release checks. This action wrapper is implemented but its complete browser release path remains unverified.
+7. Local `/approvals` additionally requires ops and riley for action approval: first approval remains held, duplicate and creator approvals are rejected, second approval invokes the original fingerprint/expiry/release checks. On `/local-demo`, dana selects **Seed synthetic quorum action**. Open its `/approvals/{id}` detail separately as ops and riley and enter a short review reason. The actual browser gate verified first approval held, duplicate rejected and second approval executed the legitimate large-refund fixture in the in-memory sandbox. No actual payment or outbound message occurs.
 
 All model judgments are scripted stand-ins, not live AI. Existing scenarios include risky actions, unsupported numeric claims and contradictions. HOLD is not BLOCK. The source view is emitted JSON evidence, not a newly completed rogue-pack comparison interface. The observed guard pair is Aegis safe / Delta unsure, not Delta unsafe. No full AvePoint acceptance claim is made.
 
@@ -54,4 +54,8 @@ The launcher allowlists inherited environment names, disables the model key and 
 
 The final implementation was rehearsed twice against actual servers with an archive reset between them. Four-role `/local-demo` browser smoke checks passed on both runs: first reviewer held, duplicate reviewer rejected, second reviewer approved, original proof seal true and modified COPY seal false. Main saved proof and audit history were not tampered with.
 
-Remaining acceptance gaps: all registered GET pages with valid seeded parameters/all roles; action-quorum release-path browser verification; a richer rogue-pack comparison beyond emitted scenario JSON; scripted-model labels on every private screen; next-free-port collision rehearsal. These are not claimed complete.
+Scoped gates passed on the repeated clean runtime: 35 GET routes from the current source inventory, 175 named-role cases at 1440 pixels, valid run/approval/incident/audit/proof IDs, no 404/422/500 responses. Expected authorization denials and redirects are retained in get-matrix.json. Every successful HTML page had the universal offline/scripted banner. Viewer login and panel were verified. The existing scenario proof/source/guard/briefing pages prove the requested moments without claiming live AI or broader sponsor correctness.
+
+The owned-dummy collision check reserved 8000, observed readiness on http://localhost:8001 (HTTP child 64339), stopped only the demo via its control socket and proved the dummy still owned 8000. The dummy was then closed by its own test scope.
+
+Focused commands after the rehearsal: `scripts/local_action_smoke.py OUTPUT`, `scripts/local_get_smoke.py OUTPUT`, `scripts/local_panel_smoke.py OUTPUT`, and `scripts/local_port_smoke.py`, all using the verified installed Python. No full application test suite was run.

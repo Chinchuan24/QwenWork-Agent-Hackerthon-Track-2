@@ -10,7 +10,7 @@ output = Path(sys.argv[1])
 with sync_playwright() as pw:
     browser = pw.chromium.launch()
     results = []
-    for name in ('dana', 'ops', 'riley', 'audi'):
+    for name in ('dana', 'ops', 'riley', 'audi', 'view'):
         context = browser.new_context(base_url='http://localhost:8000', viewport={'width': 1440, 'height': 1000})
         context.route('**/*', lambda route: route.continue_() if route.request.url.startswith('http://localhost:8000/') else route.abort())
         page = context.new_page()
