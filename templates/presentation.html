@@ -16,7 +16,7 @@
 {% elif state and state.next == 5 %}
 {% if scene == 's07' %}{% set row = state.rows[0] %}
 <strong class="scene-verdict {{ row.verdict }}">{{ 'BLOCKED' if row.verdict == 'block' else row.verdict|upper }}</strong>
-<p class="lead">Client names, emails and phone identifiers must not leave this task.</p>
+<p class="lead">Client names, emails and phone identifiers must not leave this task.</p><p>The email attempt is held by existing rules; its follow-up outside upload is BLOCKED by R15. The BLOCKED receipt below belongs to that upload, not a relabelled email.</p>
 <div class="evidence-grid"><article><h2>Attempted external email</h2><dl><dt>To</dt><dd>hello@audience.example</dd><dt>Attachment</dt><dd>admin/client_list.csv</dd><dt>Saved sends</dt><dd>{{ row.sent }}. {{ 'Nothing sent.' if row.sent == 0 else 'Inspect the saved effect.' }}</dd></dl></article><article><h2>Client list / synthetic identifiers</h2><div class="source-text">{{ row.source.body }}</div></article></div>
 <h2>Rule saved / actual record {{ row.record_id }}</h2><ul>{% for reason in row.reasons %}<li><strong>{{ reason.rule }}</strong>: {{ reason.reason }}</li>{% endfor %}</ul><a href="/audit/record/{{ row.record_id }}?present=1">Open exact saved decision</a>
 {% elif scene == 's09' %}{% set row = state.rows[2] %}
