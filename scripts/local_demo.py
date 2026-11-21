@@ -3,6 +3,7 @@ import argparse
 import ipaddress
 import json
 import os
+import re
 from pathlib import Path
 import secrets
 import signal
@@ -18,6 +19,11 @@ STATE = ROOT / '.local-demo'
 
 def style_local_html(body, presenting=False):
     """Apply readable controls only to responses from the local launcher."""
+    body = re.sub(
+        rb'<p class="muted">Demo accounts: [^<]*</p>',
+        b'<p class="muted">Local demo accounts: dana (owner), ops and riley (approvers), '
+        b'audi (auditor), view (viewer). Passwords are in .local-demo/passwords.json '
+        b'on this computer.</p>', body)
     font = '20px' if presenting else '18px'
     style = ('''<style id="local-demo-controls">
 body { --local-control-font: FONT; overflow-wrap: anywhere; }

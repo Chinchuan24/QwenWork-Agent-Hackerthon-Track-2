@@ -1,4 +1,22 @@
+from pathlib import Path
+
 from scripts.local_demo import style_local_html
+
+
+LOCAL_HINT = ('Local demo accounts: dana (owner), ops and riley (approvers), '
+              'audi (auditor), view (viewer). Passwords are in '
+              '.local-demo/passwords.json on this computer.')
+
+
+def test_local_login_hint():
+    template = (Path(__file__).resolve().parents[1] / 'templates/login.html').read_bytes()
+    for presenting in (False, True):
+        result = style_local_html(template, presenting).decode()
+        assert '<p class="muted">' + LOCAL_HINT + '</p>' in result
+        assert result.count(LOCAL_HINT) == 1
+        assert 'demo-dana-2026' not in result
+        assert 'LOCAL MODE ONLY' not in result
+        assert 'autocomplete="current-password"' in result
 
 
 def test_normal_and_present_controls():
@@ -26,4 +44,8 @@ def test_production_does_not_install_local_styling():
         assert response.status_code == 200
         assert 'local-demo-controls' not in response.text
         assert 'data-local-banner' not in response.text
+        template = (Path(__file__).resolve().parents[1] / 'templates/login.html').read_text()
+        original_hint = next(line for line in template.splitlines() if 'Demo accounts:' in line)
+        assert original_hint in response.text
+        assert LOCAL_HINT not in response.text
     assert not any(getattr(route, 'path', '').startswith('/local-demo/settings') for route in app.routes)
