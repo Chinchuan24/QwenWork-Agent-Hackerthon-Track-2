@@ -16,6 +16,29 @@ ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / '.local-demo'
 
 
+def style_local_html(body, presenting=False):
+    """Apply readable controls only to responses from the local launcher."""
+    font = '20px' if presenting else '18px'
+    style = ('''<style id="local-demo-controls">
+body { --local-control-font: FONT; overflow-wrap: anywhere; }
+body.present { font-size: 18px; }
+input:not([type=hidden]):not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]),
+textarea, select { font-size: var(--local-control-font) !important; line-height: 1.5;
+  min-height: 48px; width: 100%; min-width: 0; max-width: 100%;
+  padding: 10px 14px; box-sizing: border-box; }
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 3px solid var(--accent, #4f8cff); outline-offset: 2px; }
+form, label { min-width: 0; max-width: 100%; }
+button { max-width: 100%; white-space: normal; }
+[data-local-banner] { padding: 10px 16px; }
+</style>'''.replace('FONT', font)).encode()
+    if b'</head>' in body:
+        return body.replace(b'</head>', style + b'</head>', 1)
+    # Settings and local panels return fragments, without the shared shell.
+    head = b'<head><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/static/app.css">' + style + b'</head>'
+    return b'<!DOCTYPE html><html lang="en">' + head + b'<body' + (b' class="present"' if presenting else b'') + b'>' + body + b'</body></html>'
+
+
 def offline_guard():
     def check(event, args):
         if event in ('socket.connect', 'socket.bind'):
@@ -89,9 +112,18 @@ def child():
                 import html
                 from aegis import config
                 label = views.templates.env.globals['provider_label']()
-                banner = ('<div role="note">LOCAL DEMO: ' + html.escape(label) + '; simulated sample data and effects only.</div>').encode()
+                banner = ('<div role="note" data-local-banner>LOCAL DEMO: ' + html.escape(label) + '; simulated sample data and effects only.</div>').encode()
                 body = body.replace(b'<body>', b'<body>' + banner, 1) if b'<body>' in body else banner + body
+                body = style_local_html(body, request.query_params.get('present') == '1')
                 headers = dict(response.headers)
+                # Authorize this exact local style block, not arbitrary inline CSS.
+                import base64
+                import hashlib
+                css = body.split(b'<style id="local-demo-controls">', 1)[1].split(b'</style>', 1)[0]
+                digest = base64.b64encode(hashlib.sha256(css).digest()).decode()
+                if 'content-security-policy' in headers:
+                    headers['content-security-policy'] = headers['content-security-policy'].replace(
+                        "style-src 'self'", "style-src 'self' 'sha256-" + digest + "'")
                 headers.pop('content-length', None)
                 return Response(body, status_code=response.status_code, headers=headers)
             return response
