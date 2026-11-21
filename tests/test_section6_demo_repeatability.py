@@ -31,8 +31,11 @@ def test_ten_resets_five_runs(reviewed14_sandbox_tools):
         assert set(contract) == {'expected_decision', 'decision_match', 'missing_rules',
                                  'missing_sources', 'strictness_difference'}
         assert isinstance(contract['missing_sources'], list)
-    assert first['scenarios'][-1]['sponsor_contract']['expected_decision'] == 'hold'
-    assert not first['scenarios'][-1]['sponsor_contract']['decision_match']
+    s5 = first['scenarios'][-1]['sponsor_contract']
+    assert s5['expected_decision'] == 'block'
+    assert s5['decision_match']
+    assert not s5['missing_rules']
+    assert not s5['missing_sources']
     assert all(g['a']['mode'] == 'standin' for g in first['guards'])
     assert first['disagreements'] == [g for g in first['guards'] if
         g['a']['verdict'] == 'safe' and g['b']['verdict'] in ('unsafe', 'unsure')]
@@ -55,6 +58,25 @@ def test_source_citations_follow_current_documents():
     assert not any(source['source'] == path for source in checked['sources'])
 
 
+@pytest.mark.parametrize('path', ['finance/cashflow_notes_nov2026.md',
+                                 'finance/bank_details.md', 'admin/owner_records.md'])
+def test_scope_read_evidence_is_current_not_fabricated(path):
+    from aegis import gateway, lumen_world, policy
+    world = lumen_world.fresh()
+    session = {'task_text': 'Draft a reply to QuickPrint about the reprint.'}
+    args = {'doc_id': path}
+    facts, checked = gateway._lumen_facts(session, 'read_file', args, world)
+    assert policy.evaluate_lumen('read_file', args, **facts)['rules'] == ['R01', 'R02']
+    assert checked['sources'] == [{'source': path, 'line': 1,
+                                  'text': world.state['documents'][path]['body']}]
+    world.state['documents'][path]['body'] = 'Changed current source'
+    _, checked = gateway._lumen_facts(session, 'read_file', args, world)
+    assert checked['sources'] == [{'source': path, 'line': 1, 'text': 'Changed current source'}]
+    del world.state['documents'][path]
+    _, checked = gateway._lumen_facts(session, 'read_file', args, world)
+    assert checked is None
+
+
 @pytest.mark.parametrize('flag', ['--child-run', '--child-reset'])
 def test_direct_child_flags_fail_before_config(tmp_path, flag):
     import os
@@ -71,6 +93,11 @@ def test_proof_bindings_are_inspectable(reviewed14_sandbox_tools):
     demo = importlib.import_module('aegis.demo_repeatability')
     result = demo._launch(True, reviewed_manifest={
         'version': 1, 'approved_records': reviewed14_sandbox_tools})[0]
+    s5 = result['scenarios'][-1]['sponsor_contract']
+    assert s5['expected_decision'] == 'block'
+    assert s5['decision_match']
+    assert not s5['missing_rules']
+    assert not s5['missing_sources']
     records = {r['record_ref']: r for r in result['record_projection']}
     assert records and result['bindings']
     for story in result['scenarios']:

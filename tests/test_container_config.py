@@ -32,7 +32,8 @@ def test_image_paths_and_fail_closed_install():
     copies = [line for line in text.splitlines() if line.startswith('COPY ')]
     assert copies == [
         'COPY requirements-production.lock ./',
-        'COPY aegis/__init__.py aegis/production.py aegis/public_evaluator.py aegis/claims.py aegis/policy.py aegis/sensitivity.py aegis/mixed_demo.py ./aegis/']
+        'COPY aegis/__init__.py aegis/production.py aegis/public_evaluator.py aegis/claims.py aegis/policy.py aegis/sensitivity.py aegis/mixed_demo.py ./aegis/',
+        'COPY aegis/provider.py ./aegis/']
     for excluded in ('run.py', 'qwen_client.py', 'gateway.py', 'worker.py', 'config.py', 'db.py'):
         assert excluded not in text
 
@@ -43,5 +44,5 @@ def test_private_build_context_exclusions():
     allowed = {p[1:] for p in patterns if p.startswith('!')}
     assert allowed == {'Dockerfile', 'requirements-production.lock', 'aegis/',
                        'aegis/__init__.py', 'aegis/production.py', 'aegis/public_evaluator.py',
-                       'aegis/claims.py', 'aegis/policy.py', 'aegis/sensitivity.py', 'aegis/mixed_demo.py'}
+                       'aegis/claims.py', 'aegis/policy.py', 'aegis/sensitivity.py', 'aegis/mixed_demo.py', 'aegis/provider.py'}
     assert not any(p.endswith(('.key', '.pem')) or '.env' in p for p in allowed)

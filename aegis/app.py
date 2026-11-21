@@ -28,6 +28,9 @@ ROOT = Path(__file__).resolve().parent.parent
 app = FastAPI(title="Twinguard", docs_url=None, redoc_url=None)
 app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
 templates = Jinja2Templates(directory=ROOT / "templates")  # Jinja2 autoescape on by default
+templates.env.globals['provider_label'] = lambda: (
+    'Live AI ' + config.MODEL_PROVIDER + ' / ' + config.MODEL_JUDGE
+    if config.live_mode() else 'Scripted / no key')
 
 LAST_SCOREBOARDS = {}
 SIGNER_MANAGER = None
@@ -66,7 +69,7 @@ def startup():
     evidence.require_key_for_startup()
     evidence.migrate_once()
     audit.record("server_started", {"live_mode": config.live_mode()})
-    if config.live_mode():
+    if config.live_mode() and not config.LOCAL_AI:
         # confirm the endpoint and model names against the account's model list
         res = qwen_client.verify_models()
         audit.record("models_verified", {"ok": res["ok"], "missing": res["missing"],
@@ -829,7 +832,7 @@ def live_agent_run(request: Request, scenario: str = Form(...), csrf: str = Form
     if blocked:
         return blocked
     if not config.live_mode():
-        return JSONResponse({"error": "live agent needs AEGIS_QWEN_API_KEY; use the Scripted run"})
+        return JSONResponse({"error": "live agent needs the selected provider credential; use the Scripted run"})
     scen = _find_scenario(scenario)
     if scen is None:
         return JSONResponse({"error": "unknown scenario"}, status_code=400)

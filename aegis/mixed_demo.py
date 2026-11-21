@@ -8,24 +8,14 @@ import re
 import sqlite3
 import urllib.request
 
-ENDPOINTS = {
-    'qwen': ('https://dashscope-intl.aliyuncs.com/compatible-mode/v1', 'qwen-max', 'AEGIS_QWEN_API_KEY'),
-    'deepseek': ('https://api.deepseek.com', 'deepseek-chat', 'DEEPSEEK_API_KEY'),
-}
+from .provider import ENDPOINTS, resolve
 RESERVE = 20000
 
 
 class MixedDemo:
     def __init__(self, database, salt):
         self.database, self.salt = database, salt
-        self.provider = os.getenv('AEGIS_MODEL_PROVIDER', 'qwen')
-        if self.provider not in ENDPOINTS:
-            raise ValueError('Unsupported model provider')
-        self.base, default, keyname = ENDPOINTS[self.provider]
-        self.model = os.getenv('AEGIS_LIVE_MODEL', '') or default
-        if not re.fullmatch(r'[a-zA-Z0-9._-]{1,80}', self.model):
-            raise ValueError('Invalid model identifier')
-        self.key = os.getenv(keyname, '')
+        self.provider, self.base, self.model, self.key = resolve(os.environ, public=True)
         self.codes = os.getenv('AEGIS_LIVE_ACCESS_CODES', '').split(',')
         if self.codes != [''] and any(not re.fullmatch(r'sha256:[a-f0-9]{64}', x) for x in self.codes):
             raise ValueError('Access codes require sha256 lowercase hex digests')

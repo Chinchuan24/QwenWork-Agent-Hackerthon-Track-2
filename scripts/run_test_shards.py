@@ -190,7 +190,7 @@ def invoke_subshards(nodes, directory, timeout=300, collection_timeout=180):
             result = dict(exit_code=None, error=str(exc))
             collection = locals().get('collection', {})
         return dict(nodes=[node], collection=collection, result=result)
-    with ThreadPoolExecutor(max_workers=2) as pool:
+    with ThreadPoolExecutor(max_workers=1) as pool:
         children = list(pool.map(run, enumerate(nodes, 1)))
     results = [child['result'] for child in children]
     union_verified = False

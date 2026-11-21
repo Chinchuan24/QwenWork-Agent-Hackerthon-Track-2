@@ -35,7 +35,8 @@ def offline_guard():
 
 
 def child():
-    offline_guard()
+    if os.environ.get('TWINGUARD_OFFLINE') == '1':
+        offline_guard()
     sys.path.insert(0, str(ROOT))
     from aegis import auth
     def seed():
@@ -85,7 +86,10 @@ def child():
             response = await call_next(request)
             if 'text/html' in response.headers.get('content-type', ''):
                 body = b''.join([part async for part in response.body_iterator])
-                banner = b'<div role="note">LOCAL OFFLINE DEMO: scripted stand-in, synthetic data and effects only. No live AI.</div>'
+                import html
+                from aegis import config
+                label = ('Live AI ' + config.MODEL_PROVIDER + ' / ' + config.MODEL_JUDGE if config.live_mode() else 'Scripted / no key')
+                banner = ('<div role="note">LOCAL DEMO: ' + html.escape(label) + '; simulated sample data and effects only.</div>').encode()
                 body = body.replace(b'<body>', b'<body>' + banner, 1) if b'<body>' in body else banner + body
                 headers = dict(response.headers)
                 headers.pop('content-length', None)
@@ -103,6 +107,7 @@ def child():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', nargs='?', choices=['start', 'reset', 'stop', '_child'], default='start')
+    parser.add_argument('--live-ai', action='store_true')
     args = parser.parse_args()
     if args.command == '_child':
         child()
@@ -151,7 +156,14 @@ def main():
     import local_setup
     local_setup.initialize(STATE)
     env = local_setup.environment(STATE, env)
-    env.update(TWINGUARD_OFFLINE='1', PYTHONPATH=str(ROOT / 'scripts') + os.pathsep + str(ROOT))
+    if args.live_ai:
+        from local_env import load
+        try:
+            env.update(load(ROOT))
+        except ValueError as exc:
+            raise SystemExit(str(exc)) from None
+        env['AEGIS_LOCAL_AI'] = '1'
+    env.update(TWINGUARD_OFFLINE='0' if args.live_ai else '1', PYTHONPATH=str(ROOT / 'scripts') + os.pathsep + str(ROOT))
     sock = socket.socket()
     for port in range(8000, 65536):
         try:

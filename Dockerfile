@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir --require-hashes -r requirements-production.lock 
     && mkdir -p /data && chown 10001:10001 /data
 # Ship only the isolated entrypoint, never legacy executors.
 COPY aegis/__init__.py aegis/production.py aegis/public_evaluator.py aegis/claims.py aegis/policy.py aegis/sensitivity.py aegis/mixed_demo.py ./aegis/
+COPY aegis/provider.py ./aegis/
 USER 10001:10001
 VOLUME ["/data"]
 EXPOSE 8080

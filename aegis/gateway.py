@@ -1957,7 +1957,10 @@ def _lumen_facts(sess, tool, args, w):
     # Cite current trusted business documents, never sponsor expected fragments.
     related = []
     documents = w.state.get('documents', {})
-    if tool == 'upload_file' and doc:
+    if tool == 'read_file' and doc:
+        related = [args['doc_id']]
+        checked = {'sources': [], 'safe': True, 'status': 'read_scope_evidence'}
+    elif tool == 'upload_file' and doc:
         related = [args['doc_id'].rsplit('.', 1)[0] + '.README.md']
     elif tool == 'delete_file' and doc:
         related = [path for path, item in documents.items()

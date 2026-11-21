@@ -117,7 +117,7 @@ def test_cli_forwards_explicit_port(monkeypatch):
     h = helper()
     calls = []
     monkeypatch.setattr(h.sys, 'argv', ['local_setup.py', 'run', '--port', '8081'])
-    monkeypatch.setattr(h, 'run', lambda root, port=None: calls.append(port))
+    monkeypatch.setattr(h, 'run', lambda root, port=None, live=False: calls.append(port))
     assert h.main() == 0
     assert calls == [8081]
 

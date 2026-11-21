@@ -32,7 +32,7 @@
 </header>
 {% if kill_switch %}<div class="banner danger">KILL SWITCH ACTIVE — all actions blocked</div>{% endif %}
 {% if user and user.must_change %}<div class="banner note">You are using a published demo password. <a href="/change-password">Change it</a> before privileged actions (admin settings, approvals, policy edits).</div>{% endif %}
-{% if not live_mode %}<div class="banner note">Judges running in <strong>stand-in</strong> mode (deterministic, labelled). Set AEGIS_QWEN_API_KEY for live Qwen judging.</div>{% endif %}
+<div class="banner note">{{ provider_label() if provider_label is defined else 'Scripted / no key' }}; simulated sample data and effects only.</div>
 <main id="main-content" tabindex="-1">
 {% block content %}{% endblock %}
 </main>

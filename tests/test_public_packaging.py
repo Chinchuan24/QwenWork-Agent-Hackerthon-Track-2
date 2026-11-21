@@ -11,7 +11,7 @@ import tomllib
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-MODULES = {'__init__', 'production', 'public_evaluator', 'claims', 'policy', 'sensitivity', 'mixed_demo'}
+MODULES = {'__init__', 'production', 'public_evaluator', 'claims', 'policy', 'sensitivity', 'mixed_demo', 'provider'}
 
 
 def test_isolated_nonroot_image():

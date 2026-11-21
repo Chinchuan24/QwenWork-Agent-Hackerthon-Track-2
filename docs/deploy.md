@@ -108,7 +108,7 @@ Do not overwrite an existing snapshot or restore into production. Fly CLI must
 already be installed/authenticated by the operator; no installs or signup here.
 
 ```bash
-FLY=/Users/chin/.fly/bin/flyctl
+FLY=$HOME/.fly/bin/flyctl
 APP=twinguard-demo
 umask 077
 PRIVATE_BACKUP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/twinguard-private-reference.XXXXXXXX")

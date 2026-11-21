@@ -57,7 +57,7 @@ def environment(root, inherited):
             raise ValueError()
     except (OSError, ValueError, TypeError, KeyError):
         raise RuntimeInvalid('Local runtime is missing, partial, mismatched, or not private; restore a complete backup. No files changed.') from None
-    env = {k: v for k, v in inherited.items() if not k.startswith('AEGIS_')}
+    env = {k: v for k, v in inherited.items() if not k.startswith('AEGIS_') and k not in ('DEEPSEEK_API_KEY', 'OPENAI_API_KEY', 'TWINGUARD_OFFLINE')}
     env.update({k: str(runtime / v) for k, v in LAYOUT.items()})
     env.update(AEGIS_EVIDENCE_KEY='', AEGIS_EVIDENCE_KEYRING_FILE='',
                AEGIS_SIGNER_PORT='0', AEGIS_QWEN_API_KEY='', AEGIS_HOST='127.0.0.1')
@@ -94,11 +94,15 @@ def initialize(root):
     environment(root, {})
 
 
-def run(root, port=None):
+def run(root, port=None, live=False):
     if port is not None and (type(port) is not int or not 1 <= port <= 65535):
         raise ValueError('port must be an integer from 1 to 65535')
     root = Path(root).resolve()
     env = environment(root, os.environ)
+    if live:
+        from local_env import load
+        env.update(load(root))
+        env['AEGIS_LOCAL_AI'] = '1'
     if port is not None:
         env['AEGIS_PORT'] = str(port)
     os.umask(0o077)
@@ -112,7 +116,9 @@ def main():
     commands.add_parser('init')
     start_parser = commands.add_parser('start', help='copy environment inventory, initialize private state and run offline')
     start_parser.add_argument('--port', type=int)
+    start_parser.add_argument('--live-ai', action='store_true')
     run_parser = commands.add_parser('run')
+    run_parser.add_argument('--live-ai', action='store_true')
     run_parser.add_argument('--port', type=int, help='free localhost port, 1..65535 (default: 8080)')
     args = parser.parse_args()
     if args.command in ('run', 'start') and args.port is not None and not 1 <= args.port <= 65535:
@@ -128,12 +134,15 @@ def main():
                     stream.flush()
                     os.fsync(stream.fileno())
             initialize(root)
-            run(root, port=args.port)
+            run(root, port=args.port, live=args.live_ai)
         elif args.command == 'init':
             initialize(root)
             print('Private local runtime ready; existing keys preserved.')
         else:
-            run(root, port=args.port)
+            run(root, port=args.port, live=args.live_ai)
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
     except (RuntimeInvalid, OSError):
         print('Local setup refused: runtime unavailable or invalid. Restore a complete private backup; no reset performed.', file=sys.stderr)
         return 1

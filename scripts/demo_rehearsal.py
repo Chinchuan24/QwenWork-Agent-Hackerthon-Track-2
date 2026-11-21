@@ -16,6 +16,7 @@ def main():
     parser.add_argument('--approve-sandbox', action='store_true', required=True,
                         help='authorize the displayed snapshot in a NEW disposable clone only')
     parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--working-tree', action='store_true', help='copy tracked current files into a new disposable clone')
     parser.add_argument('--existing-url', help='Use the already-running owned loopback demo')
     parser.add_argument('--password-file', type=Path, help='Private local-demo account file; never copied to output')
     args = parser.parse_args()
@@ -27,6 +28,15 @@ def main():
     clone = source if args.existing_url else Path(tempfile.mkdtemp(prefix='twinguard-browser-')).resolve() / 'source'
     if not args.existing_url:
         subprocess.run(['git', 'clone', '--quiet', '--no-hardlinks', str(source), str(clone)], check=True)
+        if args.working_tree:
+            import shutil
+            tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=source).decode().split('\0')
+            for name in filter(None, tracked):
+                origin = source / name
+                if origin.is_file() and not origin.is_symlink():
+                    shutil.copy2(origin, clone / name)
+            for name in ('aegis/provider.py', 'scripts/local_env.py'):
+                shutil.copy2(source / name, clone / name)
     if args.existing_url:
         from urllib.parse import urlsplit
         url = urlsplit(args.existing_url)

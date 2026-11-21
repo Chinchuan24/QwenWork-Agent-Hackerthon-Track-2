@@ -3,10 +3,10 @@
 ## Start
 
 ```sh
-/Users/chin/Qwen/twinguard-release/run-local-demo.sh
+./run-local-demo.sh
 ```
 
-Uses an installed trusted Python 3.12 runtime, never installs dependencies. Discovery order: explicit `TWINGUARD_LOCAL_PYTHON`, repository `.venv/bin/python`, then `/Users/chin/Qwen/aegis/.venv/bin/python`. Exact requirements.txt versions are checked. No virtual environment is packaged. A missing prerequisite is an error, not permission to download packages.
+Uses an installed trusted Python 3.12 runtime, never installs dependencies. Discovery order: explicit `TWINGUARD_LOCAL_PYTHON`, repository `.venv/bin/python`, then `$HOME/Qwen/aegis/.venv/bin/python`. Exact requirements.txt versions are checked. No virtual environment is packaged. A missing prerequisite is an error, not permission to download packages.
 
 The readiness line prints the actual URL and owned HTTP child PID. Default is http://localhost:8000; an occupied port is skipped without stopping its owner. No automatic preview is opened. Full private application, not the public limited interface.
 
@@ -31,8 +31,8 @@ Stop only the owned foreground launcher with Ctrl-C in its terminal. SIGTERM to 
 After stopping:
 
 ```sh
-/Users/chin/Qwen/twinguard-release/run-local-demo.sh reset
-/Users/chin/Qwen/twinguard-release/run-local-demo.sh
+./run-local-demo.sh reset
+./run-local-demo.sh
 ```
 
 Reset atomically renames the entire demo directory to `.local-demo-archive-<timestamp>`. It never deletes user files or clears production logs. Running-state reset is refused by an exclusive owner lock. Both active state and archives are gitignored and absent from tracked-file release inventories. Do not include ignored state in ad hoc release archives.
@@ -42,9 +42,9 @@ Reset atomically renames the entire demo directory to `.local-demo-archive-<time
 The existing browser rehearsal was minimally adapted to accept the already-running loopback server and its private credential file:
 
 ```sh
-/Users/chin/Qwen/aegis/.venv/bin/python scripts/demo_rehearsal.py \
+$HOME/Qwen/aegis/.venv/bin/python scripts/demo_rehearsal.py \
   --approve-sandbox --existing-url http://localhost:8000 \
-  --password-file /Users/chin/Qwen/twinguard-release/.local-demo/passwords.json \
+  --password-file "$PWD/.local-demo/passwords.json" \
   --output-dir /absolute/empty/output-directory
 ```
 

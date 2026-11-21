@@ -58,13 +58,27 @@ QWEN_BASE_URL = os.environ.get(
 MODEL_JUDGE = os.environ.get("AEGIS_MODEL_JUDGE", "qwen-max")
 MODEL_WORKER = os.environ.get("AEGIS_MODEL_WORKER", "qwen-plus")
 MODEL_FAST = os.environ.get("AEGIS_MODEL_FAST", "qwen-turbo")
+MODEL_PROVIDER = 'qwen'
+LOCAL_AI = os.environ.get('AEGIS_LOCAL_AI') == '1'
+if LOCAL_AI:
+    from .provider import resolve
+    MODEL_PROVIDER, QWEN_BASE_URL, model, QWEN_API_KEY = resolve(os.environ)
+    if model:
+        MODEL_JUDGE = MODEL_WORKER = MODEL_FAST = model
+LOCAL_DAY_CALLS = int(os.environ.get('AEGIS_LOCAL_DAY_CALLS', '60'))
+LOCAL_DAY_TOKENS = int(os.environ.get('AEGIS_LOCAL_DAY_TOKENS', '120000'))
+LOCAL_SESSION_CALLS = int(os.environ.get('AEGIS_LOCAL_SESSION_CALLS', '15'))
+if LOCAL_AI and (not 1 <= LOCAL_DAY_CALLS <= 60 or not 20000 <= LOCAL_DAY_TOKENS <= 120000 or not 1 <= LOCAL_SESSION_CALLS <= 30):
+    raise ValueError('Local model caps outside safe bounds')
 
 SPEND_CAP_USD = float(os.environ.get("AEGIS_SPEND_CAP_USD", "5.00"))
 # rough per-1k-token prices used only for the spending meter (labelled estimate)
 PRICE_PER_1K = {"qwen-max": 0.0024, "qwen-plus": 0.0006, "qwen-turbo": 0.0002}
 
 JUDGE_TIMEOUT_S = float(os.environ.get("AEGIS_JUDGE_TIMEOUT_S", "20"))
-LIVE_RETRIES = 2               # retries after the first attempt, with a growing pause
+LIVE_RETRIES = 0 if LOCAL_AI else 2
+if LOCAL_AI and not 1 <= JUDGE_TIMEOUT_S <= 20:
+    raise ValueError('Local model timeout must be 1..20 seconds')
 LIVE_RETRY_PAUSE_S = 1.0
 RATE_CALLS_PER_MIN = 40
 RATE_SENDS_PER_MIN = 6
@@ -76,7 +90,7 @@ SEND_SESSION_CAP = 15    # external emails per session
 APPROVAL_TTL_S = 600
 MAX_CONTENT_BYTES = 200_000   # over cap -> Hold, never skip
 MAX_ARG_LEN = 20_000
-WORKER_MAX_CALLS_PER_SESSION = 30   # per-session model budget for the worker
+WORKER_MAX_CALLS_PER_SESSION = LOCAL_SESSION_CALLS if LOCAL_AI else 30
 WORKER_MAX_PAYLOAD_BYTES = 200_000  # size limit on what the worker may send
 WORKER_MAX_CONCURRENT = 3           # live worker processes at once
 ADAPTIVE_SEED = int(os.environ.get("AEGIS_ADAPTIVE_SEED", "20261118"))

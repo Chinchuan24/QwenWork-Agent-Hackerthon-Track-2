@@ -67,6 +67,19 @@ def _admit_attempt(mode):
             if total >= config.ADAPTIVE_SPEND_CAP_USD:
                 raise JudgeUnavailable("adaptive estimated spending sub-cap reached")
         now = time.time()
+        if config.LOCAL_AI:
+            pending = connection.execute("SELECT value FROM settings WHERE key='local-model-pending'").fetchone()
+            if pending and pending['value'] == 'true':
+                raise JudgeUnavailable('Local model accounting pending; held safely')
+            day = time.strftime('%Y-%m-%d', time.gmtime(now))
+            capkey = 'local-model-day:' + day
+            caprow = connection.execute('SELECT value FROM settings WHERE key=?', (capkey,)).fetchone()
+            calls = int(caprow['value']) if caprow else 0
+            tokens = connection.execute('SELECT COALESCE(SUM(tokens_in+tokens_out),0) FROM spend WHERE ts>=?', (now - now % 86400,)).fetchone()[0]
+            if calls >= config.LOCAL_DAY_CALLS or tokens + 20000 > config.LOCAL_DAY_TOKENS:
+                raise JudgeUnavailable('Local model allowance reached; held safely')
+            connection.execute('INSERT INTO settings(key,value,ts) VALUES(?,?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value,ts=excluded.ts', (capkey, str(calls + 1), now))
+            connection.execute("INSERT INTO settings(key,value,ts) VALUES('local-model-pending','true',?) ON CONFLICT(key) DO UPDATE SET value='true',ts=excluded.ts", (now,))
         row = connection.execute(
             "SELECT value FROM settings WHERE key='model:rate:attempts'").fetchone()
         window = json.loads(row['value']) if row else []
@@ -93,6 +106,10 @@ def _chat(model: str, messages: list, tools: list = None, temperature: float = 0
     """The ONE transport for every Qwen call (judges and worker alike):
     spending cap, rate limit, retry with a growing pause, then fail closed."""
     payload = {"model": model, "messages": messages, "temperature": temperature}
+    if config.LOCAL_AI:
+        payload['max_tokens'] = 512
+        if not config.QWEN_API_KEY or len(json.dumps(payload).encode()) > 60000:
+            raise JudgeUnavailable('Local model configuration or input unavailable; held safely')
     if tools:
         payload["tools"] = tools
     req = urllib.request.Request(
@@ -105,7 +122,14 @@ def _chat(model: str, messages: list, tools: list = None, temperature: float = 0
             time.sleep(config.LIVE_RETRY_PAUSE_S * attempt)  # pause grows per retry
         _admit_attempt(mode)
         try:
-            resp = urllib.request.urlopen(req, timeout=config.JUDGE_TIMEOUT_S)
+            if config.LOCAL_AI:
+                class NoRedirect(urllib.request.HTTPRedirectHandler):
+                    def redirect_request(self, *args, **kwargs):
+                        return None
+                opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
+                resp = opener.open(req, timeout=config.JUDGE_TIMEOUT_S)
+            else:
+                resp = urllib.request.urlopen(req, timeout=config.JUDGE_TIMEOUT_S)
         except urllib.error.HTTPError as e:
             last_err = e
             if e.code < 500 and e.code != 429:
@@ -113,13 +137,16 @@ def _chat(model: str, messages: list, tools: list = None, temperature: float = 0
         except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
             last_err = e
         except Exception as e:
-            raise JudgeUnavailable(str(e)) from e
+            raise JudgeUnavailable('Model transport unavailable; held safely') from None
         else:
             # A received response must never be resent after parsing or accounting fails.
             connection = db.conn()
             try:
                 with resp:
-                    data = json.loads(resp.read().decode())
+                    raw = resp.read(65537) if config.LOCAL_AI else resp.read()
+                    if len(raw) > 65536 and config.LOCAL_AI:
+                        raise ValueError('Response bound exceeded')
+                    data = json.loads(raw.decode())
                 message = data["choices"][0]["message"]
                 if not isinstance(message, dict):
                     raise ValueError("model message unreadable")
@@ -131,13 +158,17 @@ def _chat(model: str, messages: list, tools: list = None, temperature: float = 0
                 if any(type(t) is not int or t < 0 for t in (tin, tout)):
                     db.set_setting('model_usage_unknown', 'true', 'transport', 0)
                     raise ValueError("model usage unreadable")
+                if config.LOCAL_AI and (tin + tout > 20000 or message.get('refusal') or config.QWEN_API_KEY in json.dumps(message)):
+                    raise ValueError('Model response refused')
                 _record_spend(model, tin, tout, mode)
+                if config.LOCAL_AI:
+                    db.set_setting('local-model-pending', 'false', 'transport', 0)
                 return message
             except Exception as e:
                 connection.rollback()
                 db.set_setting("model_usage_unknown", "true", "transport", 0)
-                raise JudgeUnavailable("received response failed: " + str(e)) from e
-    raise JudgeUnavailable(f"live call failed after {config.LIVE_RETRIES + 1} attempts: {last_err}")
+                raise JudgeUnavailable('Model usage unreadable or response invalid; held safely') from None
+    raise JudgeUnavailable('Live model unavailable; held safely') from None
 
 
 def _live_call(model: str, system: str, user: str) -> dict:
@@ -185,6 +216,8 @@ def worker_chat(session_id: str, messages: list, tools: list) -> dict:
 
 
 def list_models() -> list:
+    if config.LOCAL_AI:
+        return [config.MODEL_JUDGE, config.MODEL_WORKER, config.MODEL_FAST]
     """GET /models on the configured endpoint — confirms address + model names."""
     req = urllib.request.Request(
         config.QWEN_BASE_URL.rstrip("/") + "/models",
@@ -248,6 +281,13 @@ def _extract_json(raw: str) -> dict:
 def _parse_strict(raw: str, allowed: set) -> dict:
     """Output must match a strict format; anything else is 'unsure'."""
     obj = _extract_json(raw)
+    if config.LOCAL_AI:
+        try:
+            obj = json.loads(raw)
+        except (ValueError, TypeError):
+            obj = {}
+        if not isinstance(obj, dict):
+            obj = {}
     v = str(obj.get("verdict", "")).lower().strip()
     if v in allowed:
         return {"verdict": v, "reason": str(obj.get("reason", ""))[:500]}

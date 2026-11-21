@@ -4,7 +4,7 @@ Editorial status: unpublished draft, ready for a local Hashmeta content handoff,
 
 ## Product line
 
-Aegis and Delta are two AI security guards that watch your other AI helpers, stop attacks, and keep proof for the people who check the rules.
+Planned product: Aegis and Delta are two AI security guards that helps you meet review needs and watch your other AI helpers, stop attacks, and keep proof for the people who check the rules.
 
 Product direction, not a claim that every planned feature is complete. This demonstration uses simulated business data. Live model checks remain pending.
 
@@ -12,7 +12,7 @@ Product direction, not a claim that every planned feature is complete. This demo
 
 Headline: Know what your AI did. Keep control of what happens next.
 
-Pitch: Running a business alone should not mean checking every email and invoice alone. Aegis is a security gateway between your AI helpers and their tools. The product brings together checks on actions, checks against source files, human decisions, and a plain morning briefing. Aegis and Delta provide two separate checks in the product design. The owner sees what needs attention; the auditor can look for the evidence behind it.
+Pitch: Aegis is being prepared for bounded sandbox workflows. Running a business alone should not mean checking every email and invoice alone. Aegis is a security gateway between your AI helpers and their tools. The product brings together checks on actions, checks against source files, human decisions, and a plain morning briefing. Aegis and Delta provide two separate checks in the product design. The owner sees what needs attention; the auditor can look for the evidence behind it.
 
 Primary action: Watch the demo
 
@@ -32,7 +32,7 @@ Owners need a short answer: what happened, what needs a decision, and what was s
 2. Check the action before it happens. Compare the request with the rules and the evidence. In the two guard design, Delta checks separately; the fixed rules still win even when both guards say safe. Missing or unclear checks leave the action waiting for a human.
 3. Review the morning briefing and its proof. See what needs your decision, what was stopped, and what went fine. Follow the evidence when you need the details.
 
-These steps describe the intended end to end product journey. Completion and proof for the owner briefing, helper cards, and expanded Delta checks are pending integration verification.
+Future workflow, not verified integrated behaviour. These steps describe the intended end to end product journey. Completion and proof for the owner briefing, helper cards, and expanded Delta checks are pending integration verification.
 
 ## Four demo moments
 
@@ -70,17 +70,17 @@ Simple for the owner, serious for the auditor.
 
 These are product sections to demonstrate with evidence, not promises of completed coverage.
 
-**Two guards:** See Aegis and Delta's separate checks and reasons. Integration proof: [TWO_GUARDS].
+**Two guards (prepared; integration unverified):** See Aegis and Delta's separate checks and reasons. Integration proof: [TWO_GUARDS].
 
-**Attack board:** See what was tried, what was stopped, and what got through. Detection and harm stopped are different measures. Recognising an attack is not the same as preventing its harm. Stored run proof: [ATTACK_BOARD].
+**Attack board (prepared; integration unverified):** See what was tried, what was stopped, and what got through. Detection and harm stopped are different measures. Recognising an attack is not the same as preventing its harm. Stored run proof: [ATTACK_BOARD].
 
-**Helper ID cards:** See what each helper may read and do. Screen evidence alone does not prove the limits are enforced. Enforcement proof: [ID_CARDS].
+**Helper ID cards (prepared; integration unverified):** See what each helper may read and do. Screen evidence alone does not prove the limits are enforced. Enforcement proof: [ID_CARDS].
 
-**Proof pack:** Review actions, human decisions, and checks on the record with private content hidden. Record checks have stated limits; they are not a promise that no one can change history. Export and seal proof: [PROOF_PACK].
+**Proof pack (prepared; integration unverified):** Review actions, human decisions, and checks on the record with private content hidden. Record checks have stated limits; they are not a promise that no one can change history. Export and seal proof: [PROOF_PACK].
 
-**Rule match:** See how a check helps you meet a rule, and where coverage is partial or missing. The table is not legal advice. Official source verification and working proof links: [RULE_MATCH]. Do not imply endorsement by a regulator or sponsor.
+**Rule match (prepared; integration unverified):** See how a check helps you meet a rule, and where coverage is partial or missing. The table is not legal advice. Official source verification and working proof links: [RULE_MATCH]. Do not imply endorsement by a regulator or sponsor.
 
-**Alarm:** Review controls for freezing a helper and stopping work. Any reporting reminder leaves the decision and reporting with a person; it does not contact a regulator. Control proof: [ALARM].
+**Alarm (prepared; integration unverified):** Review controls for freezing a helper and stopping work. Any reporting reminder leaves the decision and reporting with a person; it does not contact a regulator. Control proof: [ALARM].
 
 ## Built with QwenWork
 
@@ -104,7 +104,7 @@ Keep the contact action disabled until Chin supplies a real destination and conf
 
 ## Proof slots
 
-All measurements are pending the actual scoreboard. Historic numbers in the README or progress log are not approved website measurements for the new integrated product.
+All measurements are pending the actual scoreboard. Measured component results only; not an integrated product score. Every record needs component name and version. Do not combine component results into an integrated score. No achieved sponsor score is available for this draft. Historic numbers in the README or progress log are not approved website measurements for the new integrated product.
 
 | Slot | Required evidence before replacement |
 |---|---|
