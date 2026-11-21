@@ -1,4 +1,41 @@
 import secrets
+import pytest
+
+
+@pytest.mark.parametrize('case', ['echo', 'refusal', 'missing-usage', 'timeout'])
+def test_secret_response_failure_safe(case, monkeypatch):
+    import json
+    from aegis import config, qwen_client, provider, db
+    key = secrets.token_urlsafe(48)
+    monkeypatch.setattr(config, 'LOCAL_AI', True)
+    monkeypatch.setattr(config, 'LIVE_RETRIES', 0)
+    monkeypatch.setattr(config, 'provider_snapshot', lambda: ('deepseek', 'https://api.deepseek.com', 'model', key), raising=False)
+    monkeypatch.setattr(qwen_client, '_admit_attempt', lambda mode: None)
+    monkeypatch.setattr(db, 'set_setting', lambda *args: None)
+    calls = []
+    class Reply:
+        def __enter__(self): return self
+        def __exit__(self, *args): pass
+        def read(self, limit):
+            message = {'content': key if case == 'echo' else 'OK'}
+            if case == 'refusal': message['refusal'] = key
+            data = {'choices': [{'message': message}]}
+            if case != 'missing-usage':
+                data['usage'] = {'prompt_tokens': 4, 'completion_tokens': 1}
+            return json.dumps(data).encode()
+    def fake(request, timeout):
+        calls.append(True)
+        if case == 'timeout': raise TimeoutError(key)
+        return Reply()
+    monkeypatch.setattr(provider, 'open_pinned', fake)
+    try:
+        qwen_client._chat('model', [{'role': 'user', 'content': 'OK'}], mode='local-test')
+    except qwen_client.JudgeUnavailable as error:
+        assert key not in str(error)
+        assert error.__suppress_context__
+    else:
+        pytest.fail('Unsafe provider response accepted')
+    assert len(calls) == 1
 
 
 def test_memory_expiry_forget_restart():

@@ -10,6 +10,8 @@ Sign in as dana. Open `/admin/tools/review?present=1`. Review all 14 schemas and
 
 For a local live demonstration start normally with `./run-local-demo.sh`, not `--scripted`. Sign in as Dana and open `/local-demo/settings` on the printed origin. Paste the selected provider key BEFORE recording, submit, and confirm the blank password box plus masked last-four hint. Never record key entry or take a screenshot while it is populated. Test connection performs one tiny capped call; HOLD means do not claim a verified live connection. Every refreshed page shows the current provider/model badge. Forget removes only the pasted override, not an existing environment fallback. Eight-hour monotonic expiry and process restart forget the pasted override. The presentation stories remain explicitly synthetic/scripted; a live provider badge does not turn saved story evidence into live results.
 
+Local Settings verification receipt: `scripts/verify_local_key_browser.py` passed 31 headless Chromium and actual-server checks, including real password-field paste, one tiny fake connection call, masked-only response, storage/cookie checks, role/CSRF/rate denials, timeout HOLD, actual stop/restart forgetting, and release/clone filesystem canary scans with zero matches. All test servers stopped; zero real provider calls. The supplementary focused test command passed 31 tests. No secret-entry screenshots or recordings were produced.
+
 ## Exact Scene Timings
 
 These are Section C storyboard edit durations, not invented processing timings. Do not pretend saved outcomes are live animated processing. Actual processing occurs on each button click.
