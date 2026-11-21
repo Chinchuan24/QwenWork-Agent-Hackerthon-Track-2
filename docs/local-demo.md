@@ -10,7 +10,7 @@ Uses an installed trusted Python 3.12 runtime, never installs dependencies. Disc
 
 The readiness line prints the actual URL and owned HTTP child PID. Default is http://localhost:8000; an occupied port is skipped without stopping its owner. No automatic preview is opened. Full private application, not the public limited interface.
 
-Passwords are generated independently with 32 random bytes per account and stored only at `.local-demo/passwords.json` (0600). Accounts: dana/admin, ops/approver, riley/approver, audi/auditor, view/viewer. No password is included here. This is intentionally synthetic local demo authority, not production accounts. No .env file is read or written.
+Passwords are generated independently with 32 random bytes per account and stored only at `.local-demo/passwords.json` (0600). Accounts: dana/admin, ops/approver, riley/approver, audi/auditor, view/viewer. No password is included here. This is intentionally synthetic local demo authority, not production accounts. Default startup securely reads the optional owner-only `.env` to resolve a configured provider, but never writes it. For guaranteed isolated scripted recording use `./run-local-demo.sh --scripted`: this bypasses `.env` entirely, even when a real key is present.
 
 ## Click Path
 

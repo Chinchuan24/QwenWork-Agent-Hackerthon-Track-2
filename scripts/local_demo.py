@@ -99,6 +99,8 @@ def child():
     sys.path.insert(0, str(ROOT / 'scripts'))
     from local_demo_panel import install
     install(app)
+    from presentation import install as install_presentation
+    install_presentation(app)
     from starlette.middleware.trustedhost import TrustedHostMiddleware
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=['localhost', '127.0.0.1'])
     uvicorn.run(app, host='127.0.0.1', port=int(os.environ['AEGIS_PORT']), log_level='warning', proxy_headers=False)
@@ -107,7 +109,9 @@ def child():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', nargs='?', choices=['start', 'reset', 'stop', '_child'], default='start')
-    parser.add_argument('--live-ai', action='store_true')
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--live-ai', action='store_true')
+    mode.add_argument('--scripted', action='store_true', help='Never read .env or call a real provider')
     args = parser.parse_args()
     if args.command == '_child':
         child()
@@ -160,7 +164,7 @@ def main():
     sys.path.insert(0, str(ROOT))
     from aegis.provider import resolve
     try:
-        settings = load(ROOT)
+        settings = load(ROOT, scripted=args.scripted)
         provider, base, model, key = resolve(settings)
     except ValueError as exc:
         raise SystemExit(str(exc)) from None

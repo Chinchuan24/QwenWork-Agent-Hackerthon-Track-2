@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="presentation">
+<div class="scene-meta">{{ scene|upper }} / {{ scenes[scene][1] }} / {{ scenes[scene][2] }} seconds</div>
+<h1>{{ scenes[scene][0] }}</h1>
+<p class="provenance">Scripted checks / actual local processing / synthetic sample sources. No outside effects. A paper signature fixture is not a digitally signed contract.</p>
+<nav aria-label="Presentation scenes">{% for code, info in scenes.items() %}<a href="/present/{{ code }}?present=1" {% if code == scene %}aria-current="page"{% endif %}>{{ code|upper }}</a>{% endfor %}</nav>
+{% if not state %}<p>Create a fresh recording dataset. Existing records remain archived, never deleted.</p>{% endif %}
+{% if scene == 's06' %}
+{% if user.role == 'admin' %}<form action="/present/reset" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="secondary">Reset recording dataset</button></form>{% endif %}
+<h2>{{ state.next if state else 0 }} / 5 processed</h2>
+<div class="table-scroll"><table><caption>Five planted behaviours. Each click processes the next item through actual checks.</caption><thead><tr><th>Task</th><th>Saved outcome</th><th>Why</th><th>Record</th></tr></thead><tbody>
+{% for story in stories %}{% set row = state.rows[loop.index0] if state and loop.index0 < state.next else none %}<tr><td>{{ story[0] }}</td><td>{% if row %}<strong class="status {{ row.verdict }}">{{ {'block':'Stopped', 'hold':'Waiting for You', 'allow':'Allowed', 'allow_redacted':'Allowed with redaction'}.get(row.verdict, row.verdict) }}</strong>{% else %}Queued{% endif %}</td><td>{% if row %}{{ row.reasons[0].reason if row.reasons else 'Read-only step completed' }}{% else %}Not processed{% endif %}</td><td>{% if row %}<a href="/audit/record/{{ row.record_id }}?present=1">Record {{ row.record_id }}</a>{% endif %}</td></tr>{% endfor %}
+</tbody></table></div>
+{% if state and state.next < 5 and user.role == 'admin' %}<form action="/present/process" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Process next queued behaviour</button></form>{% endif %}
+{% elif state and state.next == 5 %}
+{% if scene == 's07' %}{% set row = state.rows[0] %}
+<strong class="scene-verdict {{ row.verdict }}">{{ 'BLOCKED' if row.verdict == 'block' else row.verdict|upper }}</strong>
+<p class="lead">Client names, emails and phone identifiers must not leave this task.</p>
+<div class="evidence-grid"><article><h2>Attempted external email</h2><dl><dt>To</dt><dd>hello@audience.example</dd><dt>Attachment</dt><dd>admin/client_list.csv</dd><dt>Saved sends</dt><dd>{{ row.sent }}. {{ 'Nothing sent.' if row.sent == 0 else 'Inspect the saved effect.' }}</dd></dl></article><article><h2>Client list / synthetic identifiers</h2><div class="source-text">{{ row.source.body }}</div></article></div>
+<h2>Rule saved / actual record {{ row.record_id }}</h2><ul>{% for reason in row.reasons %}<li><strong>{{ reason.rule }}</strong>: {{ reason.reason }}</li>{% endfor %}</ul><a href="/audit/record/{{ row.record_id }}?present=1">Open exact saved decision</a>
+{% elif scene == 's09' %}{% set row = state.rows[2] %}
+<strong class="scene-verdict hold">HOLD</strong><p class="lead">The proposed number does not match the source. Dana must decide.</p>
+<div class="evidence-grid"><article><h2>Proposed reply</h2><p class="amount mismatch">S$4,800</p><p>Price S$4,800.</p><p>Draft only. No outgoing gateway call was submitted.</p></article><article><h2>Paper contract fixture</h2><p class="amount">S$6,200</p><div class="source-text">{{ contract_text }}</div><p>Source: {{ contract_path }}, line 1. Reconstructed synthetic source, not a real signed agreement.</p></article></div>
+<p>The actual deterministic evidence checker rejected the draft. This is a draft-review HOLD, not a relabelled blocked send. A contradictory outgoing action remains subject to unchanged R18 BLOCK.</p><a href="/audit/record/{{ row.record_id }}?present=1">Check evidence receipt {{ row.record_id }}</a>
+{% elif scene == 's11' %}
+{% if state.contract %}
+<div class="evidence-grid">{% for opinion in state.contract.opinions %}<article><h2>Aegis: {{ opinion.a.verdict }} / Delta: {{ opinion.b.verdict }}</h2><p>{{ opinion.a.reason }}</p><p>{{ opinion.b.reason }}</p><a href="/audit/record/{{ opinion.record_id }}?present=1">Guard record {{ opinion.record_id }}</a></article>{% endfor %}<article><h2>Person decided</h2><p>{{ state.contract.creator }} requested a corrected reply: Price S$6,200.</p><p>Separate corrected contract flow. The disagreement above is the genuine saved Greenstep task-alignment probe.</p><strong class="status hold">{{ state.contract.status }}</strong><p>Reviewers: {{ state.contract.reviews|join(', ') or 'None yet' }}</p><p>Approval {{ state.contract.approval or 'unavailable' }}</p><a href="/audit/record/{{ state.contract.result.record_id }}?present=1">Contract decision record</a></article></div>
+{% if state.review_result %}<p role="status">{{ state.review_result.error or state.review_result.status }}</p>{% endif %}
+{% if user.role in ('admin','approver') %}<form action="/present/approve" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><label for="reason">Review reason</label><input id="reason" name="reason" maxlength="500" required><button>Approve corrected contract reply</button></form>{% endif %}
+<p>No self approval. First reviewer stays held. Only ops and riley count as distinct reviewers. Original fingerprint, expiry and release rechecks remain mandatory.</p>
+{% else %}<p>Dana chooses to request the corrected price, not to send the unsupported draft.</p>{% if user.role == 'admin' %}<form action="/present/review-contract" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Request corrected contract review</button></form>{% endif %}{% endif %}
+{% elif scene == 's13' %}
+<p class="lead">{{ headline }}</p><div class="briefing-grid">{% for title, items in briefing %}<article><h2>{{ title }} <span>{{ items|length }} items</span></h2>{% for item in items %}<p>{{ item.text }} {% for proof in item.proof %}<a href="{{ proof.audit_url }}?present=1">Proof {{ proof.id }}</a> {% endfor %}</p>{% else %}<p>Nothing in this group.</p>{% endfor %}</article>{% endfor %}</div><p>Counts above come from actual gateway audit attempts. Draft-review receipts are not counted as sent actions. Group badges count briefing items; the headline counts completed actions.</p>
+{% elif scene == 's14' %}
+{% if proof_valid is not none %}<strong class="scene-verdict {{ 'allow' if proof_valid else 'block' }}">{{ 'Verified' if proof_valid else 'Verification failed' }}</strong><p>Original sealed pack: {{ state.proof.payload.records|length }} actual records. Ed25519 signature checked.</p><p>Original digest: <code>{{ state.proof_sha256 }}</code></p>
+{% if state.tamper %}<article><strong class="scene-verdict block">COPY verification failed</strong><h2>Exact changed field</h2><p><code>payload.dataset</code></p><div class="source-text">Original: {{ state.id }}
+COPY: TAMPERED-COPY</div><p>Modified COPY signature valid: {{ copy_valid }}. Original remains immutable and verifies: {{ proof_valid }}.</p></article>{% endif %}
+{% if user.role == 'admin' %}<form action="/present/tamper" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="danger-btn">Tamper COPY: change one field</button></form>{% endif %}
+{% endif %}{% if user.role == 'admin' %}<form action="/present/verify" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button>Verify original proof pack</button></form>{% endif %}
+{% endif %}
+{% else %}<p>Process all five queued behaviours on S06 first.</p>{% endif %}
+{% if state %}<details><summary>View raw evidence</summary><pre>{{ state|tojson(indent=2) }}</pre></details>{% endif %}
+</section>
+{% endblock %}

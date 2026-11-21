@@ -60,9 +60,18 @@ def install(app):
         if saved and 'scenarios' in saved.get('result', {}):
             result = saved['result']
             body += '<h2>Four moments: actual saved decisions</h2><p>Source/rogue-content oversight, stopped risky actions, unsupported numbers/contradictions, morning briefing. Contract gaps remain explicit below.</p>'
-            body += '<pre>' + html.escape(json.dumps(result['scenarios'], indent=2)) + '</pre>'
-            body += '<h2>Aegis / Delta proof</h2><pre>' + html.escape(json.dumps(result['guards'], indent=2)) + '</pre>'
-            body += '<h2>Morning briefing</h2><pre>' + html.escape(json.dumps(result['briefing'], indent=2)) + '</pre>'
+            body += '<table><caption>Saved scenario outcomes, not a processing animation</caption><thead><tr><th>Story</th><th>Decision</th><th>Rules</th><th>Proof</th></tr></thead><tbody>'
+            labels = {'block': 'Stopped', 'hold': 'Waiting for You', 'allow': 'Allowed'}
+            for row in result['scenarios']:
+                verdict = row['decisions'][-1]
+                refs = ''.join('<a href="/admin/demo/proof/' + html.escape(str(ref), quote=True) + '">' + html.escape(str(ref)) + '</a> ' for ref in row['decision_refs'])
+                body += '<tr><td>' + html.escape(row['scenario']) + '</td><td>' + html.escape(labels.get(verdict, verdict)) + '</td><td>' + html.escape(', '.join(row['rules'])) + '</td><td>' + refs + '</td></tr>'
+            body += '</tbody></table>'
+            body += '<h2>Aegis / Delta proof</h2>'
+            for guard in result.get('disagreements', []):
+                body += '<p>Aegis: ' + html.escape(guard['a']['verdict']) + ' / Delta: ' + html.escape(guard['b']['verdict']) + '. A person must review. Proof: <a href="/admin/demo/proof/' + html.escape(str(guard['record_ref']), quote=True) + '">' + html.escape(str(guard['record_ref'])) + '</a></p>'
+            body += '<p><a href="/admin/demo/briefing">Open the saved morning briefing</a></p>'
+            body += '<details><summary>View raw evidence</summary><pre>' + html.escape(json.dumps({'scenarios': result['scenarios'], 'guards': result['guards'], 'briefing': result['briefing']}, indent=2)) + '</pre></details>'
             ident = digest(saved)
             reviews = json.loads(db.get_setting('local-demo-review:' + ident, '[]'))
             body += '<h2>Two-person approval of this synthetic proof pack</h2><p>This approves the review pack only. It never releases a held action.</p>'

@@ -37,6 +37,13 @@ def test_no_expansion(tmp_path, value):
     with pytest.raises(ValueError):
         load(tmp_path)
 
+def test_explicit_scripted_never_opens_env(tmp_path, monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError('scripted mode must not open credential files')
+    monkeypatch.setattr('scripts.local_env.os.open', forbidden)
+    assert resolve(load(tmp_path, scripted=True)) == ('scripted', '', '', '')
+
+
 def test_local_strict_json(monkeypatch):
     monkeypatch.setattr(config, 'LOCAL_AI', True)
     assert client._parse_strict('preface {"verdict":"safe"}', {'safe'})['verdict'] == 'unsure'

@@ -71,6 +71,29 @@ em.ai { color: var(--warn); font-size: 12px; }
   border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; background: var(--panel); }
 
 body { overflow-wrap: anywhere; }
+main, article, section, .cols, .col, .card, details, .table-scroll { min-width: 0; max-width: 100%; }
+pre, code, .source-text { overflow-wrap: anywhere; white-space: pre-wrap; }
+.presentation nav { margin: 16px 0 24px; }
+.presentation nav [aria-current] { background: var(--line); }
+.scene-meta, .provenance { color: var(--muted); }
+.scene-verdict { display: block; font-size: 36px; line-height: 1.2; margin: 24px 0 16px; }
+.scene-verdict.block, .status.block, .mismatch { color: var(--danger); }
+.scene-verdict.hold, .status.hold { color: var(--warn); }
+.scene-verdict.allow, .status.allow { color: var(--ok); }
+.evidence-grid, .briefing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.evidence-grid article, .briefing-grid article { padding: 16px; background: var(--panel); border: 1px solid var(--line); }
+.amount { font-size: 36px; font-weight: 700; margin: 16px 0; }
+.lead { font-size: 20px; }
+.source-text { border: 1px solid var(--line); padding: 12px; }
+.present { font-size: 17.25px; }
+.present table, .present input, .present button { font-size: inherit; }
+.present .watermark, .present footer, .present .brand .sub { display: none; }
+.present .presentation { max-width: 1200px; }
+.present details summary { font-size: 15px; }
+@media (max-width: 700px) {
+  .evidence-grid, .briefing-grid { grid-template-columns: minmax(0, 1fr); }
+  .scene-verdict, .amount { font-size: 30px; }
+}
 header.top > *, .who, .stephead > * { min-width: 0; }
 .who, .stephead { flex-wrap: wrap; }
 input, select, textarea { min-width: 0; max-width: 100%; }

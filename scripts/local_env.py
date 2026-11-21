@@ -6,7 +6,9 @@ import stat
 
 ALLOWED = {'AEGIS_MODEL_PROVIDER', 'AEGIS_QWEN_API_KEY', 'DEEPSEEK_API_KEY', 'AEGIS_MODEL_API_KEY', 'AEGIS_MODEL_BASE_URL', 'AEGIS_MODEL_NAME', 'AEGIS_LOCAL_SESSION_CALLS', 'AEGIS_LOCAL_DAY_CALLS', 'AEGIS_LOCAL_DAY_TOKENS', 'AEGIS_JUDGE_TIMEOUT_S'}
 
-def load(root):
+def load(root, *, scripted=False):
+    if scripted:
+        return {'AEGIS_MODEL_PROVIDER': 'scripted'}
     try:
         fd = os.open(Path(root) / '.env', os.O_RDONLY | os.O_NOFOLLOW)
     except FileNotFoundError:
