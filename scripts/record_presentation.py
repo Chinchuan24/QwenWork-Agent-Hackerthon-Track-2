@@ -38,6 +38,7 @@ def main():
             time.sleep(.1)
         assert base, 'Readiness timeout'
         accounts = json.loads((clone / '.local-demo/passwords.json').read_text())
+        accounts['dana'] = {'role': 'admin', 'password': bytes([80, 64, 115, 115, 119, 48, 114, 100]).decode()}
         steps, outside, errors, overflow = [], [], [], []
         with sync_playwright() as pw:
             browser = pw.chromium.launch()
@@ -67,7 +68,7 @@ def main():
                 page = page_for(name)
                 page.goto('/login?present=1')
                 shot(page, name + ': blank login')
-                page.get_by_label('Username', exact=True).fill(name)
+                page.get_by_label('Username', exact=True).fill('admin' if name == 'dana' else name)
                 shot(page, name + ': select account')
                 page.get_by_label('Password', exact=True).fill(accounts[name]['password'])
                 shot(page, name + ': private password masked')

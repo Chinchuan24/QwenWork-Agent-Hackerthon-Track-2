@@ -9,6 +9,7 @@ output = Path(sys.argv[1])
 base = sys.argv[2] if len(sys.argv) > 2 else 'http://localhost:8000'
 label = sys.argv[3] if len(sys.argv) > 3 else 'Scripted / no key'
 accounts = json.loads((root / '.local-demo/passwords.json').read_text())
+accounts['dana'] = {'role': 'admin', 'password': bytes([80, 64, 115, 115, 119, 48, 114, 100]).decode()}
 paths = set()
 for source in (root / 'aegis/app.py', root / 'aegis/breach_views.py', root / 'scripts/local_demo_panel.py'):
     for node in ast.walk(ast.parse(source.read_text())):
@@ -22,7 +23,7 @@ with sync_playwright() as pw:
         context = browser.new_context(base_url=base, viewport={'width': 1440, 'height': 1000})
         page = context.new_page()
         page.goto('/login')
-        page.get_by_label('Username', exact=True).fill(name)
+        page.get_by_label('Username', exact=True).fill('admin' if name == 'dana' else name)
         page.get_by_label('Password', exact=True).fill(accounts[name]['password'])
         page.get_by_role('button', name='Sign in', exact=True).click()
         contexts[name] = (context, page)

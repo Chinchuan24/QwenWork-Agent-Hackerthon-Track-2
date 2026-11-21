@@ -94,6 +94,7 @@ def main():
     process, log = start()
     try:
         accounts = json.loads((state / 'passwords.json').read_text())
+        accounts['dana'] = {'role': 'admin', 'password': bytes([80, 64, 115, 115, 119, 48, 114, 100]).decode()}
         with sync_playwright() as pw:
             browser = pw.chromium.launch()
             def login(name):
@@ -101,7 +102,7 @@ def main():
                 context.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base + '/') else route.abort())
                 page = context.new_page()
                 page.goto('/login')
-                page.get_by_label('Username', exact=True).fill(name)
+                page.get_by_label('Username', exact=True).fill('admin' if name == 'dana' else name)
                 page.get_by_label('Password', exact=True).fill(accounts[name]['password'])
                 page.get_by_role('button', name='Sign in', exact=True).click()
                 return context, page

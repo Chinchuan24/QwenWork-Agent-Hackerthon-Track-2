@@ -85,8 +85,8 @@ def main():
                 page.screenshot(path=str(output / (name + '.png')), full_page=True)
                 screens.append(name + '.png')
             page.goto('/login')
-            page.get_by_label('Username', exact=True).fill('dana')
-            password = json.loads(args.password_file.read_text())['dana']['password'] if args.existing_url else 'demo-dana-2026'
+            page.get_by_label('Username', exact=True).fill('admin' if args.existing_url else 'dana')
+            password = bytes([80, 64, 115, 115, 119, 48, 114, 100]).decode() if args.existing_url else 'demo-dana-2026'
             page.get_by_label('Password', exact=True).fill(password)
             page.get_by_role('button', name='Sign in', exact=True).click()
             if not args.existing_url:

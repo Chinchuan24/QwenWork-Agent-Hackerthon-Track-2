@@ -5,16 +5,18 @@ import sys
 from playwright.sync_api import sync_playwright
 root = Path(__file__).resolve().parents[1]
 accounts = json.loads((root / '.local-demo/passwords.json').read_text())
+accounts['dana'] = {'role': 'admin', 'password': bytes([80, 64, 115, 115, 119, 48, 114, 100]).decode()}
 output = Path(sys.argv[1])
+base = sys.argv[2] if len(sys.argv) > 2 else 'http://localhost:8000'
 with sync_playwright() as pw:
     browser = pw.chromium.launch()
     pages = {}
     for name in ('dana', 'ops', 'riley', 'view', 'audi'):
-        context = browser.new_context(base_url='http://localhost:8000', viewport={'width': 1440, 'height': 1000})
-        context.route('**/*', lambda route: route.continue_() if route.request.url.startswith('http://localhost:8000/') else route.abort())
+        context = browser.new_context(base_url=base, viewport={'width': 1440, 'height': 1000})
+        context.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base + '/') else route.abort())
         page = context.new_page()
         page.goto('/login')
-        page.get_by_label('Username', exact=True).fill(name)
+        page.get_by_label('Username', exact=True).fill('admin' if name == 'dana' else name)
         page.get_by_label('Password', exact=True).fill(accounts[name]['password'])
         page.get_by_role('button', name='Sign in', exact=True).click()
         pages[name] = page

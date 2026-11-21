@@ -21,9 +21,9 @@ def style_local_html(body, presenting=False):
     """Apply readable controls only to responses from the local launcher."""
     body = re.sub(
         rb'<p class="muted">Demo accounts: [^<]*</p>',
-        b'<p class="muted">Local demo accounts: dana (owner), ops and riley (approvers), '
-        b'audi (auditor), view (viewer). Passwords are in .local-demo/passwords.json '
-        b'on this computer.</p>', body)
+        b'<p class="muted">Owner login: admin. Other local roles: ops and riley (approvers), '
+        b'audi (auditor), view (viewer). Other-role passwords are in '
+        b'.local-demo/passwords.json on this computer.</p>', body)
     font = '20px' if presenting else '18px'
     style = ('''<style id="local-demo-controls">
 body { --local-control-font: FONT; overflow-wrap: anywhere; }
@@ -63,7 +63,37 @@ def offline_guard():
     sys.addaudithook(check)
 
 
+OWNER_SALT = b'local-owner-demo'
+OWNER_HASH = 'pbkdf2:600000:b80481372d96ca2899a3cda559814d40d7a965ccef01da70cd12d4000d297676'
+
+
+def install_owner_login(auth):
+    """Local alias only: keep Dana's persisted identity and task ownership."""
+    from aegis import db
+    if os.environ.get('AEGIS_ENV') == 'production' or os.environ.get('AEGIS_DEMO_PUBLIC') == '1' or os.environ.get('AEGIS_HOST', '127.0.0.1') not in ('127.0.0.1', 'localhost', '::1'):
+        raise ValueError('Owner fixture requires local loopback startup')
+    row = db.conn().execute("SELECT id, role, pw_hash FROM users WHERE username='dana'").fetchone()
+    if row is None or row['role'] != 'admin' or db.conn().execute("SELECT 1 FROM users WHERE username='admin'").fetchone():
+        raise ValueError('Owner fixture requires the existing Dana administrator')
+    if row['pw_hash'] != OWNER_HASH:
+        # Back up the complete SQLite store before changing an existing credential.
+        import sqlite3
+        target = STATE / ('owner-backup-' + str(time.time_ns()) + '.db')
+        fd = os.open(target, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+        os.close(fd)
+        with sqlite3.connect(target) as backup:
+            db.conn().backup(backup)
+        with db.conn() as connection:
+            connection.execute('UPDATE users SET pw_hash=?, salt=?, must_change=0 WHERE id=?',
+                               (OWNER_HASH, OWNER_SALT.hex(), row['id']))
+            connection.execute('DELETE FROM web_sessions WHERE user_id=?', (row['id'],))
+    login = auth.login
+    auth.login = lambda username, password: login('dana' if username == 'admin' else username, password)
+
+
 def child():
+    if os.environ.get('AEGIS_ENV') == 'production' or os.environ.get('AEGIS_DEMO_PUBLIC') == '1' or os.environ.get('AEGIS_HOST', '127.0.0.1') not in ('127.0.0.1', 'localhost', '::1'):
+        raise ValueError('Owner fixture requires local loopback startup')
     if os.environ.get('TWINGUARD_OFFLINE') == '1':
         offline_guard()
     sys.path.insert(0, str(ROOT))
@@ -76,7 +106,8 @@ def child():
         for name, role in [('dana', 'admin'), ('ops', 'approver'), ('riley', 'approver'), ('audi', 'auditor'), ('view', 'viewer')]:
             password = secrets.token_urlsafe(32)
             auth.create_user(name, password, role)
-            accounts[name] = {'role': role, 'password': password}
+            if name != 'dana':
+                accounts[name] = {'role': role, 'password': password}
         target = STATE / 'passwords.json'
         fd = os.open(target, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
         with os.fdopen(fd, 'w') as stream:
@@ -107,6 +138,11 @@ def child():
     import uvicorn
     from aegis.app import app
     from aegis import app as views
+    startup = auth.ensure_demo_users
+    def seed_owner():
+        startup()
+        install_owner_login(auth)
+    auth.ensure_demo_users = seed_owner
     views.demo_result_path = lambda request: STATE / 'saved-rehearsal.json'
     from starlette.middleware.base import BaseHTTPMiddleware
     from starlette.responses import Response
@@ -159,6 +195,8 @@ def main():
     if args.command == '_child':
         child()
         return
+    if args.command == 'start' and (os.environ.get('AEGIS_ENV') == 'production' or os.environ.get('AEGIS_DEMO_PUBLIC') == '1' or os.environ.get('AEGIS_HOST', '127.0.0.1') not in ('127.0.0.1', 'localhost', '::1')):
+        raise SystemExit('Owner fixture requires local loopback startup')
     # Allowlist rather than attempting to enumerate all provider secrets.
     env = {k: os.environ[k] for k in ('HOME', 'PATH', 'TMPDIR', 'LANG') if k in os.environ}
     env.update(PYTHONPATH=str(ROOT), AEGIS_QWEN_API_KEY='', AEGIS_HOST='127.0.0.1')

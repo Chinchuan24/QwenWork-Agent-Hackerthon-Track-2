@@ -117,6 +117,7 @@ def open_pinned(request, timeout):
         output = clone/'browser-evidence'
         output.mkdir()
         subprocess.run([sys.executable, str(clone/'scripts/demo_rehearsal.py'), '--approve-sandbox', '--existing-url', url, '--password-file', str(clone/'.local-demo/passwords.json'), '--output-dir', str(output)], cwd=clone, env=env, check=True, capture_output=True, timeout=120)
+        subprocess.run([sys.executable, str(clone/'scripts/local_action_smoke.py'), str(output), url], cwd=clone, env=env, check=True, capture_output=True, timeout=120)
         result = subprocess.run([sys.executable, str(clone/'scripts/local_get_smoke.py'), str(output), url, label], cwd=clone, env=env, capture_output=True, text=True, timeout=180)
         assert result.returncode == 0, result.stderr
         import json

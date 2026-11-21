@@ -42,7 +42,7 @@ def create_app():
         raise ValueError('SQLite production requires single instance and workers=1')
     if any(os.environ.get(k, '').lower() in ('1', 'true', 'yes') for k in ('AEGIS_DEBUG', 'DEBUG')):
         raise ValueError('Production refuses debug mode')
-    if any('PASSWORD' in k and v.startswith('demo-') for k, v in os.environ.items() if k.startswith('AEGIS_')):
+    if any('PASSWORD' in k and (v.startswith('demo-') or hashlib.sha256(v.encode()).hexdigest() == 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342') for k, v in os.environ.items() if k.startswith('AEGIS_')):
         raise ValueError('Production refuses fixture passwords')
     root = Path(os.environ['AEGIS_PRODUCTION_DATA_DIR'])
     if not root.is_absolute() or root != root.resolve():

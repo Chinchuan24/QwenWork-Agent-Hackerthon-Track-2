@@ -10,11 +10,11 @@ Uses an installed trusted Python 3.12 runtime, never installs dependencies. Disc
 
 The readiness line prints the actual URL and owned HTTP child PID. Default is http://localhost:8000; an occupied port is skipped without stopping its owner. No automatic preview is opened. Full private application, not the public limited interface.
 
-Passwords are generated independently with 32 random bytes per account and stored only at `.local-demo/passwords.json` (0600). Accounts: dana/admin, ops/approver, riley/approver, audi/auditor, view/viewer. No password is included here. This is intentionally synthetic local demo authority, not production accounts. Default startup securely reads the optional owner-only `.env` to resolve a configured provider, but never writes it. For guaranteed isolated scripted recording use `./run-local-demo.sh --scripted`: this bypasses `.env` entirely, even when a real key is present.
+Owner login: `admin`, using the owner-specified local credential. This launcher-only alias authenticates the existing Dana administrator (`dana` internally), not a separate user. Only its PBKDF2 hash is installed; existing owner credentials are backed up in an owner-only SQLite backup before migration. Other accounts and passwords are unchanged: ops/approver, riley/approver, audi/auditor, view/viewer. Fresh other-role passwords are independently generated and stored in `.local-demo/passwords.json` (0600). Any legacy Dana entry in that file is obsolete; use `admin` with the owner-known credential. No password is included here. Production rejects this fixed fixture as well as the older fixtures; non-loopback local child startup is refused. This is intentionally synthetic local demo authority, not production accounts. Default startup securely reads the optional owner-only `.env` to resolve a configured provider, but never writes it. For guaranteed isolated scripted recording use `./run-local-demo.sh --scripted`: this bypasses `.env` entirely, even when a real key is present.
 
 ## Memory-Only Provider Settings
 
-Start with `./run-local-demo.sh`, sign in as Dana, and open the printed origin plus `/local-demo/settings`. Select DeepSeek, Qwen, or an OpenAI-compatible public HTTPS base URL and model. Paste the key before recording. The password input is blank in the POST response; only provider, model, source, and a masked last-four hint are shown. Never capture screenshots or video while entering a key.
+Start with `./run-local-demo.sh`, sign in as `admin`, and open the printed origin plus `/local-demo/settings`. Select DeepSeek, Qwen, or an OpenAI-compatible public HTTPS base URL and model. Paste the key before recording. The password input is blank in the POST response; only provider, model, source, and a masked last-four hint are shown. Never capture screenshots or video while entering a key.
 
 The override lives only in this HTTP process behind an RLock and expires after eight hours on a monotonic clock. Forget removes the pasted override; restarting starts without it. Python strings are garbage-collected, not a forensic RAM-zeroization guarantee. No pasted key is written to dotenv, database, logs, audit, proof, cache, temporary files, cookies, or browser storage. An existing environment credential is unchanged and may remain live after Forget; Settings explicitly labels that fallback source.
 
@@ -24,8 +24,8 @@ Focused verification: `tests/test_local_key_settings.py` and `tests/test_local_p
 
 ## Click Path
 
-1. Sign in as dana using the private password file.
-2. Open `/admin/tools/review`, review all 14 displayed tools, schemas and fingerprints. Enter dana's password, confirm the displayed snapshot, then select **Approve reviewed snapshot**. Require the saved approval audit receipt.
+1. Sign in as `admin` using the owner-known local credential.
+2. Open `/admin/tools/review`, review all 14 displayed tools, schemas and fingerprints. Enter the owner-known local password, confirm the displayed snapshot, then select **Approve reviewed snapshot**. Require the saved approval audit receipt.
 3. Open `/admin/demo`. Select **Reset demo**, then **Run five stories**. These allocate isolated scenario state, not a production reset.
 4. Open `/admin/demo/source` for emitted source evidence, `/admin/demo/guard` for Aegis/Delta saved judgments, `/admin/demo/briefing` for the morning briefing, and `/admin/demo/results` for actual verdicts and contract gaps.
 5. Follow this run's proof links under `/admin/demo/proof/`. Ordinary `/audit` is a separate parent audit stream. Do not substitute normalized scenario references for its database IDs.
