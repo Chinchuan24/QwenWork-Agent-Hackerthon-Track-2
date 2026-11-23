@@ -1,95 +1,91 @@
 # Twinguard
 
-Twinguard uses two AI guards to check AI-helper requests before sample business actions.
+![TWINGUARD — Two AI guards. You decide. Heroine concept banner](docs/assets/judges-heroine-banner.jpg)
 
-## Why it matters
+- **Two AI guards, Aegis and Delta, check what your AI helpers do — and leave the uncertain decisions to you.**
 
-- Catch risky requests before they affect the sample business.
-- Keep people in control when the guards are unsure.
-- Keep checkable records explaining what happened and why.
+[**Live demo**](https://twinguard-live.fly.dev) · [**Website**](https://twinguard-site.fly.dev) · [**Hashmeta site**](https://aegis-delta.geo.hashmeta.tech) · [**Watch the film**](https://youtu.be/XzJfZbtG20k)
+
+- [Original animated banner](docs/assets/twinguard-banner-animated-20261123.gif) · [Original static banner](docs/preparation-assets/banner.jpg) · [MP4 banner](docs/assets/twinguard-banner-optimized-20261123.mp4)
+- **For judges:** watch the film, explore the website, then try the demo or the local quick start below.
+- **Live demo access:** allow cookies; the dashboard opens with a cookie-aware request, while cookie-less requests can encounter a redirect loop. The local quick start is available below.
+
+## What it is
+
+- A hackathon prototype that checks supported AI-helper requests before sample emails, file changes or payments.
+- Aegis checks the request; Delta double-checks it. Fixed rules take priority over AI opinions.
+- People stay in control when checks are uncertain or the guards disagree.
+- Saved records explain the decision and help detect later changes within the documented evidence boundary.
+- The demo uses **fictional Lumen Studio data**, not real business accounts or customer records.
 
 ## How it works
 
-1. Your AI helper asks; Aegis checks the request, and Delta double-checks it.
-2. See **ALLOWED**, **WAITING FOR YOU**, or **STOPPED**, depending on the checks.
-3. Allowed requests proceed; uncertain requests wait for you; stopped requests cannot proceed.
-
-- Only requests sent through Twinguard are checked.
-- The demo uses fictional Lumen Studio data, not real business accounts.
-- Demo login is a local sample only, not access to a live business.
-
-![Concept banner](docs/assets/twinguard-banner-animated-20261123.gif)
-[Static banner fallback](docs/preparation-assets/banner.jpg) | [MP4 banner](docs/assets/twinguard-banner-optimized-20261123.mp4)
-
-## What Twinguard does, in plain words
-
-- Aegis and Delta act like two guards checking requests at a door.
-- They check supported requests before sample emails, file changes, or payments.
-
-The three answers:
-
-- **ALLOWED** — The checks find the action safe. It goes ahead.
-- **WAITING FOR YOU** — The guards are unsure. A person decides before anything goes ahead.
-- **STOPPED** — The action is judged dangerous or breaks a rule. It is blocked.
-
-- Linked records [entries connected together] help reveal later changes.
-- These checks cannot prevent every possible change; see the technical limits below.
-- Only supported requests sent through Twinguard are checked.
-- The demonstration uses our sample agent and fictional tools.
-- It does not prove protection for every agent or real business tool.
-
-## Judge Summary
-
-- The root contains the agent; `production/` contains a separate demo using fictional data.
-- Both can run locally; keep their saved data separate.
-- Start with [Local Quickstart](#local-quickstart); fresh setup needs no API key.
-- Separate demo setup: [Public Snapshot And Fake-Key Checks](#public-snapshot-and-fake-key-checks).
-- Recorded results: **2,165 of 2,166 tests passed with each test file run separately**.
-- One slow test timed out after **180 seconds**.
-- Runs combining test files also timed out and had unresolved failures.
-- These results **do not prove the whole suite passes together**.
-- This hackathon build is **not a certified production release**.
-- Earlier passing tests do not prove every current check passes.
-- [Preparation record](docs/PREPARATION.md) explains limitations; [authorship record](docs/PROVENANCE.md) includes unknowns.
-
-## Problem And Approach
-
-- Check requests for unsafe instructions, private information leaks, and actions outside agreed rules.
-- Uncertain requests wait for review; this does not protect every agent or tool.
-
-<details>
-<summary>Request checks and technical outcomes</summary>
-
-AI helpers can follow injected instructions, leak confidential information, invent figures or make unauthorized commitments. Twinguard checks supported gateway requests against task scope, source records and hard business rules. Outcomes are Allow, Redacted Allow, Hold or Block with evidence. Rules take priority; uncertain semantic checks hold. This is not universal interception of arbitrary agents, OS file access or external tools.
-
-</details>
-
-## Architecture
-
-- Two guards check requests before permitted sample actions happen.
-- Evidence has limits; controlling all its parts can defeat the protection.
-
-<details>
-<summary>System diagram and evidence limits</summary>
+- A task giver gives an AI helper a scoped task.
+- Requests sent through the gateway are checked against scope, source records and hard rules.
+- The guards review supported requests; permitted fictional actions can proceed, uncertain actions wait, and blocked actions stop.
+- The private agent and the separate public simulation have different evidence systems; the diagram keeps that distinction visible.
 
 ```mermaid
 flowchart LR
     Owner[Authenticated task giver] --> Gateway[Private scoped gateway]
     Gateway --> Rules[Scope and hard rules]
     Rules --> Guards[Aegis and Delta]
-    Guards --> Review[Hold or block]
-    Guards --> Effects[Permitted fictional effects]
+    Guards --> Allowed[ALLOWED]
+    Guards --> Waiting[WAITING FOR YOU]
+    Guards --> Stopped[STOPPED]
+    Allowed --> Effects[Permitted fictional effects]
+    Waiting --> Human[Human review before proceeding]
     Gateway --> Audit[Encrypted chain and separate signer]
     Public[Separate public simulation] --> Fixtures[Fictional classifier results only]
 ```
 
-Private workers receive a session token and gateway address, not provider keys or the database. Independent approval and changed passwords protect privileged actions. Audit uses database mutation triggers, per-record checkpoints, a separate signer and outside-data anchor. This is same-user process separation, not OS-level custody: control of database, keys, signer state and anchor together can defeat it. Public snapshot evidence is instead an encrypted local HMAC-linked chain, not an independent signer; readiness `signer=false` is expected.
+### Three outcomes
+
+- **ALLOWED** — the request passes the applicable checks and can proceed. This is a decision within the checked scope, not a promise that every action is safe.
+- **WAITING FOR YOU** — the checks are uncertain or require review; a person must decide before the action proceeds.
+- **STOPPED** — the request breaks a rule or is blocked by the checks; it cannot proceed through that path.
+- Technical records distinguish Allow, Redacted Allow, Hold and Block. A hold is not a block, and redacted content is not the original content.
+
+## The Lumen Studio scenario
+
+- Imagine a small studio asking an AI helper to read a client brief and prepare a response.
+- Supported checks look for unsafe instructions, private information leaks, invented figures and commitments outside the agreed scope.
+- Routine work can proceed when the checks pass; questionable sends or changes wait for review or are stopped.
+- Inspect the saved decision and source evidence rather than assuming that a finished-looking response is correct.
+- These are fictional demonstration stories. Historical rehearsals include holds and missing proof; they do not establish complete live-business protection.
+
+## Screenshot gallery
+
+- Existing saved site captures show the visual experience; they are not a fresh runtime test or proof of every safety claim. All newly added README images are compressed JPGs under 400 KB each.
+
+| Website introduction | Two independent guard checks |
+| :---: | :---: |
+| ![Twinguard website hero](docs/assets/judges-site-hero.jpg) | ![Website section explaining the two guards](docs/assets/judges-site-section.jpg) |
+| **About the project** | **A stopped demo action** |
+| ![About page and demonstration limits](docs/assets/judges-about-panels.jpg) | ![Fictional demo showing a stopped action](docs/assets/judges-demo-stopped.jpg) |
+
+### The cyborg hover reveal
+
+- A saved capture of the website's heroine hover effect — visual storytelling, not a security control.
+
+![Twinguard heroine revealed by the website hover effect](docs/assets/judges-cyborg-hover.jpg)
+
+### Watch the film
+
+[![Twinguard film — two AI guards, you decide](docs/assets/judges-film-thumbnail.jpg)](https://youtu.be/XzJfZbtG20k)
+
+<details>
+<summary>Earlier desktop, dashboard and mobile development captures</summary>
+
+- These older screenshots show ongoing work outside the packaged production snapshot. They do not prove that all pictured screens are available in that snapshot or currently deployed.
+- [Desktop simulation](docs/preparation-assets/sim-1440-overview-v3b.jpg) · [Dashboard](docs/preparation-assets/live-dashboard-1440-verified-v3b.jpg) · [Mobile simulation](docs/preparation-assets/sim-390-overview-v3b.jpg)
 
 </details>
 
-## Local Quickstart
+## Quick start
 
-- Use Python 3.12 and run these commands from a fresh copy's root folder.
+- Use **Python 3.12**, a fresh copy of the repository and a free local port.
+- Run these commands from the repository root. Fresh local setup uses scripted answers and needs **no API key**.
 
 ```bash
 python3.12 -m venv .venv
@@ -97,146 +93,71 @@ python3.12 -m venv .venv
 .venv/bin/python scripts/local_setup.py start --port 8081
 ```
 
-- Open `http://127.0.0.1:8081`; fresh local setup uses scripted answers without an API key.
-- Demo logins are local samples only, not access to a live business.
-- Change sample passwords before privileged work; nobody can approve their own action.
+- Open `http://127.0.0.1:8081` after starting the app. This local address is not a public GitHub link.
+- Sample accounts: `dana` / `demo-dana-2026` (admin), `ops` / `demo-ops-2026` (approver), `audi` / `demo-audi-2026` (auditor). They are synthetic local logins, not access to a live business.
+- Change sample passwords before privileged work. A task giver cannot approve their own action.
+- Review and approve only the exact fictional tool snapshot at `/admin/tools/review`; then open `/admin/demo` for the synthetic stories.
+- Inspect Proof, Source, Guard, Briefing and Results. Do not approve a hold merely to finish the demo.
+- Follow the [local runbook](docs/demo-runbook.md), [local demo guide](docs/local-demo.md) and [state and recovery guide](docs/deployment.md).
 
-<details>
-<summary>Sample accounts, safe setup, stories, and recovery</summary>
+### Separate public demo snapshot
 
-Open `http://127.0.0.1:8081`. This supported helper clears inherited credentials/AEGIS settings, creates a secure placeholder root `.env` only if absent and allocates private `.local-runtime/` state. Default is scripted, no API key needed. Existing secure `.env` credentials can enable local AI, so use fresh state for offline evaluation. Do not send fake keys upstream.
-
-Published synthetic accounts: `dana` / `demo-dana-2026` (admin), `ops` / `demo-ops-2026` (approver), `audi` / `demo-audi-2026` (auditor). Change passwords on the Password page before privileged work. Task givers cannot approve their own action.
-
-1. Review and approve only the exact fictional tool snapshot at `/admin/tools/review`, with changed-password reauthentication.
-2. At `/admin/demo`, reset into a fresh synthetic child and run five stories. Never reset original audit history.
-3. Inspect Proof, Source, Guard, Briefing and Results. Report holds and missing proof; do not approve holds just to finish a demo.
-
-Optional supported disposable story, not rerun for packaging:
-
-```bash
-.venv/bin/python scripts/sponsor_story.py
-```
-
-This uses stand-in judges, not complete live sponsor acceptance. See [runbook](docs/demo-runbook.md), [local demo](docs/local-demo.md), [state and recovery](docs/deployment.md). Back up the entire private runtime while stopped, including database/sidecars, original and historical encryption keys, signer state and anchor; retain privately outside Git. Never reset keys to hide verification failure.
-
-</details>
-
-## Public Snapshot And Fake-Key Checks
-
-- Install the separate demo with its own dependencies; keep its saved data separate.
-- Fake-key checks block real provider traffic; they do not prove real-provider protection.
-
-<details>
-<summary>Separate installation and recorded fake-key checks</summary>
+- `production/` is a separate application with its own dependencies and saved data. Never share runtime state with the root agent.
 
 ```bash
 cd production
 python3.12 -m venv .venv
 .venv/bin/pip install --require-hashes -r requirements-production.lock
-.venv/bin/python docs/production/VERIFY.py
+.venv/bin/python -m aegis.production
 ```
 
-Entrypoint is `python -m aegis.production`, one process only. [Public runbook](production/docs/production/DEPLOY.md) explains exact host/TLS, proxy, storage, backup and operational gaps. `.env.production.example` is reference only: do not source it or use dotenv. Provider credentials belong only in secure runtime environment settings.
+- Read the [public deployment runbook](production/docs/production/DEPLOY.md) before hosting it; it covers host/TLS, proxy, storage, backups and operational gaps.
+- `.env.production.example` is reference material only: do not source it or use dotenv. Put provider credentials only in secure runtime settings.
+- The historical `VERIFY.py` is not a valid full-suite verifier for the current package.
 
-Previous fake-key diagnostics exercised actual loopback `/healthz` and `/readyz` startup, then directly mocked `MixedDemo.evaluate` by replacing `urllib.request.build_opener`. Two classifier calls produced mode LIVE and block, zero provider-network calls. That historical run did not exercise session/unlock/action HTTP. The current six-test HTTP credential acceptance rerun does exercise those routes with provider calls mocked and real provider network forbidden; see current results below. No provider-facing fake-key command, raw diagnostic logs or fake runtime is shipped.
+## Safety and limits
 
-</details>
+- **Checked boundary:** only supported requests routed through Twinguard are checked. It does not intercept every agent, operating-system file access or external tool.
+- **Tool approval:** review the exact sandbox tool snapshot; changed tool definitions need fresh review. Sandbox checks do not establish protection for arbitrary outside tool servers.
+- **Evidence:** the private agent uses an encrypted linked history and a separate signer. This is same-user process separation, not independent operating-system custody; controlling the database, keys, signer and anchor together can defeat it.
+- **Public evidence:** the snapshot uses an encrypted local HMAC-linked chain, not an independent signer. Public readiness reporting `signer=false` is expected.
+- **Secrets:** keep credentials and saved runtime data out of Git, screenshots and shared files. Do not send fake keys to real providers.
+- **Recovery:** preserve private runtime data, encryption keys, signer state and anchors together while stopped. Never reset history or keys to hide a verification failure.
+- **Quotas:** call, token, send and worker limits constrain supported paths. Spending meters are estimates, not guarantees about provider bills; missing accounting can hold further live work.
+- See [private configuration](aegis/config.py), the [environment reference](.env.example) and [public classifier configuration](production/aegis/mixed_demo.py) for the actual settings.
 
-## Configuration And Limits
+## Honest limitations
 
-- Keep secrets out of code, screenshots, shared files, and typed commands.
-- Spending limits are estimates, not promises about provider bills.
-
-<details>
-<summary>Private settings and secret handling</summary>
-
-Private settings derive from [config.py](aegis/config.py) and [environment reference](.env.example). `AEGIS_DATA_DIR` must be canonical; `AEGIS_SIGNER_STATE`, `AEGIS_ANCHOR_EXTERNAL`, `AEGIS_EVIDENCE_KEY_FILE` and `AEGIS_EVIDENCE_KEYRING_FILE` are private runtime configuration. Optional Qwen settings: `AEGIS_QWEN_API_KEY`, `AEGIS_QWEN_BASE_URL`, `AEGIS_MODEL_JUDGE`, `AEGIS_MODEL_WORKER`, `AEGIS_MODEL_FAST`. Local AI additionally uses `AEGIS_LOCAL_AI`, `AEGIS_MODEL_PROVIDER`, `AEGIS_MODEL_API_KEY`, `AEGIS_MODEL_NAME`. Never put actual secrets in source, screenshots, archives or command literals.
-
-</details>
-
-| Private default | Value |
-|---|---:|
-| Calls / minute; sends / minute | 40; 6 |
-| Refund / session; client / day | 500; 1000 |
-| Sends / session | 15 |
-| Approval TTL | 600 seconds |
-| Content / worker payload | 200000 bytes |
-| Argument length | 20000 |
-| Concurrent workers | 3 |
-| Worker calls / session | 30; local AI 15 |
-| Local AI daily calls / tokens | 60 / 120000 |
-| Judge timeout | 20 seconds |
-| Spend meter cap | USD 5 estimate, not billing guarantee |
+- This is a hackathon build, **not a certified production release** or a claim of legal compliance.
+- The root suite has **not been shown to pass together**. Recorded isolated runs reported **2,165 passed out of 2,166**, with one 180-second timeout; combined runs also timed out and had unresolved failures.
+- Recorded production checks reported **98 tests and 23 subtests passed**, using an existing release test environment, not a fresh lockfile-only environment.
+- Six recorded HTTP credential checks used mocked provider calls and forbade real provider traffic. They do not measure real-provider protection.
+- The lockfile-only production environment lacked `httpx2` for that HTTP harness; no full-suite pass in that environment is claimed.
+- Dependency auditing reported bootstrap-pip vulnerability rows. Runtime-inclusive secret scanning was not PASS; binary/encoded secrets and personal-data completeness remain uncertified.
+- Historical numbers are records of those runs, **not tests rerun for this README polish**. No complete sponsor score, universal protection rate or operational approval is claimed.
+- The root agent and public snapshot have different source histories. A stable file inventory is not production certification.
+- Read the [preparation record](docs/PREPARATION.md), [historical scorecard](docs/track2-scorecard.md) and [claims record](docs/section-6-claims.md) for the detailed gaps.
 
 <details>
-<summary>Public limits, access codes, and accounting caveats</summary>
+<summary>Recorded failures and test context</summary>
 
-Public committed limits derive from [mixed_demo.py](production/aegis/mixed_demo.py): `AEGIS_LIVE_SESSION_CALLS=30`, `AEGIS_LIVE_IP_DAILY_CALLS=60`, `AEGIS_LIVE_DAILY_CALLS=1500`, `AEGIS_LIVE_DAILY_TOKENS=2000000`, `AEGIS_LIVE_MONTHLY_TOKENS=10000000`. Only positive lower settings are accepted. Every evaluation reserves two calls and 40000 tokens; unknown accounting holds future live work. `AEGIS_LIVE_ACCESS_CODES` requires SHA256 digests of privately delivered random codes. This current snapshot includes open-mode/burst controls; see its current production LIMITS.md. The older manifest and verifier results do not describe these added files. Keys are `DEEPSEEK_API_KEY` or `AEGIS_QWEN_API_KEY` with provider selection. Public event default is 10000; quota exhaustion refuses mutations, not automatic deletion. Counters do not guarantee provider billing.
-
-</details>
-
-## Evaluation And Known Gaps
-
-- Recorded checks include failures and timeouts; the root suite has not passed together.
-- Demo checks passed in an existing test environment, not the lockfile-only environment.
-- Security scans remain incomplete; production readiness and real-provider protection are not certified.
-
-<details>
-<summary>Exact recorded results, failures, and unproven claims</summary>
-
-161 test files, complete isolated coverage: 2165 pass, 1 fail, zero skips/errors, total 2166. Reproducible failure `tests/test_final_valid_matrix.py::test_valid_post_and_seeded_details[390-admin]`: POST `/admin/bench` exceeds Playwright's 180000ms timeout. The synchronous benchmark performs 1000 cold plus 1000 warm gateway calls with growing audit verification. Shared retries exceeded 1200 seconds; G1 audit-insert-refusal failures and viewer teardown error remain unresolved. No assertions weakened or further full tests run for packaging.
-
-Current production full suite: **98 passed, 23 subtests passed, 4 warnings, 38.63 seconds**, using the existing release test environment with `PW_MODULE` pointing to its installed Playwright driver package. Initial full run: 97 passed, 1 failed because `PW_MODULE` was unset; no test or limiter changed. Command: `python -m pytest tests -q --tb=short -p no:cacheprovider` from the isolated production clone. Separate `python -m unittest discover -s tests -p test_live_key_safety.py -v`: 6 passed in 2.325 seconds, covering HTTP health/readiness, session, explicit unlock, mocked two-judge LIVE action, open mode, failures and fallback; provider network is forbidden by that harness and response/log/runtime fake-key leakage is checked. The lockfile-only production environment cannot run this HTTP harness because httpx2 is absent; no production-lockfile full-suite pass is claimed. Historical VERIFY.py rejects tests and is not a valid current-package full-suite verifier. Pre-copy regex scan: 78 files, 7 candidates, all reviewed explicit synthetic fake-key literals; no unresolved credential candidates within that scope. Binary/encoded secrets and personal-data completeness are not certified. Dependency audit failed with 12 bootstrap-pip vulnerability rows including duplicates. Runtime-inclusive secrets scan is not PASS. No real-provider protection rate, complete sponsor score, sole QwenWork authorship or operational approval claimed. [Historical scorecard](docs/track2-scorecard.md), [claims](docs/section-6-claims.md), [submission draft](docs/submission.md) remain historical.
+- Root isolated coverage: 161 test files; 2,165 passes, one failure, zero skips/errors. `tests/test_final_valid_matrix.py::test_valid_post_and_seeded_details[390-admin]` timed out on POST `/admin/bench` after 180 seconds. Shared retries exceeded 1,200 seconds; audit-insert-refusal failures and a viewer teardown error remained unresolved.
+- Production recorded command: `python -m pytest tests -q --tb=short -p no:cacheprovider`, from an isolated production clone with `PW_MODULE` pointing to an existing installed Playwright driver. Result: 98 passed, 23 subtests passed, four warnings, 38.63 seconds. The initial run had one failure because `PW_MODULE` was unset.
+- Recorded credential command: `python -m unittest discover -s tests -p test_live_key_safety.py -v`; six passed in 2.325 seconds. It covered HTTP health/readiness, session, explicit unlock, mocked two-judge LIVE action, open mode, failures and fallback, with provider network forbidden.
+- The recorded pre-copy regex scan covered 78 files and reviewed seven synthetic fake-key candidates. That limited scan does not certify all secrets or personal data. Dependency audit failure included 12 bootstrap-pip vulnerability rows, including duplicates.
+- No application tests were rerun, code changed or test assertions weakened for this presentation-only edit.
 
 </details>
 
-## Screens And Media
+## Built with QwenWork
 
-- These screenshots show **ongoing work outside this packaged production snapshot**.
-- They do not show available snapshot screens or prove live acceptance.
+- website code, demo and hosting built by QwenWork; film edited with Claude; cyborg hover image and YouTube thumbnail made with ChatGPT.
+- This credit does not claim sole QwenWork authorship of every repository file. The [authorship record](docs/PROVENANCE.md) preserves the supplied provenance table and its unknowns unchanged.
+- Dependencies and fonts include other people's work. Retain the [license](LICENSE), [third-party notices](THIRD_PARTY_NOTICES), [Rust notices](RUST_THIRD_PARTY_NOTICES) and matching production notices.
 
-![Ongoing desktop simulation](docs/preparation-assets/sim-1440-overview-v3b.jpg)
-![Ongoing mobile simulation](docs/preparation-assets/sim-390-overview-v3b.jpg)
-![Ongoing dashboard](docs/preparation-assets/live-dashboard-1440-verified-v3b.jpg)
+## Repository guide
 
-- The banner illustrates the idea; historical recordings are not newly accepted media.
-
-<details>
-<summary>Media inventory and historical recording caveats</summary>
-
-Banner is a concept asset. Preparation media directory has only the existing PNG; no new MP4/GIF or media log/report was found there. No missing video/GIF is linked or claimed generated. Historical recording files are not new accepted media.
-
-</details>
-
-## Build details
-
-- The root agent and separate demo come from different recorded source versions.
-- A stable file inventory does not certify production readiness.
-- Never share saved runtime data between these applications.
-
-<details>
-<summary>Source versions, copy record, and excluded files</summary>
-
-The agent in the root is based on release commit `39dda4a79b1530cb5be2bf83aa13464421c69dd0`. The initial `production/` snapshot was exported from tracked files at `74ff13bc3396f58386d2aac09e1c9914292627d3` using `git archive`. Its historical manifest records upstream lineage `7efc4657a5e92712319573fe8b456ed3ce3bd186`; that manifest is not the current inventory.
-
-The production snapshot was later updated with the authorized dashboard working tree and 13 production test files. Files were copied after a 601.599819916-second unchanged inventory window on 2026-11-23, from 06:44:06.932101 to 06:54:08.558724 UTC. The start and end inventory SHA256 was `a06fe32207cb02c99101e2119200c5af8673881dda91302d1db4cb8c7486fddb`. This records observed file stability, not production certification.
-
-Source backups, reject files, Git metadata and runtime paths were excluded from that snapshot. Never share runtime state between these applications.
-
-</details>
-
-## Layout, License And Provenance
-
-- The root contains the private agent; `production/` contains the separate public demo.
-- Keep license notices; dependencies and fonts include other people's work.
-- Authorship records have gaps; Git history alone does not prove who wrote the code.
-
-<details>
-<summary>Folder guide, licenses, and historical preparation restrictions</summary>
-
-Root `aegis/`, `policies/`, `templates/`, `static/`, `scripts/`, `tests/`: private release. `production/`: separate tracked public snapshot with its own lockfile, Dockerfile, host templates and notices. `docs/PREPARATION.md`: current handoff. `docs/PROVENANCE.md`: supplied table preserved verbatim. `docs/preparation-assets/`: compressed read-only-source assets.
-
-Retain [LICENSE](LICENSE), [third-party notices](THIRD_PARTY_NOTICES), [Rust notices](RUST_THIRD_PARTY_NOTICES), and matching production notices. Dependencies/fonts are third-party work. Git metadata is not writer proof; incomplete provenance remains disclosed. Historical preparation authorization: the local preparation commit was explicitly authorized despite failed preflight. **Historical restriction at that preparation stage: no push, deployment or submission.** This records the earlier restriction, not a prohibition on a later authorized push.
-
-</details>
+- `aegis/`, `policies/`, `templates/`, `static/`, `scripts/`, `tests/` — root private-agent implementation and checks.
+- `production/` — separate public demo snapshot, lockfile, hosting files and notices.
+- `docs/` — runbooks, evidence, historical results and provenance.
+- `docs/preparation-assets/` and `docs/assets/` — existing screenshots and banner media.
