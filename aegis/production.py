@@ -16,6 +16,7 @@ import secrets
 import re
 import sqlite3
 import time
+import unicodedata
 from urllib.parse import parse_qs
 
 from cryptography.fernet import Fernet
@@ -26,8 +27,10 @@ ROLES = ('viewer', 'approver', 'auditor')
 PAGES = {'/': 'Home', '/world': 'Lumen world', '/audit': 'Audit', '/roles': 'Role boundaries'}
 from .public_evaluator import CASES, evaluate as evaluate_public
 from .mixed_demo import MixedDemo
+from .dashboard_adapter import DashboardAdapter, DashboardTestModel, FAKE_KEY
+from fastapi.responses import FileResponse
 HEADERS = {
-    'Content-Security-Policy': "default-src 'none'; style-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+    'Content-Security-Policy': "default-src 'none'; style-src 'self'; script-src 'self'; connect-src 'self'; media-src 'self'; font-src 'self'; img-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
     'Strict-Transport-Security': 'max-age=31536000',
     'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff',
     'Referrer-Policy': 'no-referrer', 'Cache-Control': 'no-store',
@@ -143,6 +146,12 @@ def create_app():
                 CREATE TRIGGER IF NOT EXISTS immutable_delete BEFORE DELETE ON events BEGIN SELECT RAISE(ABORT,'immutable'); END;
             ''')
             state['mixed'] = MixedDemo(database, state['key'])
+            transport = None
+            if os.getenv('AEGIS_LIVE_TEST_MODEL') == '1':
+                if hosts - {'localhost', '127.0.0.1', '::1', 'testserver'} or proxies or state['mixed'].key != FAKE_KEY:
+                    raise ValueError('Test model requires local trusted hosts and the exact fake key')
+                transport = DashboardTestModel()
+            state['dashboard'] = await asyncio.to_thread(DashboardAdapter, state['mixed'], root / 'backend', transport)
             # Authenticate and decrypt the full stored chain before admitting traffic.
             previous = 'genesis'
             for visitor, generation, name, prev, sig, encrypted in c.execute('SELECT visitor,generation,event,previous,signature,evidence FROM events ORDER BY id'):
@@ -162,10 +171,17 @@ def create_app():
                     await task
                 except asyncio.CancelledError:
                     pass
+                await asyncio.to_thread(state.pop('dashboard').close)
                 c.close()
         finally:
-            state.clear()
-            lock.close()
+            try:
+                if 'dashboard' in state:
+                    await asyncio.to_thread(state.pop('dashboard').close)
+            finally:
+                if 'db' in state:
+                    state['db'].close()
+                state.clear()
+                lock.close()
 
     app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
     app.state.reset_demo_worlds = reset_all
@@ -272,14 +288,15 @@ def create_app():
         candidate = request.cookies.get('__Host-csrf', '')
         csrf = s[2] if s else (candidate if re.fullmatch(r'[A-Za-z0-9_-]{43}', candidate) else secrets.token_urlsafe(32))
         nav = ' '.join(f'<a href="{p}">{name}</a>' for p, name in PAGES.items())
-        content = '<p>Public sessions are SCRIPTED. Authorized LIVE sessions use real models on fictional data. No payment, email, upload or real worker execution.</p>'
+        content = '<p>Live sessions use real models on fictional data, subject to limits. Scripted simulation remains available. No payment, email, upload or real worker execution.</p>'
         if not s:
             content += form(csrf, '/session', '<label for="role">Simulated role</label><select id="role" name="role">' + ''.join(f'<option>{r}</option>' for r in ROLES) + '</select><button>Enter simulated role</button>')
         else:
             content += f'<p>Simulated {s[1]} | World generation {s[3]} | Lumen fictional company</p>'
             mode = 'LIVE: real models, simulated data' if state['mixed'].enabled(s[0]) else 'SCRIPTED'
             content += f'<p>Session mode: {mode}</p>'
-            content += form(csrf, '/live/unlock', '<label>Operator-issued live access code <input type="password" name="code" autocomplete="off"></label><button>Unlock model judgments</button>')
+            if os.getenv('AEGIS_LIVE_ACCESS_MODE', 'open') == 'access-code':
+                content += form(csrf, '/live/unlock', '<label>Operator-issued live access code <input type="password" name="code" autocomplete="off"></label><button>Unlock model judgments</button>')
             content += '<p>Viewer: observe. Approver: simulate approval. Auditor: inspect scoped metadata. No public administrator.</p>'
             if request.url.path in ('/', '/world'):
                 content += '<h2>Twinguard oversight of Lumen Studio</h2><p>Daniel Moss, fictional studio owner. Local simulation only; Allow never dispatches externally.</p>'
@@ -357,18 +374,115 @@ def create_app():
             case = action.removeprefix('scenario_')
             if case in CASES:
                 result = evaluate_public(case)
-                result = await asyncio.to_thread(state['mixed'].evaluate, s[0],
-                    request.state.client_ip, CASES[case], result)
+                capacity = state['db'].execute('SELECT COUNT(*) FROM events').fetchone()[0] < max_events
+                if capacity:
+                    result = await asyncio.to_thread(state['mixed'].evaluate, s[0],
+                        request.state.client_ip, CASES[case], result)
+                else:
+                    result = dict(result, model_mode='SCRIPTED', note='Live demo limit reached. Showing the scripted demo instead.')
                 if session(request) != s:
                     return JSONResponse({'error': 'Session changed; held safely'}, 409)
-                with admission():
-                    event(s[0], s[3], 'lumen_' + case + '_' + result['decision'])
+                if capacity:
+                    with admission():
+                        event(s[0], s[3], 'lumen_' + case + '_' + result['decision'])
+                if 'text/html' in request.headers.get('accept', ''):
+                    return HTMLResponse('<!doctype html><html lang="en"><meta charset="utf-8"><title>Demo result</title><body><main><p>' + html.escape(result['note']) + '</p><p>Session mode: ' + html.escape(result['model_mode']) + '</p><p>Simulated decision: ' + html.escape(result['decision']) + '</p><a href="/world">Return to scripted scenarios</a></main></body></html>')
                 return JSONResponse(result)
         if request.url.path == '/action' and s[1] == 'approver' and fields.get('action') == ['simulate_approval'] and set(fields) == {'csrf', 'action'}:
             with admission():
                 event(s[0], s[3], 'simulated_approval')
             return RedirectResponse('/audit', 303)
         return JSONResponse({'error': 'Action not allowlisted'}, 403)
+
+    @app.get('/dashboard/assets/{name}')
+    async def dashboard_asset(name: str):
+        if name not in ('dashboard.css', 'dashboard.js'):
+            return JSONResponse({'error': 'Not found'}, 404)
+        return FileResponse(Path(__file__).parent / 'assets' / name)
+
+    @app.get('/dashboard/assets/backdrops/{name}')
+    async def dashboard_backdrop(name: str):
+        allowed = {'B2-rainy-megacity.mp4': 'video/mp4',
+                   'B2-rainy-megacity.webm': 'video/webm',
+                   'B2-rainy-megacity-poster.jpg': 'image/jpeg'}
+        if name not in allowed:
+            return JSONResponse({'error': 'Not found'}, 404)
+        return FileResponse(Path(__file__).parent / 'assets' / 'backdrops' / name,
+                            media_type=allowed[name])
+
+    @app.get('/dashboard/assets/fonts/{name}')
+    async def dashboard_font(name: str):
+        allowed = {'atkinson-hyperlegible-next-400.woff2', 'atkinson-hyperlegible-next-700.woff2',
+                   'atkinson-hyperlegible-mono-400.woff2', 'atkinson-hyperlegible-mono-500.woff2',
+                   'barlow-condensed-600.woff2'}
+        if name not in allowed:
+            return JSONResponse({'error': 'Not found'}, 404)
+        return FileResponse(Path(__file__).parent / 'assets' / 'fonts' / name, media_type='font/woff2')
+
+    @app.get('/dashboard')
+    async def dashboard(request: Request):
+        s = session(request)
+        if not s:
+            return RedirectResponse('/', 303)
+        template = (Path(__file__).parent / 'assets' / 'dashboard.html').read_text()
+        return HTMLResponse(template.replace('__CSRF__', html.escape(s[2], quote=True)))
+
+    async def dashboard_http(request: Request):
+        s = session(request)
+        if not s:
+            return JSONResponse({'error': 'Session required'}, 401)
+        op = request.url.path.rsplit('/', 1)[-1]
+        if request.method == 'GET':
+            fields = dict(request.query_params)
+        else:
+            if not hmac.compare_digest(s[2], request.headers.get('x-csrf-token', '')):
+                return JSONResponse({'error': 'CSRF refused'}, 403)
+            if request.headers.get('content-type', '').split(';')[0] != 'application/json':
+                return JSONResponse({'error': 'JSON required'}, 415)
+            try:
+                def unique(pairs):
+                    obj = {}
+                    for key, value in pairs:
+                        if key in obj:
+                            raise ValueError('Duplicate field')
+                        obj[key] = value
+                    return obj
+                fields = json.loads(await request.body(), object_pairs_hook=unique)
+            except (ValueError, UnicodeDecodeError):
+                return JSONResponse({'error': 'Invalid JSON'}, 400)
+        allowed = {'start': {'task'}, 'advance': {'task_id'}, 'status': {'task_id'},
+                   'verify': {'task_id'}, 'approval': {'task_id', 'action_id', 'approved'}}
+        if type(fields) is not dict or op not in allowed or set(fields) - ({'reason'} if op == 'approval' else set()) != allowed[op]:
+            return JSONResponse({'error': 'Invalid fields'}, 400)
+        if any(type(v) is not str or not 1 <= len(v) <= 128 for k, v in fields.items() if k not in ('approved', 'reason')):
+            return JSONResponse({'error': 'Invalid identifier'}, 400)
+        if op == 'approval' and (s[1] != 'approver' or type(fields['approved']) is not bool):
+            return JSONResponse({'error': 'Approver required'}, 403)
+        reason = fields.get('reason')
+        if op == 'approval':
+            if reason is not None and (type(reason) is not str or len(reason) > 500):
+                return JSONResponse({'error': 'Reason must be text up to 500 characters'}, 400)
+            if fields['approved'] and not (isinstance(reason, str) and any(not c.isspace() and not unicodedata.category(c).startswith('C') for c in reason)):
+                return JSONResponse({'error': 'Enter your reason before approving'}, 400)
+        try:
+            service = state['dashboard']
+            if op == 'start':
+                result = await asyncio.to_thread(service.start, s[0], request.state.client_ip, fields['task'])
+            elif op == 'approval':
+                result = await asyncio.to_thread(service.approval, s[0], fields['task_id'], fields['action_id'], fields['approved'], reason)
+            else:
+                result = await asyncio.to_thread(getattr(service, op), s[0], fields['task_id'])
+            if session(request) != s:
+                return JSONResponse({'error': 'Session changed; held safely'}, 409)
+            return JSONResponse(result)
+        except PermissionError:
+            return JSONResponse({'error': 'Task not found'}, 404)
+        except ValueError:
+            return JSONResponse({'error': 'Operation refused'}, 409)
+
+    for op in ('start', 'advance', 'approval', 'verify'):
+        app.add_api_route('/live-product/' + op, dashboard_http, methods=['POST'])
+    app.add_api_route('/live-product/status', dashboard_http, methods=['GET'])
 
     for path in ('/session', '/reset', '/action', '/live/unlock'):
         app.add_api_route(path, mutate, methods=['POST'])

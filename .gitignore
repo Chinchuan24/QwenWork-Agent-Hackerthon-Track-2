@@ -1,6 +1,5 @@
 .env
 .env.*
-!.env.production.example
 __pycache__/
 *.pyc
 .pytest_cache/

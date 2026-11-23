@@ -1,7 +1,8 @@
 {
   "source_commit": "7efc4657a5e92712319573fe8b456ed3ce3bd186",
+  "final_release_head_verified": "c17a0196f31c460863513b21ce94afa450f71c2c",
   "self_exclusion": "docs/production/MANIFEST.json",
-  "file_count_excluding_manifest": 22,
+  "file_count_excluding_manifest": 23,
   "files": [
     {
       "path": ".dockerignore",
@@ -84,14 +85,19 @@
       "sha256": "23b61996354eab2855b387b94ea5cd3d4eedb329ae169cdf722e7d33c587baa0"
     },
     {
+      "path": "docs/production/PROVENANCE.json",
+      "bytes": 868,
+      "sha256": "acd73277e670893d91bfbfa1665429156afc17eaa5f1116f5cfd5e81dc1b442d"
+    },
+    {
       "path": "docs/production/SCAN.json",
       "bytes": 917,
       "sha256": "66f722ebe1f3ac1468671fb8a750d7ac664582b2ff77edc6a4cc0292a4db3988"
     },
     {
       "path": "docs/production/VERIFICATION.md",
-      "bytes": 4625,
-      "sha256": "e3a565cbdbb92a879cbfe3dde5c7d3e97c0de41a0bb2a3681da8f9051bf55903"
+      "bytes": 4977,
+      "sha256": "6e6ea4fcad20451f45cde89aee2957c60ee69b5ec49dbb17e33bb516b748b39e"
     },
     {
       "path": "docs/production/VERIFY.py",
