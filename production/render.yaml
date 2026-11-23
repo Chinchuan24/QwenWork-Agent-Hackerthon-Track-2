@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: replace-twinguard-production
+    runtime: docker
+    # Operator must confirm current plan/disk availability and cost.
+    plan: starter
+    numInstances: 1
+    autoDeployTrigger: 'off'
+    healthCheckPath: /readyz
+    disk:
+      name: aegis-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: AEGIS_MODEL_PROVIDER
+        value: deepseek
+      - key: AEGIS_PROXY_PROVIDER
+        value: render
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: AEGIS_LIVE_ACCESS_CODES
+        sync: false
+      - key: AEGIS_TRUSTED_HOSTS
+        sync: false
+      - key: AEGIS_TRUSTED_PROXY_CIDRS
+        sync: false
