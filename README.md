@@ -5,6 +5,24 @@ Two AI guards, Aegis and Delta, check supported AI-helper requests before simula
 ![Concept banner](docs/assets/twinguard-banner-animated-20261123.gif)
 [Static banner fallback](docs/preparation-assets/banner.jpg) | [MP4 banner](docs/assets/twinguard-banner-optimized-20261123.mp4)
 
+## What Twinguard does, in plain words
+
+Two AI guards check every action your AI agents try to take, before it happens—when those actions are routed through Twinguard.
+
+Think of two security guards at a building door. Your AI agents are workers who want to send emails, move files or pay invoices. Every action passes the guards first. An agent asks to act. **Aegis** checks the request. **Delta** double-checks it.
+
+The guards give one of three answers:
+
+- **ALLOWED** — The checks find the action safe. It goes ahead.
+- **WAITING FOR YOU** — The guards are unsure. A person decides before anything goes ahead.
+- **STOPPED** — The action is judged dangerous or breaks a rule. It is blocked.
+
+Every decision is kept in a sealed, hash-linked record. Each entry is linked to the one before it. The tamper check can catch changes to that record.
+
+Small businesses may give your AI agents access to important emails, files and invoices. A mistaken payment or an exposed document can cause real harm. Twinguard adds a checkpoint before an action happens. It gives people a say when the answer is unclear, and keeps a record they can check later.
+
+**Honest demo boundary:** Twinguard is built as a gateway that any AI agent can be plugged into by routing its tool calls through it. It does not automatically intercept actions outside that route. In this hackathon demo, we show it guarding our own sample agent on sandbox tools with fictional Lumen Studio data. That demonstration is not proof of integration with every agent or real business tool.
+
 ## Judge Summary
 
 **LOCAL ONLY. Current diagnostics: 2165 passed, 1 failed / 2166 in independent per-file processes. Shared suite retries timed out with additional unresolved failures. Not release-approved. STOP NO PUSH.** Historical passing results in older documents are not current acceptance. See [preparation](docs/PREPARATION.md) and [provenance](docs/PROVENANCE.md).
