@@ -1,0 +1,9 @@
+{
+  "final_release_head_verified": "c17a0196f31c460863513b21ce94afa450f71c2c",
+  "application_input_commit": "7efc4657a5e92712319573fe8b456ed3ce3bd186",
+  "production_inputs_unchanged": true,
+  "verification": "git diff --exit-code between both commits over aegis, Dockerfile, fly.toml, render.yaml, requirements-production.lock, LICENSE and both notices, plus all four source test files used; exit 0",
+  "release_changes_only": ["scripts/local_get_smoke.py", "tests/test_local_finishline.py", "tests/test_local_workflows.py"],
+  "source_test_files": ["tests/test_production.py", "tests/test_production_https.py", "tests/test_mixed_demo.py", "tests/test_t4_lumen_policy.py"],
+  "disposition": "Original application/test input provenance retained honestly; final release tree verified equivalent for production inputs. No application changes or platform operations."
+}

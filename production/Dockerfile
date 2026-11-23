@@ -9,9 +9,11 @@ COPY requirements-production.lock ./
 RUN pip install --no-cache-dir --require-hashes -r requirements-production.lock \
     && useradd --no-create-home --uid 10001 aegis \
     && mkdir -p /data && chown 10001:10001 /data
-# Ship only the isolated entrypoint, never legacy executors.
+# Original gateway runs in a separate process against fictional World only.
 COPY aegis/__init__.py aegis/production.py aegis/public_evaluator.py aegis/claims.py aegis/policy.py aegis/sensitivity.py aegis/mixed_demo.py ./aegis/
-COPY aegis/provider.py ./aegis/
+COPY aegis/provider.py aegis/dashboard_adapter.py aegis/backend_mount.py aegis/real_backend.py aegis/live_product.py aegis/live_signer.py ./aegis/
+COPY aegis/real_runtime/ ./aegis/real_runtime/
+COPY aegis/assets/ ./aegis/assets/
 COPY LICENSE THIRD_PARTY_NOTICES RUST_THIRD_PARTY_NOTICES ./
 USER 10001:10001
 VOLUME ["/data"]

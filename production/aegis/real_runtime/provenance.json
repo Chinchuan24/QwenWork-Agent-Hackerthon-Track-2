@@ -1,0 +1,27 @@
+{
+  "source": "/Users/chin/Qwen/aegis/aegis",
+  "scope": "Unchanged gateway dependency closure; original fictional World executors only",
+  "sha256": {
+    "__init__.py": "4afa63f0e660dc23932206595e60152ce80ccdfc934cbb097e50f141cbc68743",
+    "approvals.py": "d4c52008fdd2e2c79a32d4a5f47b6c43bf17c0b3569eb3f334665c2944e43872",
+    "audit.py": "a91bde9dd00fd80c8b3fbdf999895f5757fbf1187f36881caefa98e583bba212",
+    "claims.py": "ece52c599dc448c2058acf30b9bf6edf6b195fe94986a5f615941aaf9de75bc2",
+    "config.py": "4847ecc62b7a44a77ce257fe02b1bce8f66b7245d47b2cd9cd1433a0e1a1190e",
+    "db.py": "b822be25f4fd4bec29f3ff6d202519b581d17035aa1646f5eea6076e415a40e2",
+    "detectors.py": "498ca3640bd9ec2b9622b755fc4b4cce523f393963274cc65a65c830b39db516",
+    "evidence.py": "1e0739cc79fa67dd202216ab50897728ffed8eb10dda9bd66a4c7f1ea9daf72c",
+    "gateway.py": "301f5190c8c3ad4780c9887adca527f6772cef79abdb7e5f0b80916d4d2b04ca",
+    "helper_alarm.py": "211db9b9aa0c8c0c7204f5292e1be8bb932d5f47b052f0eee884335d9e73f311",
+    "helper_pattern.py": "05b4b068f46f20b04cf68f732eec295c459fc1e43639345e6a39b21055261a5b",
+    "normalize.py": "03fda8e5bdf65cd34107c0317f99a7ce3722c98f3edf1112c6d5c6631df5a016",
+    "policy.py": "99044f1e3d0ed8f3bde618174da85b20533ee0052b724ec16f3bf194b557f835",
+    "qwen_client.py": "26c5f1dd993cda99d8dc333546b29472c134e52238d23ed7d1b19b4d28e253c1",
+    "sensitivity.py": "99ccf9e61670304d4431113ecb7ac53d87cd9812cfa7f3ea669d3fb21bfb6161",
+    "signer.py": "658349f8b2524c3375fd06c3104e1adf93c8c3aff36b2e4ab0586192d19bb422",
+    "signer_client.py": "d37b201256ce3efb89fdfbea85fbbcb754e36e3cdbb74a3935a4401c8768342e",
+    "tool_passport.py": "e0582c2bacaf3f14fbc06b7b0a9e62628cbb58bb112c5acf9c99cfe4c05d7a82",
+    "tool_passport_registry.py": "4fbdc930871e5fe2bdfc1774f1bf5a654d58abee8100aa023ac7426922491a3f",
+    "world.py": "453598981af4c834d030b237105b8f47290e35c84959cf09e7ef2ac54427ce90",
+    "default.yaml": "26ebe847d44740cd93978d6e0ce353c49e230450dfa3ac39850e1190e21832b4"
+  }
+}

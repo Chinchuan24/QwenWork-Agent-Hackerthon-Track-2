@@ -2,6 +2,8 @@
 
 Source commit used: `7efc4657a5e92712319573fe8b456ed3ce3bd186`; source was clean at inspection. Selected files extracted using git archive against that immutable commit, not working-copy files. Production destination did not exist; no prior folder was overwritten or moved. No release files edited.
 
+Final-tree follow-up: release HEAD `c17a0196f31c460863513b21ce94afa450f71c2c` verified. Only three local smoke/workflow test files changed; all production inputs and four source test files used are byte-identical between commits. See PROVENANCE.json. Repeat package test run: **108 passed, 1 warning, 8.54 seconds**. No platform operations performed.
+
 ## Actual Results
 
 Python 3.12.15 isolated temporary environment: hash-required installation of all 18 locked runtime distributions succeeded. Initial system Python 3.9 pip resolution failed for opentelemetry-api; no lock relaxation occurred. Switching to Python 3.12/uv resolved it.
