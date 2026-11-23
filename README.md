@@ -25,9 +25,13 @@ Small businesses may give your AI agents access to important emails, files and i
 
 ## Judge Summary
 
-**LOCAL ONLY. Current diagnostics: 2165 passed, 1 failed / 2166 in independent per-file processes. Shared suite retries timed out with additional unresolved failures. Not release-approved. STOP NO PUSH.** Historical passing results in older documents are not current acceptance. See [preparation](docs/PREPARATION.md) and [provenance](docs/PROVENANCE.md).
+This repository contains the Twinguard agent in the root and a separate live demo package in `production/`. Both can run locally. The demo uses fictional business data.
 
-The root is the private release based on `39dda4a79b1530cb5be2bf83aa13464421c69dd0`. `production/` is the tracked-only public snapshot of `74ff13bc3396f58386d2aac09e1c9914292627d3`, exported using git archive. Its historical manifest records upstream lineage `7efc4657a5e92712319573fe8b456ed3ce3bd186`; that manifest is not the current inventory. The snapshot now includes the authorized current dashboard working tree and 13 production test files, copied after a 601.599819916-second unchanged inventory window on 2026-11-23 (06:44:06.932101 to 06:54:08.558724 UTC). Start/end inventory SHA256: `a06fe32207cb02c99101e2119200c5af8673881dda91302d1db4cb8c7486fddb`. Source backups, reject files, Git metadata and runtime paths are excluded. Never share runtime state between these applications.
+To start the agent locally, install Python 3.12, create a virtual environment and install `requirements.txt`. Then run `scripts/local_setup.py start --port 8081` with that environment's Python. Open `http://127.0.0.1:8081`. The default uses scripted responses and needs no API key. See [Local Quickstart](#local-quickstart) for the commands. The demo package has its own dependencies and entrypoint; see [Public Snapshot And Fake-Key Checks](#public-snapshot-and-fake-key-checks). Keep their runtime data separate.
+
+In the recorded checks, **2,165 of 2,166 tests passed when each test file ran separately**. One slow benchmark test timed out at **180 seconds**. Some shared-suite runs also timed out and showed unresolved failures. These results do not mean that the whole suite passes together. Detailed results appear below.
+
+This is a hackathon build, now pushed to `qwen-final`. It is **not a certified production release**. Historical passing results are not proof that the current build has passed every check. Read [PREPARATION.md](docs/PREPARATION.md) for the preparation record and limitations, and [PROVENANCE.md](docs/PROVENANCE.md) for the honest authorship table, including what remains unknown.
 
 ## Problem And Approach
 
@@ -124,6 +128,14 @@ Compressed newest v3b screenshots depict **ongoing work outside this packaged pr
 ![Ongoing dashboard](docs/preparation-assets/live-dashboard-1440-verified-v3b.jpg)
 
 Banner is a concept asset. Preparation media directory has only the existing PNG; no new MP4/GIF or media log/report was found there. No missing video/GIF is linked or claimed generated. Historical recording files are not new accepted media.
+
+## Build details
+
+The agent in the root is based on release commit `39dda4a79b1530cb5be2bf83aa13464421c69dd0`. The initial `production/` snapshot was exported from tracked files at `74ff13bc3396f58386d2aac09e1c9914292627d3` using `git archive`. Its historical manifest records upstream lineage `7efc4657a5e92712319573fe8b456ed3ce3bd186`; that manifest is not the current inventory.
+
+The production snapshot was later updated with the authorized dashboard working tree and 13 production test files. Files were copied after a 601.599819916-second unchanged inventory window on 2026-11-23, from 06:44:06.932101 to 06:54:08.558724 UTC. The start and end inventory SHA256 was `a06fe32207cb02c99101e2119200c5af8673881dda91302d1db4cb8c7486fddb`. This records observed file stability, not production certification.
+
+Source backups, reject files, Git metadata and runtime paths were excluded from that snapshot. Never share runtime state between these applications.
 
 ## Layout, License And Provenance
 
