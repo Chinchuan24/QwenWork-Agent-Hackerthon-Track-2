@@ -2,7 +2,8 @@
 
 Two AI guards, Aegis and Delta, check supported AI-helper requests before simulated business actions. Track 2: AI Governance, Security & Decision-Making. Fictional Lumen Studio records and example domains only.
 
-![Concept banner](docs/preparation-assets/banner.jpg)
+![Concept banner](docs/assets/twinguard-banner-animated-20261123.gif)
+[Static banner fallback](docs/preparation-assets/banner.jpg) | [MP4 banner](docs/assets/twinguard-banner-optimized-20261123.mp4)
 
 ## Judge Summary
 
